@@ -59,12 +59,12 @@ func linq43(){
         .map { c -> ( CompanyName:String, YearGroups:(Year:Int, MonthGroups:Group<Year, Order>[])[] ) in
             (
                 c.companyName,
-                c.orders.groupBy { o in Date.getYear(o.orderDate!) }
+                c.orders.groupBy { o in o.orderDate!.getYear() }
                     .map {
                         (yg:Group<Int,Order>) in
                         (
                             yg.key,
-                            yg.items.groupBy { (o:Order) in Date.getMonth(o.orderDate!) }
+                            yg.items.groupBy { (o:Order) in o.orderDate!.getMonth() }
                         )
                     }
             )

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		510471E01941CB6000F288A5 /* generationoperators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 510471DF1941CB6000F288A5 /* generationoperators.swift */; };
+		510471E219423A3500F288A5 /* quantifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 510471E119423A3500F288A5 /* quantifiers.swift */; };
 		517DBB78194180BC007E7B70 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 517DBB77194180BC007E7B70 /* main.swift */; };
 		517DBB8719418131007E7B70 /* data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 517DBB7F19418131007E7B70 /* data.swift */; };
 		517DBB8819418131007E7B70 /* extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 517DBB8019418131007E7B70 /* extensions.swift */; };
@@ -36,6 +37,7 @@
 
 /* Begin PBXFileReference section */
 		510471DF1941CB6000F288A5 /* generationoperators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = generationoperators.swift; sourceTree = "<group>"; };
+		510471E119423A3500F288A5 /* quantifiers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = quantifiers.swift; sourceTree = "<group>"; };
 		517DBB74194180BC007E7B70 /* LinqExamples */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = LinqExamples; sourceTree = BUILT_PRODUCTS_DIR; };
 		517DBB77194180BC007E7B70 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		517DBB7E19418131007E7B70 /* customers.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = customers.json; sourceTree = "<group>"; };
@@ -83,6 +85,7 @@
 				517DBB7E19418131007E7B70 /* customers.json */,
 				517DBB7F19418131007E7B70 /* data.swift */,
 				517DBB8019418131007E7B70 /* extensions.swift */,
+				510471E119423A3500F288A5 /* quantifiers.swift */,
 				510471DF1941CB6000F288A5 /* generationoperators.swift */,
 				517DBB8119418131007E7B70 /* grouping.swift */,
 				517DBB8219418131007E7B70 /* ordering.swift */,
@@ -163,6 +166,7 @@
 				517DBB8D19418131007E7B70 /* restrictions.swift in Sources */,
 				517DBB8B19418131007E7B70 /* partitioning.swift in Sources */,
 				510471E01941CB6000F288A5 /* generationoperators.swift in Sources */,
+				510471E219423A3500F288A5 /* quantifiers.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

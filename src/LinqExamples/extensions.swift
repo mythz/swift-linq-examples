@@ -40,6 +40,14 @@ extension Array {
         return to
     }
     
+    func any(fn: (T) -> Bool) -> Bool {
+        return self.find(fn).count > 0
+    }
+    
+    func all(fn: (T) -> Bool) -> Bool {
+        return self.find(fn).count == self.count
+    }
+    
     func expand<TResult>(fn: (T) -> TResult[]?) -> TResult[] {
         var to = TResult[]()
         for x in self {
@@ -199,6 +207,30 @@ extension Array {
         }
         return to
     }
+    
+    func sum() -> Int {
+        return self.map { $0 as Int }.reduce(0) { $0 + $1 }
+    }
+    
+    func sum(fn: (T) -> Int) -> Int {
+        return self.map { fn($0) }.reduce(0) { $0 + $1 }
+    }
+    
+    func min() -> Int {
+        return self.map { $0 as Int }.reduce(Int.max) { $0 < $1 ? $0 : $1 }
+    }
+    
+    func min(fn: (T) -> Int) -> Int {
+        return self.map { fn($0) }.reduce(Int.max) { $0 < $1 ? $0 : $1 }
+    }
+    
+    func max() -> Int {
+        return self.map { $0 as Int }.reduce(0) { $0 > $1 ? $0 : $1 }
+    }
+    
+    func max(fn: (T) -> Int) -> Int {
+        return self.map { fn($0) }.reduce(0) { $0 > $1 ? $0 : $1 }
+    }
 }
 
 func distinct<T : Equatable>(this:T[]) -> T[] {
@@ -278,14 +310,14 @@ struct Group<Key,Item> : Sequence, Printable {
     }
     
     var description: String {
-    var s = ""
+        var s = ""
         for x in items {
             if s.length > 0 {
                 s += ", "
             }
             s += "\(x)"
         }
-        return "\(key): [\(s)]"
+        return "\(key): [\(s)]\n"
     }
 }
 
@@ -317,10 +349,6 @@ extension MapCollectionView {
     }
 }
 
-//anagramEqualityComparer(a, b) =>
-//    new String.fromCharCodes(orderBy(a.codeUnits.toList()))
-//        .compareTo(new String.fromCharCodes(orderBy(b.codeUnits.toList())))
-
 func compare<T : Comparable>(a:T, b:T) -> Int {
     return a == b
         ? 0
@@ -332,6 +360,16 @@ extension Slice {
         for i in self {
             fn(i)
         }
+    }
+}
+
+extension Range {    
+    func map<T,U>(fn: (T) -> U) -> U[] {
+        var to = U[]()
+        for i in self {
+            to += fn(i as T)
+        }
+        return to
     }
 }
 
@@ -353,44 +391,111 @@ extension String {
     }
 }
 
-class Date {
+
+
+extension NSDate {
     
-    class func New(#year:Int, month:Int, day:Int) -> NSDate {
+    convenience init(dateString:String, format:String="yyyy-MM-dd") {
+        let dateFmt = NSDateFormatter()
+        dateFmt.timeZone = NSTimeZone.defaultTimeZone()
+        dateFmt.dateFormat = "yyyy-MM-dd"
+        let d = dateFmt.dateFromString(dateString)
+        self.init(timeInterval:0, sinceDate:d)
+    }
+    
+    convenience init(year:Int, month:Int, day:Int) {
         var c = NSDateComponents()
         c.year = year
         c.month = month
         c.day = day
         
         var gregorian = NSCalendar(identifier:NSGregorianCalendar)
-        var date = gregorian.dateFromComponents(c)
-        return date
+        var d = gregorian.dateFromComponents(c)
+        self.init(timeInterval:0, sinceDate:d)
     }
     
-    class func isAfter(this:NSDate?, other:NSDate) -> Bool {
-        if this == nil {
-            return false
-        }
-        return this!.compare(other) == NSComparisonResult.OrderedDescending
+    func isAfter(other:NSDate) -> Bool {
+        return self.compare(other) == NSComparisonResult.OrderedDescending
     }
     
-    class func components(this:NSDate) -> NSDateComponents {
+    func components() -> NSDateComponents {
         var compnents  = NSCalendar.currentCalendar().components(
             NSCalendarUnit.DayCalendarUnit | NSCalendarUnit.MonthCalendarUnit | NSCalendarUnit.YearCalendarUnit,
-            fromDate: this)
+            fromDate: self)
         
         return compnents
     }
-    
-    class func getYear(this:NSDate) -> Int {
-        return components(this).year
+
+    //causes crash when returned inside lambda
+    var year:Int {
+        return components().year
     }
     
-    class func getMonth(this:NSDate) -> Int {
-        return components(this).month
+    var month:Int {
+        return components().month
     }
     
-    class func getDay(this:NSDate) -> Int {
-        return components(this).day
+    var day:Int {
+        return components().day
+    }
+    
+
+    func getYear() -> Int {
+        return components().year
+    }
+    
+    func getMonth() -> Int {
+        return components().month
     }
 }
 
+//
+//
+//class Date {
+//    
+//    class func from(#year:Int, month:Int, day:Int) -> NSDate {
+//        var c = NSDateComponents()
+//        c.year = year
+//        c.month = month
+//        c.day = day
+//        
+//        var gregorian = NSCalendar(identifier:NSGregorianCalendar)
+//        var date = gregorian.dateFromComponents(c)
+//        return date
+//    }
+//    
+//    class func parse(dateString:String, format:String="yyyy-MM-dd") -> NSDate {
+//        var dateFmt = NSDateFormatter()
+//        dateFmt.timeZone = NSTimeZone.defaultTimeZone()
+//        dateFmt.dateFormat = format
+//        return dateFmt.dateFromString(dateString)
+//    }
+//    
+//    class func isAfter(this:NSDate?, other:NSDate) -> Bool {
+//        if this == nil {
+//            return false
+//        }
+//        return this!.compare(other) == NSComparisonResult.OrderedDescending
+//    }
+//    
+//    class func components(this:NSDate) -> NSDateComponents {
+//        var compnents  = NSCalendar.currentCalendar().components(
+//            NSCalendarUnit.DayCalendarUnit | NSCalendarUnit.MonthCalendarUnit | NSCalendarUnit.YearCalendarUnit,
+//            fromDate: this)
+//        
+//        return compnents
+//    }
+//    
+//    class func getYear(this:NSDate) -> Int {
+//        return components(this).year
+//    }
+//    
+//    class func getMonth(this:NSDate) -> Int {
+//        return components(this).month
+//    }
+//    
+//    class func getDay(this:NSDate) -> Int {
+//        return components(this).day
+//    }
+//}
+//

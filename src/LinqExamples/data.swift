@@ -201,9 +201,9 @@ func customersList() -> Customer[] {
             return nil
         }
         
-        var dateFmt = NSDateFormatter()
-        dateFmt.timeZone = NSTimeZone(name:"UTC")
-        dateFmt.dateFormat = "yyyy-MM-dd'T'HH:mm:ss" //1996-08-12T00:00:00
+//        var dateFmt = NSDateFormatter()
+//        dateFmt.timeZone = NSTimeZone(name:"UTC")
+//        dateFmt.dateFormat = "yyyy-MM-dd'T'HH:mm:ss" //1996-08-12T00:00:00
 
         func createOrders(orders: NSArray?) -> Order[] {
             var to = Order[]()
@@ -212,7 +212,7 @@ func customersList() -> Customer[] {
                     var m = o as NSDictionary
                     var orderDate: NSDate?
                     if let dateStr : AnyObject = m["orderdate"] {
-                        orderDate = dateFmt.dateFromString(dateStr as String)
+                        orderDate = NSDate(dateString:dateStr as String, format: "yyyy-MM-dd'T'HH:mm:ss")
                     }
                     to += Order(
                         orderId:fmt.numberFromString(m["id"] as String).integerValue,

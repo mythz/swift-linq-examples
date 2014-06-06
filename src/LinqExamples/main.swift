@@ -25,4 +25,5 @@ func runExamples(fns: (() -> ())[]) {
 //runExamples(grouping)
 //runExamples(setoperators)
 //runExamples(conversions)
-runExamples(generationoperators)
+//runExamples(generationoperators)
+runExamples(quantifiers)
