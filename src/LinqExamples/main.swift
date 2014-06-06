@@ -24,4 +24,5 @@ func runExamples(fns: (() -> ())[]) {
 //runExamples(ordering)
 //runExamples(grouping)
 //runExamples(setoperators)
-runExamples(conversions)
+//runExamples(conversions)
+runExamples(generationoperators)

@@ -189,6 +189,16 @@ extension Array {
         }
         return nil
     }
+    
+    func toDictionary<Key : Hashable, Item>(fn:Item -> Key) -> Dictionary<Key,Item> {
+        var to = Dictionary<Key,Item>()
+        for x in self {
+            var e = x as Item
+            var key = fn(e)
+            to[key] = e
+        }
+        return to
+    }
 }
 
 func distinct<T : Equatable>(this:T[]) -> T[] {
