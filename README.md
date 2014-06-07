@@ -3,12 +3,16 @@
 
 Port of the [C# 101 LINQ Samples](http://code.msdn.microsoft.com/101-LINQ-Samples-3fb9811b) rewritten into [Apple's Swift](https://developer.apple.com/swift/).
 
-You can also compare these LINQ examples written:
+Compare Swift to other LINQ examples written in:
 
  - [Clojure](https://github.com/mythz/clojure-linq-examples)
  - [Dart](https://github.com/dartist/101LinqSamples)
 
-The samples below mirrors the C# LINQ samples layout with the names of the top-level Dart methods matching their corresponding C# examples.
+You can choose to run specific examples by commenting the sections you're not interested in [main.swift](https://github.com/mythz/swift-linq-examples/blob/master/src/LinqExamples/main.swift).
+
+To see the full output of all the examples, run the [LinqExamples.xcodeproj](https://github.com/mythz/swift-linq-examples/tree/master/src) XCode project locally.
+
+The samples below mirrors the C# LINQ samples layout with the names of the top-level Swift methods matching their corresponding C# examples.
 
 #### [LINQ - Restriction Operators](https://github.com/mythz/swift-linq-examples/tree/master/src/LinqExamples/restrictions.swift) / [MSDN C#](http://code.msdn.microsoft.com/LINQ-Restriction-Operators-b15d29ca)
 #### [LINQ - Projection Operators](https://github.com/mythz/swift-linq-examples/tree/master/src/LinqExamples/projections.swift) / [MSDN C#](http://code.msdn.microsoft.com/LINQ-to-DataSets-09787825)
@@ -33,10 +37,6 @@ For a side-by-side comparison, the original **C#** source code is displayed abov
   - Outputs ending with `...` illustrates only a partial response is displayed. 
   - The source-code for all the Swift extensions and utils used are in [extensions.swift](https://github.com/mythz/swift-linq-examples/blob/master/src/LinqExamples/extensions.swift)
   - The C# ObjectDumper util used is downloadable from MSDN - [ObjectDumper.zip](http://code.msdn.microsoft.com/Visual-Studio-2008-C-d295cdba/file/46086/1/ObjectDumper.zip)
-
-You can choose to run specific examples by commenting the sections you're not interested in [main.swift](https://github.com/mythz/swift-linq-examples/blob/master/src/LinqExamples/main.swift).
-
-To see the full output of all the samples, run the [LinqExamples.xcodeproj](https://github.com/mythz/swift-linq-examples/tree/master/src) XCode project locally.
 
 
 LINQ - Restriction Operators
