@@ -458,10 +458,10 @@ extension String {
 extension NSDate {
     
     convenience init(dateString:String, format:String="yyyy-MM-dd") {
-        let dateFmt = NSDateFormatter()
-        dateFmt.timeZone = NSTimeZone.defaultTimeZone()
-        dateFmt.dateFormat = "yyyy-MM-dd"
-        let d = dateFmt.dateFromString(dateString)
+        let fmt = NSDateFormatter()
+        fmt.timeZone = NSTimeZone.defaultTimeZone()
+        fmt.dateFormat = format
+        let d = fmt.dateFromString(dateString)
         self.init(timeInterval:0, sinceDate:d)
     }
     
@@ -483,12 +483,12 @@ extension NSDate {
         
         return compnents
     }
-
-// Swift Compiler crashes when extension computed property is used in a call-site. Bug submitted
-//    var year:Int {
-//        return components().year
-//    }
-
+    
+    // Swift Compiler crashes when extension computed property is used in a call-site. Bug submitted
+    //    var year:Int {
+    //        return components().year
+    //    }
+    
     func getYear() -> Int {
         return components().year
     }
@@ -496,13 +496,28 @@ extension NSDate {
     func getMonth() -> Int {
         return components().month
     }
+    
+    func shortDateString() -> String {
+        let fmt = NSDateFormatter()
+        fmt.timeZone = NSTimeZone.defaultTimeZone()
+        fmt.dateFormat = "yyyy-MM-dd"
+        return fmt.stringFromDate(self)
+    }
 }
 
 func >(lhs: NSDate, rhs: NSDate) -> Bool {
     return lhs.compare(rhs) == NSComparisonResult.OrderedDescending
 }
-func <(lhs: NSDate, rhs: NSDate) -> Bool {
+func >=(lhs: NSDate, rhs: NSDate) -> Bool {
     return lhs.compare(rhs) == NSComparisonResult.OrderedDescending
+        || lhs == rhs
+}
+func <(lhs: NSDate, rhs: NSDate) -> Bool {
+    return lhs.compare(rhs) == NSComparisonResult.OrderedAscending
+}
+func <=(lhs: NSDate, rhs: NSDate) -> Bool {
+    return lhs.compare(rhs) == NSComparisonResult.OrderedAscending
+        || lhs == rhs
 }
 func ==(lhs: NSDate, rhs: NSDate) -> Bool {
     return lhs.compare(rhs) == NSComparisonResult.OrderedSame

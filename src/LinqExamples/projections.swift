@@ -10,6 +10,15 @@ import Foundation
 
 let projections = [linq6, linq7, linq8, linq9, linq10, linq11, linq12, linq13, linq14, linq15, linq16, linq17, linq18, linq19]
 
+func linq6(){
+    let numbers = [ 5, 4, 1, 3, 9, 8, 6, 7, 2, 0 ]
+    
+    let numsPlusOne = numbers.map { $0 + 1 }
+    
+    println("Numbers + 1:")
+    numsPlusOne.each(println)
+}
+
 func linq7(){
     let products = productsList()
     
@@ -129,9 +138,9 @@ func linq16(){
     let date = NSDate(year: 1998, month: 1, day: 1)
     let orders = customers.expand { c in
         c.orders
-            .find { $0.orderDate! > date }
-            .map { o -> (CustomerId: String, OrderId:Int, OrderDate:NSDate?) in
-                (c.customerId, o.orderId, o.orderDate)
+            .find { $0.orderDate! >= date }
+            .map { o -> (CustomerId: String, OrderId:Int, OrderDate:NSDate) in
+                (c.customerId, o.orderId, o.orderDate!)
             }
         }
     
@@ -161,8 +170,8 @@ func linq18(){
         .find { $0.region == "WA" }.expand { c in
             c.orders
                 .find { $0.orderDate! > cutoffDate }
-                .map { o -> (CustomerId: String, OrderId:Int, Total:Double) in
-                    (c.customerId, o.orderId, o.total)
+                .map { o -> (CustomerId: String, OrderId:Int) in
+                    (c.customerId, o.orderId)
                 }
             }
     
@@ -173,8 +182,9 @@ func linq19(){
     let customers = customersList()
     
     var custIndex = 0
-    let customerOrders = customers.expand { c in
-        c.orders.map { "Customer #\(++custIndex) has an order with OrderID \($0.orderId)" }
+    let customerOrders = customers.expand { c -> String[] in
+        custIndex++
+        return c.orders.map { "Customer #\(custIndex) has an order with OrderID \($0.orderId)" }
     }
     
     customerOrders.each(println)

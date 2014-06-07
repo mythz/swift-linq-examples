@@ -67,11 +67,3 @@ func linq5(){
     }
 }
 
-func linq6(){
-    let numbers = [ 5, 4, 1, 3, 9, 8, 6, 7, 2, 0 ]
-    
-    let numsPlusOne = numbers.map { $0 + 1 }
-    
-    println("Numbers + 1:")
-    numsPlusOne.each(println)
-}

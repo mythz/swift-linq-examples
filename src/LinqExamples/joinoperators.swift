@@ -22,7 +22,7 @@ func linq102(){
         }
 
     q.each {
-        println("CategoryName:\($0.Category), ProductName:\($0.ProductName)")
+        println("Category:\($0.Category), ProductName:\($0.ProductName)")
     }
 }
 

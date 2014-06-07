@@ -24,6 +24,7 @@
 		517DBB8E19418131007E7B70 /* setoperators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 517DBB8619418131007E7B70 /* setoperators.swift */; };
 		517DBB91194195CA007E7B70 /* customers.json in CopyFiles */ = {isa = PBXBuildFile; fileRef = 517DBB7E19418131007E7B70 /* customers.json */; };
 		517DBB931941BF23007E7B70 /* conversion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 517DBB921941BF23007E7B70 /* conversion.swift */; };
+		51A524B81943086600C91BC7 /* elementoperators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51A524B71943086600C91BC7 /* elementoperators.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -58,6 +59,7 @@
 		517DBB8519418131007E7B70 /* restrictions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = restrictions.swift; sourceTree = "<group>"; };
 		517DBB8619418131007E7B70 /* setoperators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = setoperators.swift; sourceTree = "<group>"; };
 		517DBB921941BF23007E7B70 /* conversion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = conversion.swift; sourceTree = "<group>"; };
+		51A524B71943086600C91BC7 /* elementoperators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = elementoperators.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +106,7 @@
 				517DBB8619418131007E7B70 /* setoperators.swift */,
 				517DBB921941BF23007E7B70 /* conversion.swift */,
 				517DBB77194180BC007E7B70 /* main.swift */,
+				51A524B71943086600C91BC7 /* elementoperators.swift */,
 				51002A061942CB0F00605F8C /* joinoperators.swift */,
 				51002A021942C69500605F8C /* miscoperators.swift */,
 				51002A041942C7B200605F8C /* queryexecution.swift */,
@@ -181,6 +184,7 @@
 				517DBB8B19418131007E7B70 /* partitioning.swift in Sources */,
 				510471E01941CB6000F288A5 /* generationoperators.swift in Sources */,
 				51002A071942CB0F00605F8C /* joinoperators.swift in Sources */,
+				51A524B81943086600C91BC7 /* elementoperators.swift in Sources */,
 				510471E219423A3500F288A5 /* quantifiers.swift in Sources */,
 				51002A011942C5AB00605F8C /* aggregateoperators.swift in Sources */,
 			);
