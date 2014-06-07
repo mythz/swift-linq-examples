@@ -58,7 +58,7 @@ func linq4(){
 
 func linq5(){
     let digits = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"]
-    var index = 0
+
     let shortDigits = digits.find { $0.length < $1 }
     
     println("Short digits:")
