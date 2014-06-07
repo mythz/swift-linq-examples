@@ -66,7 +66,7 @@ public void Linq1()
 //swift
 func linq1(){
     let numbers = [5, 4, 1, 3, 9, 8, 6, 7, 2, 0]
-    let lowNums = numbers.filter({n in n < 5})
+    let lowNums = numbers.find { $0 < 5}
     
     println("Numbers < 5:")
     lowNums.each(println)
