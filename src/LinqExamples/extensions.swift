@@ -8,7 +8,7 @@
 
 import Foundation
 
-//Reusable extensions used in examples
+//Reusable extensions and utils used in examples
 
 extension Array {
     func each(fn: (T) -> ()) {
@@ -160,7 +160,7 @@ extension Array {
         var map = Dictionary<Key, Group<Key,Item>>()
         for x in self {
             var e = x as Item
-            var val = fn(e)
+            let val = fn(e)
 
             var key = val as Key
             
@@ -201,8 +201,8 @@ extension Array {
     func toDictionary<Key : Hashable, Item>(fn:Item -> Key) -> Dictionary<Key,Item> {
         var to = Dictionary<Key,Item>()
         for x in self {
-            var e = x as Item
-            var key = fn(e)
+            let e = x as Item
+            let key = fn(e)
             to[key] = e
         }
         return to
@@ -289,7 +289,7 @@ func _union<T : Equatable>(arrays:T[][]) -> T[] {
     var to = T[]()
     for arr in arrays {
         outer: for x in arr {
-            var e = x as T
+            let e = x as T
             for y in to {
                 if y == e {
                     continue outer
@@ -307,7 +307,7 @@ func intersection<T : Equatable>(arrays:T[]...) -> T[] {
     
     for x in all {
         var count = 0
-        var e = x as T
+        let e = x as T
         outer: for arr in arrays {
             for y in arr {
                 if y == e {
@@ -342,7 +342,7 @@ func difference<T : Equatable>(from:T[], other:T[]...) -> T[] {
 //
 //Generic classes not supported yet? Crashes XCode
 struct Group<Key,Item> : Sequence, Printable {
-    var key: Key
+    let key: Key
     var items = Item[]()
     
     init(key:Key) {
@@ -405,7 +405,7 @@ extension MapCollectionView {
     func map<T,U>(fn: (T) -> (U)) -> U[] {
         var to = U[]()
         for x in self {
-            var e = x as U
+            let e = x as U
             to.append(e)
         }
         return to
@@ -471,13 +471,13 @@ extension NSDate {
         c.month = month
         c.day = day
         
-        var gregorian = NSCalendar(identifier:NSGregorianCalendar)
+        let gregorian = NSCalendar(identifier:NSGregorianCalendar)
         var d = gregorian.dateFromComponents(c)
         self.init(timeInterval:0, sinceDate:d)
     }
     
     func components() -> NSDateComponents {
-        var compnents  = NSCalendar.currentCalendar().components(
+        let compnents  = NSCalendar.currentCalendar().components(
             NSCalendarUnit.DayCalendarUnit | NSCalendarUnit.MonthCalendarUnit | NSCalendarUnit.YearCalendarUnit,
             fromDate: self)
         

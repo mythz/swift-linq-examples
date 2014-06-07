@@ -10,11 +10,11 @@ import Foundation
 
 
 class Product : Printable {
-    var productId : Int
-    var productName : String
-    var category : String
-    var unitPrice : Double
-    var unitsInStock : Int
+    let productId : Int
+    let productName : String
+    let category : String
+    let unitPrice : Double
+    let unitsInStock : Int
     
     init(id: Int, name: String, category: String, unitPrice: Double, unitsInStock: Int) {
         productId = id
@@ -44,9 +44,9 @@ func newProduct(id: Int, name: String, category: String, unitPrice: Double, unit
 
 class Order : Printable
 {
-    var orderId: Int
-    var orderDate: NSDate?
-    var total: Double
+    let orderId: Int
+    let orderDate: NSDate?
+    let total: Double
     
     init(orderId: Int, orderDate: NSDate?, total: Double){
         self.orderId = orderId
@@ -61,16 +61,16 @@ class Order : Printable
 
 class Customer : Printable
 {
-    var customerId: String
-    var companyName: String
-    var address: String
-    var city: String
-    var region: String?
-    var postalCode: String?
-    var country: String?
-    var phone: String?
-    var fax: String?
-    var orders: Order[]
+    let customerId: String
+    let companyName: String
+    let address: String
+    let city: String
+    let region: String?
+    let postalCode: String?
+    let country: String?
+    let phone: String?
+    let fax: String?
+    let orders: Order[]
     
     init(customerId: String, companyName: String,
          address: String, city: String, region: String?, postalCode: String?, country: String?,
@@ -95,7 +95,7 @@ class Customer : Printable
 
 
 func productsList() -> Product[] {
-    var products = [
+    let products = [
         newProduct(1, "Chai", "Beverages", 18.000, 39),
         newProduct(2, "Chang", "Beverages", 19.000, 17),
         newProduct(3, "Aniseed Syrup", "Condiments", 10.000, 13),
@@ -184,15 +184,15 @@ func customersList() -> Customer[] {
         return customers!
     }
     
-    var files = NSFileManager.defaultManager()
-    var jsonData = files.contentsAtPath(NSBundle.mainBundle().pathForResource("customers", ofType: "json"))
-    var rawCustomers = NSJSONSerialization.JSONObjectWithData(jsonData, options:nil, error:nil) as NSDictionary
-    var customersArray = rawCustomers["customers"] as NSArray
+    let files = NSFileManager.defaultManager()
+    let jsonData = files.contentsAtPath(NSBundle.mainBundle().pathForResource("customers", ofType: "json"))
+    let rawCustomers = NSJSONSerialization.JSONObjectWithData(jsonData, options:nil, error:nil) as NSDictionary
+    let customersArray = rawCustomers["customers"] as NSArray
     let fmt = NSNumberFormatter()
 
     var to = Array<Customer>()
     for o : AnyObject in customersArray {
-        var c = o as NSDictionary
+        let c = o as NSDictionary
 
         func str(key: String) -> String? {
             if let o : AnyObject? = c[key] {
@@ -200,16 +200,12 @@ func customersList() -> Customer[] {
             }
             return nil
         }
-        
-//        var dateFmt = NSDateFormatter()
-//        dateFmt.timeZone = NSTimeZone(name:"UTC")
-//        dateFmt.dateFormat = "yyyy-MM-dd'T'HH:mm:ss" //1996-08-12T00:00:00
 
         func createOrders(orders: NSArray?) -> Order[] {
             var to = Order[]()
             if orders {
                 for o: AnyObject in orders! {
-                    var m = o as NSDictionary
+                    let m = o as NSDictionary
                     var orderDate: NSDate?
                     if let dateStr : AnyObject = m["orderdate"] {
                         orderDate = NSDate(dateString:dateStr as String, format: "yyyy-MM-dd'T'HH:mm:ss")

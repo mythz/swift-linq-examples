@@ -8,11 +8,11 @@
 
 import Foundation
 
-let generationoperators = [linq66]
+let generationoperators = [linq65, linq66]
 
 func linq65(){
     Range(start:1,end:2).by(-1)
-    var numbers = (100...150)
+    let numbers = (100...150)
         .map { n -> (Number:Int, OddEven:String) in
             (n, n % 2 == 1 ? "odd" : "even")
         }
@@ -23,7 +23,7 @@ func linq65(){
 }
 
 func linq66(){
-    var numbers = Array(count:10, repeatedValue:7)
+    let numbers = Array(count:10, repeatedValue:7)
     
     numbers.each(println)
 }

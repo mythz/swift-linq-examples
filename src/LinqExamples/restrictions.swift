@@ -8,7 +8,7 @@
 
 import Foundation
 
-let restrictions = [ linq1, linq2, linq3, linq4, linq5 ]
+let restrictions = [linq1, linq2, linq3, linq4, linq5]
 
 func linq1(){
     let numbers = [5, 4, 1, 3, 9, 8, 6, 7, 2, 0]

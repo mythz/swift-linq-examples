@@ -14,25 +14,25 @@ let aggregateoperators = [
 ]
 
 func linq73(){
-    var factorsOf300 = [ 2, 2, 3, 5, 5 ]
+    let factorsOf300 = [ 2, 2, 3, 5, 5 ]
     
-    var uniqueFactors = distinct(factorsOf300).count
+    let uniqueFactors = distinct(factorsOf300).count
     
     println("There are \(uniqueFactors) unique factors of 300.")
 }
 
 func linq74(){
-    var numbers = [ 5, 4, 1, 3, 9, 8, 6, 7, 2, 0 ]
+    let numbers = [ 5, 4, 1, 3, 9, 8, 6, 7, 2, 0 ]
     
-    var oddNumbers = numbers.find { $0 % 2 == 1 }.count
+    let oddNumbers = numbers.find { $0 % 2 == 1 }.count
     
     println("There are \(oddNumbers) odd numbers in the list.")
 }
 
 func linq76(){
-    var customers = customersList()
+    let customers = customersList()
     
-    var orderCounts = customers
+    let orderCounts = customers
         .map { c -> (CustomerId:String, OrderCount:Int) in
             (c.customerId, c.orders.count)
     }
@@ -41,9 +41,9 @@ func linq76(){
 }
 
 func linq77(){
-    var products = productsList()
+    let products = productsList()
     
-    var categoryCounts = products.groupBy { (p:Product) in p.category }
+    let categoryCounts = products.groupBy { (p:Product) in p.category }
         .map { g -> (Category:String,ProductCount:Int) in
             (g.key, g.items.count)
     }
@@ -52,25 +52,25 @@ func linq77(){
 }
 
 func linq78(){
-    var numbers = [ 5, 4, 1, 3, 9, 8, 6, 7, 2, 0 ]
+    let numbers = [ 5, 4, 1, 3, 9, 8, 6, 7, 2, 0 ]
     
-    var numSum:Int = numbers.sum()
+    let numSum:Int = numbers.sum()
     
     println("The sum of the numbers is \(numSum).")
 }
 
 func linq79(){
-    var words = [ "cherry", "apple", "blueberry" ]
+    let words = [ "cherry", "apple", "blueberry" ]
     
-    var totalChars = words.sum { (s:String) in s.length }
+    let totalChars = words.sum { (s:String) in s.length }
     
     println("There are a total of \(totalChars) characters in these words.")
 }
 
 func linq80(){
-    var products = productsList()
+    let products = productsList()
     
-    var categories = products.groupBy { (p:Product) in p.category }
+    let categories = products.groupBy { (p:Product) in p.category }
         .map { g -> (Category:String, TotalUnitsInStock:Int) in
             (g.key, g.items.sum { (p:Product) in p.unitsInStock })
     }
@@ -79,17 +79,17 @@ func linq80(){
 }
 
 func linq81(){
-    var numbers = [ 5, 4, 1, 3, 9, 8, 6, 7, 2, 0 ]
+    let numbers = [ 5, 4, 1, 3, 9, 8, 6, 7, 2, 0 ]
     
-    var minNum:Int = numbers.min()
+    let minNum:Int = numbers.min()
     
     println("The minimum number is \(minNum).")
 }
 
 func linq82(){
-    var words = [ "cherry", "apple", "blueberry" ]
+    let words = [ "cherry", "apple", "blueberry" ]
     
-    var shortestWord = words.min { (s:String) in s.length }
+    let shortestWord = words.min { (s:String) in s.length }
     
     println("The shortest word is \(shortestWord) characters long.")
 }
@@ -165,23 +165,23 @@ func linq88(){
 }
 
 func linq89(){
-    var numbers = [ 5, 4, 1, 3, 9, 8, 6, 7, 2, 0 ]
+    let numbers = [ 5, 4, 1, 3, 9, 8, 6, 7, 2, 0 ]
     
-    var averageNum = numbers.avg { $0 as Int }
+    let averageNum = numbers.avg { $0 as Int }
     
     println("The average number is \(averageNum).")
 }
 
 func linq90(){
-    var words = [ "cherry", "apple", "blueberry" ]
+    let words = [ "cherry", "apple", "blueberry" ]
     
-    var averageLength = words.map { $0.length }.avg { $0 as Int }
+    let averageLength = words.map { $0.length }.avg { $0 as Int }
     
     println("The average word length is \(averageLength) characters.")
 }
 
 func linq91(){
-    var products = productsList()
+    let products = productsList()
     
     let categories = products.groupBy { (p:Product) in p.category }
         .map { g -> (Category:String, AveragePrice:Double) in
@@ -202,11 +202,11 @@ func linq92(){
 }
 
 func linq93(){
-    var startBalance = 100.0
+    let startBalance = 100.0
     
-    var attemptedWithdrawals = [ 20, 10, 40, 50, 10, 70, 30 ]
+    let attemptedWithdrawals = [ 20, 10, 40, 50, 10, 70, 30 ]
     
-    var endBalance = attemptedWithdrawals.map { Double($0) }.reduce(startBalance) {
+    let endBalance = attemptedWithdrawals.map { Double($0) }.reduce(startBalance) {
         balance, nextWithdrawal -> Double in
         (nextWithdrawal <= balance) ? (balance - nextWithdrawal) : balance
     }

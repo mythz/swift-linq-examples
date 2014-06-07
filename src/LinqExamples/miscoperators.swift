@@ -8,7 +8,7 @@
 
 import Foundation
 
-let miscoperators = [linq97]
+let miscoperators = [linq94, linq95, linq96, linq97]
 
 func linq94(){
     let numbersA = [ 0, 2, 4, 5, 6, 8, 9 ]

@@ -8,14 +8,14 @@
 
 import Foundation
 
-let joinoperators = [linq102, linq103, linq104, linq105 ]
+let joinoperators = [linq102, linq103, linq104, linq105]
 
 func linq102(){
-    var categories = [ "Beverages", "Condiments", "Vegetables", "Dairy Products", "Seafood" ]
+    let categories = [ "Beverages", "Condiments", "Vegetables", "Dairy Products", "Seafood" ]
     
-    var products = productsList()
+    let products = productsList()
     
-    var q = join(categories, products) { (c:String,p:Product) in c == p.category }
+    let q = join(categories, products) { (c:String,p:Product) in c == p.category }
         .map { j -> (Category:String, ProductName:String) in
             let (c,p) = j
             return (c, p.productName)
@@ -27,13 +27,15 @@ func linq102(){
 }
 
 func linq103(){
-    var categories = [ "Beverages", "Condiments", "Vegetables", "Dairy Products", "Seafood" ]
+    let categories = [ "Beverages", "Condiments", "Vegetables", "Dairy Products", "Seafood" ]
     
-    var products = productsList()
+    let products = productsList()
     
-    var q = joinGroup(categories, products) { c,p in c == p.category }
+    let q = joinGroup(categories, products) { c,p in c == p.category }
         .map { (j:Group<String,(String,Product)>) -> (Category:String, Products:Product[]) in
-            (j.key, j.items.map { let (_,p) = $0; return p } )
+            (j.key, j.items.map {
+                let (_,p) = $0
+                return p })
         }
     
     for v in q {
@@ -43,11 +45,11 @@ func linq103(){
 }
 
 func linq104(){
-    var categories = [ "Beverages", "Condiments", "Vegetables", "Dairy Products", "Seafood" ]
+    let categories = [ "Beverages", "Condiments", "Vegetables", "Dairy Products", "Seafood" ]
     
-    var products = productsList()
+    let products = productsList()
     
-    var q = joinGroup(categories, products) { c,p in c == p.category }
+    let q = joinGroup(categories, products) { c,p in c == p.category }
         .expand { j in j.items.map {
                     let (_,p) = $0
                     return p
@@ -62,13 +64,13 @@ func linq104(){
 }
 
 func linq105(){
-    var categories = [ "Beverages", "Condiments", "Vegetables", "Dairy Products", "Seafood" ]
+    let categories = [ "Beverages", "Condiments", "Vegetables", "Dairy Products", "Seafood" ]
     
-    var products = productsList()
+    let products = productsList()
     
-    var q = categories
+    let q = categories
         .expand { c -> (Category:String,ProductName:String)[] in
-            var catProducts = products.find { c == $0.category }
+            let catProducts = products.find { c == $0.category }
             return catProducts.isEmpty
                 ? [(c, "(No products)")]
                 : catProducts.map { p in( c, p.productName) }

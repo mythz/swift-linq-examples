@@ -8,8 +8,6 @@
 
 import Foundation
 
-import Foundation
-
 func runExamples(fns: (() -> ())[]) {
     for fn in fns {
         fn()

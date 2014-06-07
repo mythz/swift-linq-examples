@@ -8,7 +8,7 @@
 
 import Foundation
 
-let projections  = [ linq6, linq7, linq8, linq9, linq10, linq11, linq12, linq13, linq14, linq15, linq16, linq17, linq18, linq19 ]
+let projections = [linq6, linq7, linq8, linq9, linq10, linq11, linq12, linq13, linq14, linq15, linq16, linq17, linq18, linq19]
 
 func linq7(){
     let products = productsList()
@@ -94,10 +94,10 @@ func linq13(){
 }
 
 func linq14(){
-    var numbersA = [ 0, 2, 4, 5, 6, 8, 9 ]
-    var numbersB = [ 1, 3, 5, 7, 8 ]
+    let numbersA = [ 0, 2, 4, 5, 6, 8, 9 ]
+    let numbersB = [ 1, 3, 5, 7, 8 ]
     
-    var pairs = numbersA.expand { a in
+    let pairs = numbersA.expand { a in
         numbersB
             .find { b in a < b }
             .map { i -> (a: Int, b:Int) in (a, i) }
@@ -110,9 +110,9 @@ func linq14(){
 }
 
 func linq15(){
-    var customers = customersList()
+    let customers = customersList()
     
-    var orders = customers.expand { c in
+    let orders = customers.expand { c in
         c.orders
             .find { $0.total < 500 }
             .map { o -> (CustomerId: String, OrderId:Int, Total:Double) in
@@ -124,10 +124,10 @@ func linq15(){
 }
 
 func linq16(){
-    var customers = customersList()
+    let customers = customersList()
     
-    var date = NSDate(year: 1998, month: 1, day: 1)
-    var orders = customers.expand { c in
+    let date = NSDate(year: 1998, month: 1, day: 1)
+    let orders = customers.expand { c in
         c.orders
             .find { $0.orderDate! > date }
             .map { o -> (CustomerId: String, OrderId:Int, OrderDate:NSDate?) in
@@ -139,9 +139,9 @@ func linq16(){
 }
 
 func linq17(){
-    var customers = customersList()
+    let customers = customersList()
     
-    var orders = customers.expand { c in
+    let orders = customers.expand { c in
         c.orders
             .find { $0.total >= 2000 }
             .map { o -> (CustomerId: String, OrderId:Int, Total:Double) in
@@ -153,11 +153,11 @@ func linq17(){
 }
 
 func linq18(){
-    var customers = customersList()
+    let customers = customersList()
     
-    var cutoffDate = NSDate(year: 1997, month: 1, day: 1)
+    let cutoffDate = NSDate(year: 1997, month: 1, day: 1)
     
-    var orders = customers
+    let orders = customers
         .find { $0.region == "WA" }.expand { c in
             c.orders
                 .find { $0.orderDate! > cutoffDate }
@@ -170,10 +170,10 @@ func linq18(){
 }
 
 func linq19(){
-    var customers = customersList()
+    let customers = customersList()
     
     var custIndex = 0
-    var customerOrders = customers.expand { c in
+    let customerOrders = customers.expand { c in
         c.orders.map { "Customer #\(++custIndex) has an order with OrderID \($0.orderId)" }
     }
     

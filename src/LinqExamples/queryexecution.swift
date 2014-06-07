@@ -8,12 +8,12 @@
 
 import Foundation
 
-let queryexecution = [linq101]
+let queryexecution = [linq99, linq100, linq101]
 
 func linq99(){
     let numbers = [ 5, 4, 1, 3, 9, 8, 6, 7, 2, 0 ]
     
-    var i = 0;
+    var i = 0
     let q = numbers.map { n in { ++i } }
     
     for f in q {
@@ -25,7 +25,7 @@ func linq99(){
 func linq100(){
     let numbers = [ 5, 4, 1, 3, 9, 8, 6, 7, 2, 0 ]
     
-    var i = 0;
+    var i = 0
     var q = numbers.map { n in ++i }
     
     for v in q {
