@@ -8,9 +8,13 @@ Compare Swift to other LINQ examples written in:
  - [Clojure](https://github.com/mythz/clojure-linq-examples)
  - [Dart](https://github.com/dartist/101LinqSamples)
 
+### Running the examples
+
 You can choose to run specific examples by commenting the sections you're not interested in [main.swift](https://github.com/mythz/swift-linq-examples/blob/master/src/LinqExamples/main.swift).
 
 To see the full output of all the examples, run the [LinqExamples.xcodeproj](https://github.com/mythz/swift-linq-examples/tree/master/src) XCode project locally.
+
+### Contents
 
 The samples below mirrors the C# LINQ samples layout with the names of the top-level Swift methods matching their corresponding C# examples.
 
