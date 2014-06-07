@@ -129,7 +129,7 @@ func linq16(){
     var date = NSDate(year: 1998, month: 1, day: 1)
     var orders = customers.expand { c in
         c.orders
-            .find { $0.orderDate!.isAfter(date) }
+            .find { $0.orderDate! > date }
             .map { o -> (CustomerId: String, OrderId:Int, OrderDate:NSDate?) in
                 (c.customerId, o.orderId, o.orderDate)
             }
@@ -160,7 +160,7 @@ func linq18(){
     var orders = customers
         .find { $0.region == "WA" }.expand { c in
             c.orders
-                .find { $0.orderDate!.isAfter(cutoffDate) }
+                .find { $0.orderDate! > cutoffDate }
                 .map { o -> (CustomerId: String, OrderId:Int, Total:Double) in
                     (c.customerId, o.orderId, o.total)
                 }

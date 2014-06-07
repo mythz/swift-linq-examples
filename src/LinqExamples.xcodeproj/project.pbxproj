@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		51002A011942C5AB00605F8C /* aggregateoperators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51002A001942C5AB00605F8C /* aggregateoperators.swift */; };
+		51002A031942C69500605F8C /* miscoperators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51002A021942C69500605F8C /* miscoperators.swift */; };
+		51002A051942C7B200605F8C /* queryexecution.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51002A041942C7B200605F8C /* queryexecution.swift */; };
+		51002A071942CB0F00605F8C /* joinoperators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51002A061942CB0F00605F8C /* joinoperators.swift */; };
 		510471E01941CB6000F288A5 /* generationoperators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 510471DF1941CB6000F288A5 /* generationoperators.swift */; };
 		510471E219423A3500F288A5 /* quantifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 510471E119423A3500F288A5 /* quantifiers.swift */; };
 		517DBB78194180BC007E7B70 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 517DBB77194180BC007E7B70 /* main.swift */; };
@@ -36,6 +40,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		51002A001942C5AB00605F8C /* aggregateoperators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = aggregateoperators.swift; sourceTree = "<group>"; };
+		51002A021942C69500605F8C /* miscoperators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = miscoperators.swift; sourceTree = "<group>"; };
+		51002A041942C7B200605F8C /* queryexecution.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = queryexecution.swift; sourceTree = "<group>"; };
+		51002A061942CB0F00605F8C /* joinoperators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = joinoperators.swift; sourceTree = "<group>"; };
 		510471DF1941CB6000F288A5 /* generationoperators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = generationoperators.swift; sourceTree = "<group>"; };
 		510471E119423A3500F288A5 /* quantifiers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = quantifiers.swift; sourceTree = "<group>"; };
 		517DBB74194180BC007E7B70 /* LinqExamples */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = LinqExamples; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -85,6 +93,7 @@
 				517DBB7E19418131007E7B70 /* customers.json */,
 				517DBB7F19418131007E7B70 /* data.swift */,
 				517DBB8019418131007E7B70 /* extensions.swift */,
+				51002A001942C5AB00605F8C /* aggregateoperators.swift */,
 				510471E119423A3500F288A5 /* quantifiers.swift */,
 				510471DF1941CB6000F288A5 /* generationoperators.swift */,
 				517DBB8119418131007E7B70 /* grouping.swift */,
@@ -95,6 +104,9 @@
 				517DBB8619418131007E7B70 /* setoperators.swift */,
 				517DBB921941BF23007E7B70 /* conversion.swift */,
 				517DBB77194180BC007E7B70 /* main.swift */,
+				51002A061942CB0F00605F8C /* joinoperators.swift */,
+				51002A021942C69500605F8C /* miscoperators.swift */,
+				51002A041942C7B200605F8C /* queryexecution.swift */,
 			);
 			path = LinqExamples;
 			sourceTree = "<group>";
@@ -158,15 +170,19 @@
 				517DBB8919418131007E7B70 /* grouping.swift in Sources */,
 				517DBB931941BF23007E7B70 /* conversion.swift in Sources */,
 				517DBB8E19418131007E7B70 /* setoperators.swift in Sources */,
+				51002A051942C7B200605F8C /* queryexecution.swift in Sources */,
 				517DBB78194180BC007E7B70 /* main.swift in Sources */,
 				517DBB8A19418131007E7B70 /* ordering.swift in Sources */,
 				517DBB8719418131007E7B70 /* data.swift in Sources */,
 				517DBB8819418131007E7B70 /* extensions.swift in Sources */,
 				517DBB8C19418131007E7B70 /* projections.swift in Sources */,
 				517DBB8D19418131007E7B70 /* restrictions.swift in Sources */,
+				51002A031942C69500605F8C /* miscoperators.swift in Sources */,
 				517DBB8B19418131007E7B70 /* partitioning.swift in Sources */,
 				510471E01941CB6000F288A5 /* generationoperators.swift in Sources */,
+				51002A071942CB0F00605F8C /* joinoperators.swift in Sources */,
 				510471E219423A3500F288A5 /* quantifiers.swift in Sources */,
+				51002A011942C5AB00605F8C /* aggregateoperators.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

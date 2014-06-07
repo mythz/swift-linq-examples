@@ -8,7 +8,7 @@
 
 import Foundation
 
-let quantifiers = [linq82]
+let quantifiers = [linq67, linq69, linq70, linq72]
 
 func linq67(){
     var words = [ "believe", "relief", "receipt", "field" ]
@@ -50,96 +50,3 @@ func linq72(){
 
     productGroups.each { println($0.Products) }
 }
-
-func linq73(){
-    var factorsOf300 = [ 2, 2, 3, 5, 5 ]
-    
-    var uniqueFactors = distinct(factorsOf300).count
-    
-    println("There are \(uniqueFactors) unique factors of 300.")
-}
-
-func linq74(){
-    var numbers = [ 5, 4, 1, 3, 9, 8, 6, 7, 2, 0 ]
-    
-    var oddNumbers = numbers.find { $0 % 2 == 1 }.count
-    
-    println("There are \(oddNumbers) odd numbers in the list.")
-}
-
-func linq76(){
-    var customers = customersList()
-    
-    var orderCounts = customers
-        .map { c -> (CustomerId:String, OrderCount:Int) in
-            (c.customerId, c.orders.count)
-        }
-    
-    orderCounts.each(println)
-}
-
-func linq77(){
-    var products = productsList()
-    
-    var categoryCounts = products.groupBy { (p:Product) in p.category }
-        .map { g -> (Category:String,ProductCount:Int) in
-            (g.key, g.items.count)
-        }
-    
-    categoryCounts.each(println)
-}
-
-func linq78(){
-    var numbers = [ 5, 4, 1, 3, 9, 8, 6, 7, 2, 0 ]
-    
-    var numSum = numbers.sum()
-    
-    println("The sum of the numbers is \(numSum).")
-}
-
-func linq79(){
-    var words = [ "cherry", "apple", "blueberry" ]
-    
-    var totalChars = words.sum { $0.length }
-    
-    println("There are a total of \(totalChars) characters in these words.")
-}
-
-func linq80(){
-    var products = productsList()
-    
-    var categories = products.groupBy { (p:Product) in p.category }
-        .map { g -> (Category:String, TotalUnitsInStock:Int) in
-            (g.key, g.items.sum { $0.unitsInStock })
-        }
-    
-    categories.each(println)
-}
-
-func linq81(){
-    var numbers = [ 5, 4, 1, 3, 9, 8, 6, 7, 2, 0 ]
-    
-    var minNum = numbers.min()
-    
-    println("The minimum number is \(minNum).")
-}
-
-func linq82(){
-    var words = [ "cherry", "apple", "blueberry" ]
-    
-    var shortestWord = words.min { $0.length }
-    
-    println("The shortest word is \(shortestWord) characters long.")
-}
-
-//func linq83(){
-//    var products = productsList()
-//    
-//    var categories = products.groupBy { (p:Product) -> p.category }
-//        .map { g -> (Category:String, CheapestPrice:Double) in
-//            (g.key, )
-//        }
-////        .map((g) => { 'Category': g.key, 'CheapestPrice': min(g.values.map((p) => p.unitPrice)) });
-//    
-//    categories.each(println)
-//}

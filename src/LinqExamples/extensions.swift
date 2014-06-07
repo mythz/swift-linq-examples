@@ -208,30 +208,74 @@ extension Array {
         return to
     }
     
-    func sum() -> Int {
-        return self.map { $0 as Int }.reduce(0) { $0 + $1 }
+    func sum<T : Addable>() -> T
+    {
+        return self.map { $0 as T }.reduce(T()) { $0 + $1 }
     }
     
-    func sum(fn: (T) -> Int) -> Int {
-        return self.map { fn($0) }.reduce(0) { $0 + $1 }
+    func sum<U, T : Addable>(fn: (U) -> T) -> T {
+        return self.map { fn($0 as U) }.reduce(T()) { $0 + $1 }
     }
     
-    func min() -> Int {
-        return self.map { $0 as Int }.reduce(Int.max) { $0 < $1 ? $0 : $1 }
+    func min<T : Reducable>() -> T {
+        return self.map { $0 as T }.reduce(T.max()) { $0 < $1 ? $0 : $1 }
     }
     
-    func min(fn: (T) -> Int) -> Int {
-        return self.map { fn($0) }.reduce(Int.max) { $0 < $1 ? $0 : $1 }
+    func min<U, T : Reducable>(fn: (U) -> T) -> T {
+        return self.map { fn($0 as U) }.reduce(T.max()) { $0 < $1 ? $0 : $1 }
     }
     
-    func max() -> Int {
-        return self.map { $0 as Int }.reduce(0) { $0 > $1 ? $0 : $1 }
+    func max<T : Reducable>() -> T {
+        return self.map { $0 as T }.reduce(T()) { $0 > $1 ? $0 : $1 }
     }
     
-    func max(fn: (T) -> Int) -> Int {
-        return self.map { fn($0) }.reduce(0) { $0 > $1 ? $0 : $1 }
+    func max<U, T : Reducable>(fn: (U) -> T) -> T {
+        return self.map { fn($0 as U) }.reduce(T()) { $0 > $1 ? $0 : $1 }
+    }
+    
+    func avg<T : Averagable>() -> Double
+    {
+        return self.map { $0 as T }.reduce(T()) { $0 + $1 } / self.count
+    }
+    
+    func avg<U, T : Averagable>(fn: (U) -> T) -> Double {
+        return self.map { fn($0 as U) }.reduce(T()) { $0 + $1 } / self.count
     }
 }
+
+protocol Addable {
+    func +(lhs: Self, rhs: Self) -> Self
+    init()
+}
+
+protocol Reducable : Addable, Averagable, Comparable {
+    class func max() -> Self
+}
+
+protocol Averagable : Addable {
+    func /(lhs: Self, rhs: Int) -> Double
+}
+
+extension Int : Reducable {
+    static func max() -> Int {
+        return Int.max
+    }
+}
+
+extension Double : Reducable {
+    static func max() -> Double {
+        return Double(Int.max)
+    }
+}
+
+func /(lhs: Int, rhs: Int) -> Double {
+    return Double(lhs) / Double(rhs)
+}
+
+func /(lhs: Double, rhs: Int) -> Double {
+    return lhs / Double(rhs)
+}
+
 
 func distinct<T : Equatable>(this:T[]) -> T[] {
     return union(this)
@@ -292,6 +336,10 @@ func difference<T : Equatable>(from:T[], other:T[]...) -> T[] {
     return to
 }
 
+// How for-in uses Sequences:
+//   var g = seq.generate()
+//   while let x = g.next() { .. }
+//
 //Generic classes not supported yet? Crashes XCode
 struct Group<Key,Item> : Sequence, Printable {
     var key: Key
@@ -318,6 +366,21 @@ struct Group<Key,Item> : Sequence, Printable {
             s += "\(x)"
         }
         return "\(key): [\(s)]\n"
+    }
+}
+
+func join<T,U>(seq:T[], withSeq:U[], match:(T,U)->Bool) -> (T,U)[] {
+    return seq.expand { (x:T) in
+        withSeq
+            .find { y in match(x,y) }
+            .map { y in (x,y) }
+    }
+}
+
+func joinGroup<T : Hashable,U>(seq:T[], withSeq:U[], match:(T,U)->Bool) -> Group<T,(T,U)>[] {
+    return join(seq, withSeq, match).groupBy { x -> T in
+        let (t,u) = x
+        return t
     }
 }
 
@@ -392,7 +455,6 @@ extension String {
 }
 
 
-
 extension NSDate {
     
     convenience init(dateString:String, format:String="yyyy-MM-dd") {
@@ -414,10 +476,6 @@ extension NSDate {
         self.init(timeInterval:0, sinceDate:d)
     }
     
-    func isAfter(other:NSDate) -> Bool {
-        return self.compare(other) == NSComparisonResult.OrderedDescending
-    }
-    
     func components() -> NSDateComponents {
         var compnents  = NSCalendar.currentCalendar().components(
             NSCalendarUnit.DayCalendarUnit | NSCalendarUnit.MonthCalendarUnit | NSCalendarUnit.YearCalendarUnit,
@@ -426,19 +484,10 @@ extension NSDate {
         return compnents
     }
 
-    //causes crash when returned inside lambda
-    var year:Int {
-        return components().year
-    }
-    
-    var month:Int {
-        return components().month
-    }
-    
-    var day:Int {
-        return components().day
-    }
-    
+// Swift Compiler crashes when extension computed property is used in a call-site. Bug submitted
+//    var year:Int {
+//        return components().year
+//    }
 
     func getYear() -> Int {
         return components().year
@@ -449,53 +498,12 @@ extension NSDate {
     }
 }
 
-//
-//
-//class Date {
-//    
-//    class func from(#year:Int, month:Int, day:Int) -> NSDate {
-//        var c = NSDateComponents()
-//        c.year = year
-//        c.month = month
-//        c.day = day
-//        
-//        var gregorian = NSCalendar(identifier:NSGregorianCalendar)
-//        var date = gregorian.dateFromComponents(c)
-//        return date
-//    }
-//    
-//    class func parse(dateString:String, format:String="yyyy-MM-dd") -> NSDate {
-//        var dateFmt = NSDateFormatter()
-//        dateFmt.timeZone = NSTimeZone.defaultTimeZone()
-//        dateFmt.dateFormat = format
-//        return dateFmt.dateFromString(dateString)
-//    }
-//    
-//    class func isAfter(this:NSDate?, other:NSDate) -> Bool {
-//        if this == nil {
-//            return false
-//        }
-//        return this!.compare(other) == NSComparisonResult.OrderedDescending
-//    }
-//    
-//    class func components(this:NSDate) -> NSDateComponents {
-//        var compnents  = NSCalendar.currentCalendar().components(
-//            NSCalendarUnit.DayCalendarUnit | NSCalendarUnit.MonthCalendarUnit | NSCalendarUnit.YearCalendarUnit,
-//            fromDate: this)
-//        
-//        return compnents
-//    }
-//    
-//    class func getYear(this:NSDate) -> Int {
-//        return components(this).year
-//    }
-//    
-//    class func getMonth(this:NSDate) -> Int {
-//        return components(this).month
-//    }
-//    
-//    class func getDay(this:NSDate) -> Int {
-//        return components(this).day
-//    }
-//}
-//
+func >(lhs: NSDate, rhs: NSDate) -> Bool {
+    return lhs.compare(rhs) == NSComparisonResult.OrderedDescending
+}
+func <(lhs: NSDate, rhs: NSDate) -> Bool {
+    return lhs.compare(rhs) == NSComparisonResult.OrderedDescending
+}
+func ==(lhs: NSDate, rhs: NSDate) -> Bool {
+    return lhs.compare(rhs) == NSComparisonResult.OrderedSame
+}
