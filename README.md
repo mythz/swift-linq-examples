@@ -43,6 +43,8 @@ For a side-by-side comparison, the original **C#** source code is displayed abov
 
 Unlike many languages that support a functional-style, Swift doesn't have many LINQ-like utils built-in by default, but as Swift is highly extensible this functionality can be easily extended on core primitives like `Array` as can be seen in [extensions.swift](https://github.com/mythz/swift-linq-examples/blob/master/src/LinqExamples/extensions.swift) which contains all utils used in the samples below.
 
+These LINQ extensions are also available in the [LinqKit](https://github.com/mythz/LinqKit) project.
+
 LINQ - Restriction Operators
 ----------------------------
 
@@ -2644,7 +2646,6 @@ public void Linq65()
 ```go
 //swift
 func linq65(){
-    Range(start:1,end:2).by(-1)
     let numbers = (100...150)
         .map { n -> (Number:Int, OddEven:String) in
             (n, n % 2 == 1 ? "odd" : "even")
