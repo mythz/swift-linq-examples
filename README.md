@@ -39,9 +39,9 @@ For a side-by-side comparison, the original **C#** source code is displayed abov
 
   - The **Output** shows the console output of running the **Swift** sample. 
   - Outputs ending with `...` illustrates only a partial response is displayed. 
-  - The source-code for all the Swift extensions and utils used are in [extensions.swift](https://github.com/mythz/swift-linq-examples/blob/master/src/LinqExamples/extensions.swift)
   - The C# ObjectDumper util used is downloadable from MSDN - [ObjectDumper.zip](http://code.msdn.microsoft.com/Visual-Studio-2008-C-d295cdba/file/46086/1/ObjectDumper.zip)
 
+Unlike many languages that support a functional-style, Swift doesn't have many LINQ-like utils built-in by default, but as Swift is highly extensible this functionality can be easily extended on core primitives like `Array` as can be seen in [extensions.swift](https://github.com/mythz/swift-linq-examples/blob/master/src/LinqExamples/extensions.swift) which contains all utils used in the samples below.
 
 LINQ - Restriction Operators
 ----------------------------
