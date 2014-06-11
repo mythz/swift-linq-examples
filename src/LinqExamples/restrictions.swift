@@ -1,4 +1,4 @@
-//
+// 
 //  restrictions.swift
 //  LinqExamples
 //
