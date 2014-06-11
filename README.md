@@ -68,7 +68,7 @@ public void Linq1()
     } 
 }  
 ```
-```go
+```swift
 //swift
 func linq1(){
     let numbers = [5, 4, 1, 3, 9, 8, 6, 7, 2, 0]
@@ -106,7 +106,7 @@ public void Linq2()
     } 
 } 
 ```
-```go
+```swift
 //swift
 func linq2(){
     let products = productsList()
@@ -148,7 +148,7 @@ public void Linq3()
     } 
 } 
 ```
-```go
+```swift
 //swift
 func linq3(){
     let products = productsList()
@@ -193,7 +193,7 @@ public void Linq4()
     } 
 } 
 ```
-```go
+```swift
 //swift
 func linq4(){
     let customers = customersList()
@@ -237,7 +237,7 @@ public void Linq5()
     } 
 }
 ```
-```go
+```swift
 //swift
 func linq5(){
     let digits = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"]
@@ -280,7 +280,7 @@ public void Linq6()
     } 
 }
 ```
-```go
+```swift
 //swift
 func linq6(){
     let numbers = [ 5, 4, 1, 3, 9, 8, 6, 7, 2, 0 ]
@@ -323,7 +323,7 @@ public void Linq7()
     } 
 }
 ```
-```go
+```swift
 //swift
 func linq7(){
     let products = productsList()
@@ -363,7 +363,7 @@ public void Linq8()
     } 
 }
 ```
-```go
+```swift
 //swift
 func linq8(){
     let numbers = [5, 4, 1, 3, 9, 8, 6, 7, 2, 0]
@@ -406,7 +406,7 @@ public void Linq9()
     } 
 }
 ```
-```go
+```swift
 //swift
 func linq9(){
     let words = ["aPPLE", "BlUeBeRrY", "cHeRry"]
@@ -444,7 +444,7 @@ public void Linq10()
     } 
 }
 ```
-```go
+```swift
 //swift
 func linq10(){
     let numbers = [ 5, 4, 1, 3, 9, 8, 6, 7, 2, 0 ]
@@ -490,7 +490,7 @@ public void Linq11()
     } 
 }
 ```
-```go
+```swift
 //swift
 func linq11(){
     let products = productsList()
@@ -529,7 +529,7 @@ public void Linq12()
     } 
 }
 ```
-```go
+```swift
 //swift
 func linq12(){
     let numbers = [ 5, 4, 1, 3, 9, 8, 6, 7, 2, 0 ]
@@ -579,7 +579,7 @@ public void Linq13()
     } 
 }
 ```
-```go
+```swift
 //swift
 func linq13(){
     let numbers = [ 5, 4, 1, 3, 9, 8, 6, 7, 2, 0 ]
@@ -623,7 +623,7 @@ public void Linq14()
     } 
 }
 ```
-```go
+```swift
 //swift
 func linq14(){
     let numbersA = [ 0, 2, 4, 5, 6, 8, 9 ]
@@ -677,7 +677,7 @@ public void Linq15()
     ObjectDumper.Write(orders); 
 }
 ```
-```go
+```swift
 //swift
 func linq15(){
     let customers = customersList()
@@ -717,7 +717,7 @@ public void Linq16()
     ObjectDumper.Write(orders); 
 }
 ```
-```go
+```swift
 //swift
 func linq16(){
     let customers = customersList()
@@ -759,7 +759,7 @@ public void Linq17()
     ObjectDumper.Write(orders); 
 }
 ```
-```go
+```swift
 //swift
 func linq17(){
     let customers = customersList()
@@ -803,7 +803,7 @@ public void Linq18()
     ObjectDumper.Write(orders); 
 }
 ```
-```go
+```swift
 //swift
 func linq18(){
     let customers = customersList()
@@ -858,7 +858,7 @@ public void Linq19()
     ObjectDumper.Write(customerOrders); 
 }
 ```
-```go
+```swift
 //swift
 func linq19(){
     let customers = customersList()
@@ -906,7 +906,7 @@ public void Linq20()
     } 
 }
 ```
-```go
+```swift
 //swift
 func linq20(){
     let numbers = [ 5, 4, 1, 3, 9, 8, 6, 7, 2, 0 ]
@@ -945,7 +945,7 @@ public void Linq21()
     } 
 }
 ```
-```go
+```swift
 //swift
 func linq21(){
     let customers = customersList()
@@ -987,7 +987,7 @@ public void Linq22()
     } 
 }
 ```
-```go
+```swift
 //swift
 func linq22(){
     let numbers = [ 5, 4, 1, 3, 9, 8, 6, 7, 2, 0 ]
@@ -1029,7 +1029,7 @@ public void Linq23()
     } 
 }
 ```
-```go
+```swift
 //swift
 func linq23(){
     let customers = customersList()
@@ -1085,7 +1085,7 @@ public void Linq24()
     } 
 }
 ```
-```go
+```swift
 //swift
 func linq24(){
     let numbers = [ 5, 4, 1, 3, 9, 8, 6, 7, 2, 0 ]
@@ -1120,7 +1120,7 @@ public void Linq25()
     } 
 }
 ```
-```go
+```swift
 //swift
 func linq25(){
     let numbers = [ 5, 4, 1, 3, 9, 8, 6, 7, 2, 0 ]
@@ -1154,7 +1154,7 @@ public void Linq26()
     } 
 }
 ```
-```go
+```swift
 //swift
 func linq26(){
     let numbers = [ 5, 4, 1, 3, 9, 8, 6, 7, 2, 0 ]
@@ -1191,7 +1191,7 @@ public void Linq27()
     } 
 }
 ```
-```go
+```swift
 //swift
 func linq27(){
     let numbers = [ 5, 4, 1, 3, 9, 8, 6, 7, 2, 0 ]
@@ -1238,7 +1238,7 @@ public void Linq28()
     } 
 }
 ```
-```go
+```swift
 //swift
 func linq28(){
     let words = [ "cherry", "apple", "blueberry" ]
@@ -1275,7 +1275,7 @@ public void Linq29()
     } 
 }
 ```
-```go
+```swift
 //swift
 func linq29(){
     let words = [ "cherry", "apple", "blueberry" ]
@@ -1308,7 +1308,7 @@ public void Linq30()
     ObjectDumper.Write(sortedProducts); 
 }
 ```
-```go
+```swift
 //swift
 func linq30(){
     let products = productsList()
@@ -1339,7 +1339,7 @@ public void Linq31()
     ObjectDumper.Write(sortedWords); 
 } 
 ```
-```go
+```swift
 //swift
 func linq31(){
     let words = [ "aPPLE", "AbAcUs", "bRaNcH", "BlUeBeRrY", "ClOvEr", "cHeRry" ]
@@ -1377,7 +1377,7 @@ public void Linq32()
     } 
 }
 ```
-```go
+```swift
 //swift
 func linq32(){
     let doubles = [ 1.7, 2.3, 1.9, 4.1, 2.9 ]
@@ -1412,7 +1412,7 @@ public void Linq33()
     ObjectDumper.Write(sortedProducts); 
 }
 ```
-```go
+```swift
 //swift
 func linq33(){
     let products = productsList()
@@ -1443,7 +1443,7 @@ public void Linq34()
     ObjectDumper.Write(sortedWords); 
 } 
 ```
-```go
+```swift
 //swift
 func linq34(){
     let words = [ "aPPLE", "AbAcUs", "bRaNcH", "BlUeBeRrY", "ClOvEr", "cHeRry" ]
@@ -1481,7 +1481,7 @@ public void Linq35()
     } 
 }
 ```
-```go
+```swift
 //swift
 func linq35(){
     let digits = [ "zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine" ]
@@ -1520,7 +1520,7 @@ public void Linq36()
     ObjectDumper.Write(sortedWords); 
 } 
 ```
-```go
+```swift
 //swift
 func linq36(){
     let words = [ "aPPLE", "AbAcUs", "bRaNcH", "BlUeBeRrY", "ClOvEr", "cHeRry" ]
@@ -1554,7 +1554,7 @@ public void Linq37()
     ObjectDumper.Write(sortedProducts); 
 }
 ```
-```go
+```swift
 //swift
 func linq37(){
     let products = productsList()
@@ -1594,7 +1594,7 @@ public void Linq38()
     ObjectDumper.Write(sortedWords); 
 } 
 ```
-```go
+```swift
 //swift
 func linq38(){
     let words = [ "aPPLE", "AbAcUs", "bRaNcH", "BlUeBeRrY", "ClOvEr", "cHeRry" ]
@@ -1636,7 +1636,7 @@ public void Linq39()
     } 
 }
 ```
-```go
+```swift
 //swift
 func linq39(){
     let digits = [ "zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine" ]
@@ -1683,7 +1683,7 @@ public void Linq40()
     } 
 }
 ```
-```go
+```swift
 //swift
 func linq40(){
     let numbers = [ 5, 4, 1, 3, 9, 8, 6, 7, 2, 0 ]
@@ -1739,7 +1739,7 @@ public void Linq41()
     } 
 }
 ```
-```go
+```swift
 //swift
 func linq41(){
     let words = [ "blueberry", "chimpanzee", "abacus", "banana", "apple", "cheese" ]
@@ -1782,7 +1782,7 @@ public void Linq42()
     ObjectDumper.Write(orderGroups, 1); 
 } 
 ```
-```go
+```swift
 //swift
 func linq42(){
     let products = productsList()
@@ -1848,7 +1848,7 @@ public void Linq43()
     ObjectDumper.Write(customerOrderGroups, 3); 
 } 
 ```
-```go
+```swift
 //swift
 func linq43(){
     let customers = customersList()
@@ -1903,7 +1903,7 @@ public void Linq44()
     ObjectDumper.Write(orderGroups, 1); 
 } 
 ```
-```go
+```swift
 //swift
 func linq44(){
     let anagrams = [ "from   ", " salt", " earn ", "  last   ", " near ", " form  " ]
@@ -1935,7 +1935,7 @@ public void Linq45()
     ObjectDumper.Write(orderGroups, 1); 
 } 
 ```
-```go
+```swift
 //swift
 func linq45(){
     let anagrams = [ "from   ", " salt", " earn ", "  last   ", " near ", " form  " ]
@@ -1973,7 +1973,7 @@ public void Linq46()
     } 
 }
 ```
-```go
+```swift
 //swift
 func linq46(){
     let factorsOf300 = [ 2, 2, 3, 5, 5 ]
@@ -2010,7 +2010,7 @@ public void Linq47()
     } 
 }
 ```
-```go
+```swift
 //swift
 func linq47(){
     let products = productsList()
@@ -2050,7 +2050,7 @@ public void Linq48()
     } 
 }
 ```
-```go
+```swift
 //swift
 func linq48(){
     let numbersA = [ 0, 2, 4, 5, 6, 8, 9 ]
@@ -2100,7 +2100,7 @@ public void Linq49()
     } 
 }
 ```
-```go
+```swift
 //swift
 func linq49(){
     let products = productsList()
@@ -2160,7 +2160,7 @@ public void Linq50()
     } 
 }
 ```
-```go
+```swift
 //swift
 func linq50(){
     let numbersA = [ 0, 2, 4, 5, 6, 8, 9 ]
@@ -2202,7 +2202,7 @@ public void Linq51()
     } 
 }
 ```
-```go
+```swift
 //swift
 func linq51(){
     let products = productsList()
@@ -2257,7 +2257,7 @@ public void Linq52()
     } 
 }
 ```
-```go
+```swift
 //swift
 func linq52(){
     let numbersA = [ 0, 2, 4, 5, 6, 8, 9 ]
@@ -2302,7 +2302,7 @@ public void Linq53()
     } 
 }
 ```
-```go
+```swift
 //swift
 func linq53(){
     let products = productsList()
@@ -2348,7 +2348,7 @@ public void Linq54()
     } 
 }
 ```
-```go
+```swift
 //swift
 func linq54(){
     let doubles = [ 1.7, 2.3, 1.9, 4.1, 2.9 ]
@@ -2392,7 +2392,7 @@ public void Linq55()
     } 
 }
 ```
-```go
+```swift
 //swift
 func linq55(){
     let words = [ "cherry", "apple", "blueberry" ]
@@ -2427,7 +2427,7 @@ public void Linq56()
     Console.WriteLine("Bob's score: {0}", scoreRecordsDict["Bob"]); 
 }
 ```
-```go
+```swift
 //swift
 func linq56(){
     let scoreRecords = [
@@ -2464,7 +2464,7 @@ public void Linq57()
     } 
 }
 ```
-```go
+```swift
 //swift
 func linq57(){
     let numbers = [ nil as Any, 1.0, "two", 3, "four", 5, "six", 7.0 ]
@@ -2501,7 +2501,7 @@ public void Linq58()
     ObjectDumper.Write(product12); 
 }
 ```
-```go
+```swift
 //swift
 func linq58(){
     let products = productsList()
@@ -2527,7 +2527,7 @@ public void Linq59()
     Console.WriteLine("A string starting with 'o': {0}", startsWithO); 
 }
 ```
-```go
+```swift
 //swift
 func linq59(){
     let strings = [ "zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine" ]
@@ -2553,7 +2553,7 @@ public void Linq61()
     Console.WriteLine(firstNumOrDefault); 
 }
 ```
-```go
+```swift
 //swift
 func linq61(){
     let numbers:Int[] = []
@@ -2579,7 +2579,7 @@ public void Linq62()
     Console.WriteLine("Product 789 exists: {0}", product789 != null); 
 }
 ```
-```go
+```swift
 //swift
 func linq62(){
     let products = productsList()
@@ -2609,7 +2609,7 @@ public void Linq64()
     Console.WriteLine("Second number > 5: {0}", fourthLowNum); 
 }
 ```
-```go
+```swift
 //swift
 func linq64(){
     let numbers = [ 5, 4, 1, 3, 9, 8, 6, 7, 2, 0 ]
@@ -2643,7 +2643,7 @@ public void Linq65()
     } 
 }
 ```
-```go
+```swift
 //swift
 func linq65(){
     let numbers = (100...150)
@@ -2684,7 +2684,7 @@ public void Linq66()
     } 
 }
 ```
-```go
+```swift
 //swift
 func linq66(){
     let numbers = Array(count:10, repeatedValue:7)
@@ -2721,7 +2721,7 @@ public void Linq67()
     Console.WriteLine("There is a word that contains in the list that contains 'ei': {0}", iAfterE); 
 }
 ```
-```go
+```swift
 //swift
 func linq67(){
     let words = [ "believe", "relief", "receipt", "field" ]
@@ -2750,7 +2750,7 @@ public void Linq69()
     ObjectDumper.Write(productGroups, 1);  
 }
 ```
-```go
+```swift
 //swift
 func linq69(){
     let products = productsList()
@@ -2782,7 +2782,7 @@ public void Linq70()
     Console.WriteLine("The list contains only odd numbers: {0}", onlyOdd); 
 }
 ```
-```go
+```swift
 //swift
 func linq70(){
     let numbers = [ 1, 11, 3, 19, 41, 65, 19 ]
@@ -2812,7 +2812,7 @@ public void Linq72()
     ObjectDumper.Write(productGroups, 1); 
 }
 ```
-```go
+```swift
 //swift
 func linq72(){
     let products = productsList()
@@ -2847,7 +2847,7 @@ public void Linq73()
     Console.WriteLine("There are {0} unique factors of 300.", uniqueFactors); 
 }
 ```
-```go
+```swift
 //swift
 func linq73(){
     let factorsOf300 = [ 2, 2, 3, 5, 5 ]
@@ -2873,7 +2873,7 @@ public void Linq74()
     Console.WriteLine("There are {0} odd numbers in the list.", oddNumbers); 
 }
 ```
-```go
+```swift
 //swift
 func linq74(){
     let numbers = [ 5, 4, 1, 3, 9, 8, 6, 7, 2, 0 ]
@@ -2901,7 +2901,7 @@ public void Linq76()
     ObjectDumper.Write(orderCounts); 
 }
 ```
-```go
+```swift
 //swift
 func linq76(){
     let customers = customersList()
@@ -2940,7 +2940,7 @@ public void Linq77()
     ObjectDumper.Write(categoryCounts 
 }
 ```
-```go
+```swift
 //swift
 func linq77(){
     let products = productsList()
@@ -2976,7 +2976,7 @@ public void Linq78()
     Console.WriteLine("The sum of the numbers is {0}.", numSum); 
 }
 ```
-```go
+```swift
 //swift
 func linq78(){
     let numbers = [ 5, 4, 1, 3, 9, 8, 6, 7, 2, 0 ]
@@ -3002,7 +3002,7 @@ public void Linq79()
     Console.WriteLine("There are a total of {0} characters in these words.", totalChars); 
 }
 ```
-```go
+```swift
 //swift
 func linq79(){
     let words = [ "cherry", "apple", "blueberry" ]
@@ -3031,7 +3031,7 @@ public void Linq80()
     ObjectDumper.Write(categories); 
 }
 ```
-```go
+```swift
 //swift
 func linq80(){
     let products = productsList()
@@ -3067,7 +3067,7 @@ public void Linq81()
     Console.WriteLine("The minimum number is {0}.", minNum); 
 }
 ```
-```go
+```swift
 //swift
 func linq81(){
     let numbers = [ 5, 4, 1, 3, 9, 8, 6, 7, 2, 0 ]
@@ -3093,7 +3093,7 @@ public void Linq82()
     Console.WriteLine("The shortest word is {0} characters long.", shortestWord); 
 }
 ```
-```go
+```swift
 //swift
 func linq82(){
     let words = [ "cherry", "apple", "blueberry" ]
@@ -3122,7 +3122,7 @@ public void Linq83()
     ObjectDumper.Write(categories); 
 }
 ```
-```go
+```swift
 //swift
 func linq83(){
     let products = productsList()
@@ -3162,7 +3162,7 @@ public void Linq84()
     ObjectDumper.Write(categories, 1); 
 }
 ```
-```go
+```swift
 //swift
 func linq84(){
     let products = productsList()
@@ -3202,7 +3202,7 @@ public void Linq85()
     Console.WriteLine("The maximum number is {0}.", maxNum); 
 }
 ```
-```go
+```swift
 //swift
 func linq85(){
     let numbers = [ 5, 4, 1, 3, 9, 8, 6, 7, 2, 0 ]
@@ -3228,7 +3228,7 @@ public void Linq86()
     Console.WriteLine("The longest word is {0} characters long.", longestLength); 
 }
 ```
-```go
+```swift
 //swift
 func linq86(){
     let words = [ "cherry", "apple", "blueberry" ]
@@ -3257,7 +3257,7 @@ public void Linq87()
     ObjectDumper.Write(categories); 
 }
 ```
-```go
+```swift
 //swift
 func linq87(){
     let products = productsList()
@@ -3299,7 +3299,7 @@ public void Linq88()
     ObjectDumper.Write(categories, 1); 
 }
 ```
-```go
+```swift
 //swift
 func linq88(){
     let products = productsList()
@@ -3339,7 +3339,7 @@ public void Linq89()
     Console.WriteLine("The average number is {0}.", averageNum); 
 }
 ```
-```go
+```swift
 //swift
 func linq89(){
     let numbers = [ 5, 4, 1, 3, 9, 8, 6, 7, 2, 0 ]
@@ -3365,7 +3365,7 @@ public void Linq90()
     Console.WriteLine("The average word length is {0} characters.", averageLength); 
 }
 ```
-```go
+```swift
 //swift
 func linq90(){
     let words = [ "cherry", "apple", "blueberry" ]
@@ -3394,7 +3394,7 @@ public void Linq91()
     ObjectDumper.Write(categories); 
 }
 ```
-```go
+```swift
 //swift
 func linq91(){
     let products = productsList()
@@ -3432,7 +3432,7 @@ public void Linq92()
     Console.WriteLine("Total product of all numbers: {0}", product); 
 }
 ```
-```go
+```swift
 //swift
 func linq92(){
     let doubles = [ 1.7, 2.3, 1.9, 4.1, 2.9 ]
@@ -3463,7 +3463,7 @@ public void Linq93()
     Console.WriteLine("Ending balance: {0}", endBalance); 
 }
 ```
-```go
+```swift
 //swift
 func linq93(){
     let startBalance = 100.0
@@ -3503,7 +3503,7 @@ public void Linq94()
     } 
 }
 ```
-```go
+```swift
 //swift
 func linq94(){
     let numbersA = [ 0, 2, 4, 5, 6, 8, 9 ]
@@ -3555,7 +3555,7 @@ public void Linq95()
     } 
 }
 ```
-```go
+```swift
 //swift
 func linq95(){
     let customers = customersList()
@@ -3594,7 +3594,7 @@ public void Linq96()
     Console.WriteLine("The sequences match: {0}", match); 
 }
 ```
-```go
+```swift
 //swift
 func linq96(){
     let wordsA = [ "cherry", "apple", "blueberry" ]
@@ -3622,7 +3622,7 @@ public void Linq97()
     Console.WriteLine("The sequences match: {0}", match); 
 }
 ```
-```go
+```swift
 //swift
 func linq97(){
     let wordsA = [ "cherry", "apple", "blueberry" ]
@@ -3663,7 +3663,7 @@ public void Linq99()
     } 
 }
 ```
-```go
+```swift
 //swift
 func linq99(){
     let numbers = [ 5, 4, 1, 3, 9, 8, 6, 7, 2, 0 ]
@@ -3714,7 +3714,7 @@ public void Linq100()
     } 
 } 
 ```
-```go
+```swift
 //swift
 func linq100(){
     let numbers = [ 5, 4, 1, 3, 9, 8, 6, 7, 2, 0 ]
@@ -3775,7 +3775,7 @@ public void Linq101()
     } 
 } 
 ```
-```go
+```swift
 //swift
 func linq101(){
     var numbers = [ 5, 4, 1, 3, 9, 8, 6, 7, 2, 0 ]
@@ -3840,7 +3840,7 @@ public void Linq102()
     } 
 }
 ```
-```go
+```swift
 //swift
 func linq102(){
     let categories = [ "Beverages", "Condiments", "Vegetables", "Dairy Products", "Seafood" ]
@@ -3899,7 +3899,7 @@ public void Linq103()
     } 
 }
 ```
-```go
+```swift
 //swift
 func linq103(){
     let categories = [ "Beverages", "Condiments", "Vegetables", "Dairy Products", "Seafood" ]
@@ -3975,7 +3975,7 @@ public void Linq104()
     } 
 }
 ```
-```go
+```swift
 //swift
 func linq104(){
     let categories = [ "Beverages", "Condiments", "Vegetables", "Dairy Products", "Seafood" ]
@@ -4041,7 +4041,7 @@ public void Linq105()
     } 
 }
 ```
-```go
+```swift
 //swift
 func linq105(){
     let categories = [ "Beverages", "Condiments", "Vegetables", "Dairy Products", "Seafood" ]
