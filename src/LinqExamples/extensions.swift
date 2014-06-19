@@ -40,6 +40,27 @@ extension Array {
         return to
     }
     
+    func first(fn: (T) -> Bool) -> T? {
+        for x in self {
+            let t = x as T
+            if fn(t) {
+                return t
+            }
+        }
+        return nil
+    }
+    
+    func first(fn: (T, Int) -> Bool) -> T? {
+        var i = 0
+        for x in self {
+            let t = x as T
+            if fn(t, i++) {
+                return t
+            }
+        }
+        return nil
+    }
+    
     func any(fn: (T) -> Bool) -> Bool {
         return self.find(fn).count > 0
     }
