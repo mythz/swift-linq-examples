@@ -13,7 +13,7 @@ let partitioning = [linq20, linq21, linq22, linq23, linq24, linq25, linq26, linq
 func linq20(){
     let numbers = [ 5, 4, 1, 3, 9, 8, 6, 7, 2, 0 ]
     
-    let first3Numbers = numbers[0..3]
+    let first3Numbers = numbers[0...2]
     
     println("First 3 numbers:")
     first3Numbers.each(println)
