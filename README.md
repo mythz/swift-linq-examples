@@ -6,7 +6,7 @@ Port of the [C# 101 LINQ Samples](http://code.msdn.microsoft.com/101-LINQ-Sample
 Compare Swift to other LINQ examples written in:
 
  - [Clojure](https://github.com/mythz/clojure-linq-examples)
- - [Dart](https://github.com/dartist/101LinqSamples)
+ - [Dart](https://github.com/mythz/dart-linq-examples)
 
 ## [Call .NET Web Services from Swift](https://github.com/ServiceStack/ServiceStack/wiki/Swift-Add-ServiceStack-Reference)
 
