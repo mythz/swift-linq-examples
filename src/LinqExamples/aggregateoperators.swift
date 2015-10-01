@@ -18,15 +18,15 @@ func linq73(){
     
     let uniqueFactors = distinct(factorsOf300).count
     
-    println("There are \(uniqueFactors) unique factors of 300.")
+    print("There are \(uniqueFactors) unique factors of 300.")
 }
 
 func linq74(){
     let numbers = [ 5, 4, 1, 3, 9, 8, 6, 7, 2, 0 ]
     
-    let oddNumbers = numbers.find { $0 % 2 == 1 }.count
+    let oddNumbers = numbers.filter { $0 % 2 == 1 }.count
     
-    println("There are \(oddNumbers) odd numbers in the list.")
+    print("There are \(oddNumbers) odd numbers in the list.")
 }
 
 func linq76(){
@@ -37,7 +37,7 @@ func linq76(){
             (c.customerId, c.orders.count)
     }
     
-    orderCounts.each(println)
+    orderCounts.forEach { print($0) }
 }
 
 func linq77(){
@@ -48,7 +48,7 @@ func linq77(){
             (g.key, g.items.count)
     }
     
-    categoryCounts.each(println)
+    categoryCounts.forEach { print($0) }
 }
 
 func linq78(){
@@ -56,7 +56,7 @@ func linq78(){
     
     let numSum:Int = numbers.sum()
     
-    println("The sum of the numbers is \(numSum).")
+    print("The sum of the numbers is \(numSum).")
 }
 
 func linq79(){
@@ -64,7 +64,7 @@ func linq79(){
     
     let totalChars = words.sum { (s:String) in s.length }
     
-    println("There are a total of \(totalChars) characters in these words.")
+    print("There are a total of \(totalChars) characters in these words.")
 }
 
 func linq80(){
@@ -75,23 +75,23 @@ func linq80(){
             (g.key, g.items.sum { (p:Product) in p.unitsInStock })
     }
     
-    categories.each(println)
+    categories.forEach { print($0) }
 }
 
 func linq81(){
     let numbers = [ 5, 4, 1, 3, 9, 8, 6, 7, 2, 0 ]
     
-    let minNum:Int = numbers.min()
+    let minNum = numbers.minElement()!
     
-    println("The minimum number is \(minNum).")
+    print("The minimum number is \(minNum).")
 }
 
 func linq82(){
     let words = [ "cherry", "apple", "blueberry" ]
     
-    let shortestWord = words.min { (s:String) in s.length }
+    let shortestWord = words.minElement { (s:String) in s.length }
     
-    println("The shortest word is \(shortestWord) characters long.")
+    print("The shortest word is \(shortestWord) characters long.")
 }
 
 func linq83(){
@@ -99,41 +99,41 @@ func linq83(){
     
     let categories = products.groupBy { (p:Product)in p.category }
         .map { g -> (Category:String, CheapestPrice:Double) in
-            (g.key, g.items.map { (p:Product) in p.unitPrice }.min() )
+            (g.key, g.items.map { (p:Product) in p.unitPrice }.minElement()! )
     }
     
-    categories.each(println)
+    categories.forEach { print($0) }
 }
 
 func linq84(){
     let products = productsList()
     
     let categories = products.groupBy { (p:Product) in p.category }
-        .map { g -> (Category:String, CheapestProducts:Product[]) in
-            let minPrice:Double = g.items.min { (p:Product) in p.unitPrice }
-            return (g.key, g.items.find { $0.unitPrice == minPrice })
+        .map { g -> (Category:String, CheapestProducts:[Product]) in
+            let minPrice:Double = g.items.minElement { (p:Product) in p.unitPrice }
+            return (g.key, g.items.filter { $0.unitPrice == minPrice })
     }
     
-    categories.each {
+    categories.forEach {
         print("\($0.Category): ")
-        $0.CheapestProducts.each(println)
+        $0.CheapestProducts.forEach { print($0) }
     }
 }
 
 func linq85(){
     let numbers = [ 5, 4, 1, 3, 9, 8, 6, 7, 2, 0 ]
     
-    let maxNum:Int = numbers.max()
+    let maxNum = numbers.maxElement()!
     
-    println("The maximum number is \(maxNum).")
+    print("The maximum number is \(maxNum).")
 }
 
 func linq86(){
     let words = [ "cherry", "apple", "blueberry" ]
     
-    let longestLength:Int = words.map { (s:String) in s.length }.max()
+    let longestLength:Int = words.map { (s:String) in s.length }.maxElement()!
     
-    println("The longest word is \(longestLength) characters long.")
+    print("The longest word is \(longestLength) characters long.")
 }
 
 func linq87(){
@@ -141,11 +141,11 @@ func linq87(){
     
     let categories = products.groupBy { (p:Product) in p.category }
         .map { g -> (Category:String, MostExpensivePrice:Double) in
-            (g.key, g.items.max { (p:Product) in p.unitPrice } )
+            (g.key, g.items.maxElement { (p:Product) in p.unitPrice } )
     }
     
     for c in categories {
-        println("Category: \(c.Category), MaximumPrice: \(c.MostExpensivePrice)")
+        print("Category: \(c.Category), MaximumPrice: \(c.MostExpensivePrice)")
     }
 }
 
@@ -153,14 +153,14 @@ func linq88(){
     let products = productsList()
     
     let categories = products.groupBy { (p:Product) in p.category }
-        .map { g -> (Category:String, MostExpensiveProducts:Product[]) in
-            let maxPrice:Double = g.items.max { (p:Product) in p.unitPrice }
-            return (g.key, g.items.find { $0.unitPrice == maxPrice })
+        .map { g -> (Category:String, MostExpensiveProducts:[Product]) in
+            let maxPrice:Double = g.items.maxElement { (p:Product) in p.unitPrice }
+            return (g.key, g.items.filter { $0.unitPrice == maxPrice })
     }
     
-    categories.each {
+    categories.forEach {
         print("\($0.Category): ")
-        $0.MostExpensiveProducts.each(println)
+        $0.MostExpensiveProducts.forEach { print($0) }
     }
 }
 
@@ -169,7 +169,7 @@ func linq89(){
     
     let averageNum = numbers.avg { $0 as Int }
     
-    println("The average number is \(averageNum).")
+    print("The average number is \(averageNum).")
 }
 
 func linq90(){
@@ -177,7 +177,7 @@ func linq90(){
     
     let averageLength = words.map { $0.length }.avg { $0 as Int }
     
-    println("The average word length is \(averageLength) characters.")
+    print("The average word length is \(averageLength) characters.")
 }
 
 func linq91(){
@@ -189,7 +189,7 @@ func linq91(){
     }
     
     for c in categories {
-        println("Category: \(c.Category), AveragePrice: \(c.AveragePrice)")
+        print("Category: \(c.Category), AveragePrice: \(c.AveragePrice)")
     }
 }
 
@@ -198,7 +198,7 @@ func linq92(){
     
     let product = doubles.reduce(1) { runningProduct, nextFactor in runningProduct * nextFactor }
     
-    println("Total product of all numbers: \(product)")
+    print("Total product of all numbers: \(product)")
 }
 
 func linq93(){
@@ -211,5 +211,5 @@ func linq93(){
         (nextWithdrawal <= balance) ? (balance - nextWithdrawal) : balance
     }
     
-    println("Ending balance: \(endBalance)")
+    print("Ending balance: \(endBalance)")
 }

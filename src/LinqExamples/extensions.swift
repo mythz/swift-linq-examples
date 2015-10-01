@@ -10,39 +10,30 @@ import Foundation
 
 //Reusable extensions and utils used in examples
 
+extension CollectionType
+{    
+    func toArray() -> [Self.Generator.Element] {
+        return self.map { $0 }
+    }
+}
+
 extension Array {
-    func each(fn: (T) -> ()) {
-        for i in self {
-            fn(i)
-        }
-    }
     
-    func find(fn: (T) -> Bool) -> [T] {
-        var to = [T]()
-        for x in self {
-            let t = x as T
-            if fn(t) {
-                to += t
-            }
-        }
-        return to
-    }
-    
-    func find(fn: (T, Int) -> Bool) -> [T] {
-        var to = [T]()
+    func filteri(fn: (Element, Int) -> Bool) -> [Element] {
+        var to = [Element]()
         var i = 0
         for x in self {
-            let t = x as T
+            let t = x as Element
             if fn(t, i++) {
-                to += t
+                to.append(t)
             }
         }
         return to
     }
     
-    func first(fn: (T) -> Bool) -> T? {
+    func first(fn: (Element) -> Bool) -> Element? {
         for x in self {
-            let t = x as T
+            let t = x as Element
             if fn(t) {
                 return t
             }
@@ -50,10 +41,10 @@ extension Array {
         return nil
     }
     
-    func first(fn: (T, Int) -> Bool) -> T? {
+    func first(fn: (Element, Int) -> Bool) -> Element? {
         var i = 0
         for x in self {
-            let t = x as T
+            let t = x as Element
             if fn(t, i++) {
                 return t
             }
@@ -61,50 +52,50 @@ extension Array {
         return nil
     }
     
-    func any(fn: (T) -> Bool) -> Bool {
-        return self.find(fn).count > 0
+    func any(fn: (Element) -> Bool) -> Bool {
+        return self.filter(fn).count > 0
     }
     
-    func all(fn: (T) -> Bool) -> Bool {
-        return self.find(fn).count == self.count
+    func all(fn: (Element) -> Bool) -> Bool {
+        return self.filter(fn).count == self.count
     }
     
-    func expand<TResult>(fn: (T) -> [TResult]?) -> [TResult] {
+    func expand<TResult>(fn: (Element) -> [TResult]?) -> [TResult] {
         var to = [TResult]()
         for x in self {
-            if let result = fn(x as T) {
+            if let result = fn(x as Element) {
                 for r in result {
-                    to += r
+                    to.append(r)
                 }
             }
         }
         return to
     }
     
-    func take(count:Int) -> [T] {
-        var to = [T]()
+    func take(count:Int) -> [Element] {
+        var to = [Element]()
         var i = 0
         while i < self.count && i < count {
-            to += self[i++]
+            to.append(self[i++])
         }
         return to
     }
     
-    func skip(count:Int) -> [T] {
-        var to = [T]()
+    func skip(count:Int) -> [Element] {
+        var to = [Element]()
         var i = count
         while i < self.count {
-            to += self[i++]
+            to.append(self[i++])
         }
         return to
     }
     
-    func takeWhile(fn: (T) -> Bool) -> [T] {
-        var to = [T]()
+    func takeWhile(fn: (Element) -> Bool) -> [Element] {
+        var to = [Element]()
         for x in self {
-            let t = x as T
+            let t = x as Element
             if fn(t) {
-                to += t
+                to.append(t)
             }
             else {
                 break
@@ -113,22 +104,22 @@ extension Array {
         return to
     }
     
-    func skipWhile(fn: (T) -> Bool) -> [T] {
-        var to = [T]()
+    func skipWhile(fn: (Element) -> Bool) -> [Element] {
+        var to = [Element]()
         var keepSkipping = true
         for x in self {
-            let t = x as T
+            let t = x as Element
             if !fn(t) {
                 keepSkipping = false
             }
             if !keepSkipping {
-                to += t
+                to.append(t)
             }
         }
         return to
     }
     
-    func firstWhere(fn: (T) -> Bool) -> T? {
+    func firstWhere(fn: (Element) -> Bool) -> Element? {
         for x in self {
             if fn(x) {
                 return x
@@ -137,7 +128,7 @@ extension Array {
         return nil
     }
     
-    func firstWhere(fn: (T) -> Bool, orElse: () -> T) -> T {
+    func firstWhere(fn: (Element) -> Bool, orElse: () -> Element) -> Element {
         for x in self {
             if fn(x) {
                 return x
@@ -146,10 +137,9 @@ extension Array {
         return orElse()
     }
     
-    func sortBy(fns: ((T,T) -> Int)...) -> [T]
+    func sortBy(fns: ((Element,Element) -> Int)...) -> [Element]
     {
-        var items = self.copy()
-        items.sort { x, y in
+        return self.sort { x, y in
             for f in fns {
                 let r = f(x,y)
                 if r != 0 {
@@ -158,15 +148,14 @@ extension Array {
             }
             return false
         }
-        return items
     }
     
     func groupBy<Key : Hashable, Item>(fn:(Item) -> Key) -> [Group<Key,Item>] {
-        return self.groupBy(fn, nil, nil)
+        return self.groupBy(fn, matchWith: nil, valueAs: nil)
     }
     
     func groupBy<Key : Hashable, Item>(fn:(Item) -> Key, matchWith:((Key,Key) -> Bool)?) -> [Group<Key,Item>] {
-        return self.groupBy(fn, matchWith, nil)
+        return self.groupBy(fn, matchWith: matchWith, valueAs: nil)
     }
     
     func groupBy<Key : Hashable, Item>
@@ -177,15 +166,14 @@ extension Array {
         )
         -> [Group<Key,Item>]
     {
-        var ret = [Item]()
         var map = Dictionary<Key, Group<Key,Item>>()
         for x in self {
-            var e = x as Item
+            var e = x as! Item
             let val = fn(e)
             
             var key = val as Key
             
-            if matchWith {
+            if (matchWith != nil) {
                 for k in map.keys {
                     if matchWith!(val, k) {
                         key = k
@@ -194,11 +182,11 @@ extension Array {
                 }
             }
             
-            if valueAs {
+            if (valueAs != nil) {
                 e = valueAs!(e)
             }
             
-            var group = map[key] ? map[key]! : Group<Key,Item>(key:key)
+            var group = map[key] != nil ? map[key]! : Group<Key,Item>(key:key)
             group.append(e)
             map[key] = group //always copy back struct
         }
@@ -206,13 +194,9 @@ extension Array {
         return map.values.map { $0 as Group<Key,Item> }
     }
     
-    func contains<T : Equatable>(x:T) -> Bool {
-        return self.indexOf(x) != nil
-    }
-    
     func indexOf<T : Equatable>(x:T) -> Int? {
         for i in 0..<self.count {
-            if self[i] as T == x {
+            if self[i] as! T == x {
                 return i
             }
         }
@@ -222,47 +206,44 @@ extension Array {
     func toDictionary<Key : Hashable, Item>(fn:Item -> Key) -> Dictionary<Key,Item> {
         var to = Dictionary<Key,Item>()
         for x in self {
-            let e = x as Item
+            let e = x as! Item
             let key = fn(e)
             to[key] = e
         }
         return to
     }
+
     
     func sum<T : Addable>() -> T
     {
-        return self.map { $0 as T }.reduce(T()) { $0 + $1 }
+        return self.map { $0 as! T }.reduce(T()) { $0 + $1 }
     }
     
     func sum<U, T : Addable>(fn: (U) -> T) -> T {
-        return self.map { fn($0 as U) }.reduce(T()) { $0 + $1 }
+        return self.map { fn($0 as! U) }.reduce(T()) { $0 + $1 }
     }
     
-    func min<T : Reducable>() -> T {
-        return self.map { $0 as T }.reduce(T.max()) { $0 < $1 ? $0 : $1 }
+    func minElement<U, T : Reducable>(fn: (U) -> T) -> T {
+        return self.map { fn($0 as! U) }.reduce(T.max()) { $0 < $1 ? $0 : $1 }
     }
     
-    func min<U, T : Reducable>(fn: (U) -> T) -> T {
-        return self.map { fn($0 as U) }.reduce(T.max()) { $0 < $1 ? $0 : $1 }
-    }
-    
-    func max<T : Reducable>() -> T {
-        return self.map { $0 as T }.reduce(T()) { $0 > $1 ? $0 : $1 }
-    }
-    
-    func max<U, T : Reducable>(fn: (U) -> T) -> T {
-        return self.map { fn($0 as U) }.reduce(T()) { $0 > $1 ? $0 : $1 }
-    }
-    
-    func avg<T : Averagable>() -> Double
-    {
-        return self.map { $0 as T }.reduce(T()) { $0 + $1 } / self.count
+    func maxElement<U, T : Reducable>(fn: (U) -> T) -> T {
+        return self.map { fn($0 as! U) }.reduce(T()) { $0 > $1 ? $0 : $1 }
     }
     
     func avg<U, T : Averagable>(fn: (U) -> T) -> Double {
-        return self.map { fn($0 as U) }.reduce(T()) { $0 + $1 } / self.count
+        return self.map { fn($0 as! U) }.reduce(T()) { $0 + $1 } / self.count
     }
 }
+
+extension Array where Element : Averagable
+{
+    func avg() -> Double
+    {
+        return self.reduce(Element()) { $0 + $1 } / self.count
+    }
+}
+
 
 protocol Addable {
     func +(lhs: Self, rhs: Self) -> Self
@@ -270,7 +251,7 @@ protocol Addable {
 }
 
 protocol Reducable : Addable, Averagable, Comparable {
-    class func max() -> Self
+    static func max() -> Self
 }
 
 protocol Averagable : Addable {
@@ -316,14 +297,14 @@ func _union<T : Equatable>(arrays:[[T]]) -> [T] {
                     continue outer
                 }
             }
-            to += e
+            to.append(e)
         }
     }
     return to
 }
 
 func intersection<T : Equatable>(arrays:[T]...) -> [T] {
-    var all: [T] = _union(arrays)
+    let all: [T] = _union(arrays)
     var to = [T]()
     
     for x in all {
@@ -338,7 +319,7 @@ func intersection<T : Equatable>(arrays:[T]...) -> [T] {
             }
         }
         if count == arrays.count {
-            to += e
+            to.append(e)
         }
     }
     
@@ -350,7 +331,7 @@ func difference<T : Equatable>(from:[T], other:[T]...) -> [T] {
     for arr in other {
         for x in from {
             if !arr.contains(x) && !to.contains(x) {
-                to += x
+                to.append(x)
             }
         }
     }
@@ -362,7 +343,7 @@ func difference<T : Equatable>(from:[T], other:[T]...) -> [T] {
 //   while let x = g.next() { .. }
 //
 //Generic classes not supported yet? Crashes XCode
-struct Group<Key,Item> : Sequence, Printable {
+struct Group<Key,Item> : SequenceType, CustomStringConvertible {
     let key: Key
     var items = [Item]()
     
@@ -393,14 +374,14 @@ struct Group<Key,Item> : Sequence, Printable {
 func join<T,U>(seq:[T], withSeq:[U], match:(T,U)->Bool) -> [(T,U)] {
     return seq.expand { (x:T) in
         withSeq
-            .find { y in match(x,y) }
+            .filter { y in match(x,y) }
             .map { y in (x,y) }
     }
 }
 
 func joinGroup<T : Hashable,U>(seq:[T], withSeq:[U], match:(T,U)->Bool) -> [Group<T,(T,U)>] {
-    return join(seq, withSeq, match).groupBy { x -> T in
-        let (t,u) = x
+    return join(seq, withSeq: withSeq, match: match).groupBy { x -> T in
+        let (t,_) = x
         return t
     }
 }
@@ -408,57 +389,54 @@ func joinGroup<T : Hashable,U>(seq:[T], withSeq:[U], match:(T,U)->Bool) -> [Grou
 func anagramComparer(a:String, b:String) -> Bool {
     let aChars = Array(a.nulTerminatedUTF8)
     let bChars = Array(b.nulTerminatedUTF8)
-    sort(aChars)
-    sort(bChars)
-    return aChars == bChars
+    return aChars.sort() == bChars.sort()
 }
 
 func caseInsensitiveComparer (a:String,b:String) -> Bool {
-    return a.uppercaseString.compare(b.uppercaseString) < 0
+    return a.uppercaseString.compare(b.uppercaseString) == .OrderedDescending
 }
 
-func compareIgnoreCase (a:String,b:String) -> Int {
-    return a.uppercaseString.compare(b.uppercaseString)
+func compareIgnoreCase (a:String, _ b:String) -> Int {
+    switch a.uppercaseString.compare(b.uppercaseString) {
+    case .OrderedAscending:
+        return 1
+    case .OrderedSame:
+        return 0
+    case .OrderedDescending:
+        return -1
+    }
 }
 
-extension MapCollectionView {
+extension LazyMapCollection {
     
     func map<T,U>(fn: (T) -> (U)) -> [U] {
         var to = [U]()
         for x in self {
-            let e = x as U
+            let e = x as! U
             to.append(e)
         }
         return to
     }
 }
 
-func compare<T : Comparable>(a:T, b:T) -> Int {
+func compare<T : Comparable>(a:T, _ b:T) -> Int {
     return a == b
         ? 0
         : a > b ? -1 : 1
-}
-
-extension Slice {
-    func each(fn: (T) -> ()) {
-        for i in self {
-            fn(i)
-        }
-    }
 }
 
 extension Range {
     func map<T,U>(fn: (T) -> U) -> [U] {
         var to = [U]()
         for i in self {
-            to += fn(i as T)
+            to.append(fn(i as! T))
         }
         return to
     }
 }
 
 extension String {
-    var length: Int { return countElements(self) }
+    var length: Int { return self.characters.count }
     
     func contains(s:String) -> Bool {
         return (self as NSString).containsString(s)
@@ -467,7 +445,7 @@ extension String {
     func charAt(index:Int) -> String {
         let c = (self as NSString).characterAtIndex(index)
         let s = NSString(format:"%c",c)
-        return s
+        return s as String
     }
     
     func trim() -> String {
@@ -483,39 +461,33 @@ extension NSDate {
         fmt.timeZone = NSTimeZone.defaultTimeZone()
         fmt.dateFormat = format
         let d = fmt.dateFromString(dateString)
-        self.init(timeInterval:0, sinceDate:d)
+        self.init(timeInterval:0, sinceDate:d!)
     }
     
     convenience init(year:Int, month:Int, day:Int) {
-        var c = NSDateComponents()
+        let c = NSDateComponents()
         c.year = year
         c.month = month
         c.day = day
         
-        let gregorian = NSCalendar(identifier:NSGregorianCalendar)
-        var d = gregorian.dateFromComponents(c)
+        let gregorian = NSCalendar(identifier:NSCalendarIdentifierGregorian)
+        let d = gregorian!.dateFromComponents(c)!
         self.init(timeInterval:0, sinceDate:d)
     }
     
     func components() -> NSDateComponents {
-        let compnents  = NSCalendar.currentCalendar().components(
-            NSCalendarUnit.DayCalendarUnit | NSCalendarUnit.MonthCalendarUnit | NSCalendarUnit.YearCalendarUnit,
-            fromDate: self)
-        
+        let compnents = NSCalendar.currentCalendar().components([.Year, .Month, .Day], fromDate: self)
         return compnents
     }
     
-    // Swift Compiler crashes when extension computed property is used in a call-site. Bug submitted
-    //    var year:Int {
-    //        return components().year
-    //    }
-    
-    func getYear() -> Int {
+    var year:Int {
         return components().year
     }
-    
-    func getMonth() -> Int {
+    var month:Int {
         return components().month
+    }
+    var day:Int {
+        return components().day
     }
     
     func shortDateString() -> String {

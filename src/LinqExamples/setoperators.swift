@@ -4,7 +4,7 @@
 //
 //  Created by Demis Bellot on 6/6/14.
 //  Copyright (c) 2014 ServiceStack LLC. All rights reserved.
-// 
+//
 
 import Foundation
 
@@ -15,8 +15,8 @@ func linq46(){
     
     let uniqueFactors = distinct(factorsOf300)
     
-    println("Prime factors of 300:")
-    uniqueFactors.each(println)
+    print("Prime factors of 300:")
+    uniqueFactors.forEach { print($0) }
 }
 
 func linq47(){
@@ -24,8 +24,8 @@ func linq47(){
     
     let categoryNames = distinct(products.map { $0.category })
 
-    println("Category names:")
-    categoryNames.each(println)
+    print("Category names:")
+    categoryNames.forEach { print($0) }
 }
 
 func linq48(){
@@ -34,8 +34,8 @@ func linq48(){
     
     let uniqueNumbers = union(numbersA, numbersB)
     
-    println("Unique numbers from both arrays:")
-    uniqueNumbers.each(println)
+    print("Unique numbers from both arrays:")
+    uniqueNumbers.forEach { print($0) }
 }
 
 func linq49(){
@@ -47,8 +47,8 @@ func linq49(){
     
     let uniqueFirstChars = union(productFirstChars, customerFirstChars)
     
-    println("Unique first letters from Product names and Customer names:")
-    uniqueFirstChars.each(println)
+    print("Unique first letters from Product names and Customer names:")
+    uniqueFirstChars.forEach { print($0) }
 }
 
 func linq50(){
@@ -57,8 +57,8 @@ func linq50(){
     
     let commonNumbers = intersection(numbersA, numbersB)
     
-    println("Common numbers shared by both arrays:")
-    commonNumbers.each(println)
+    print("Common numbers shared by both arrays:")
+    commonNumbers.forEach { print($0) }
 }
 
 func linq51(){
@@ -70,18 +70,18 @@ func linq51(){
     
     let commonFirstChars = intersection(productFirstChars, customerFirstChars)
     
-    println("Common first letters from Product names and Customer names:")
-    commonFirstChars.each(println)
+    print("Common first letters from Product names and Customer names:")
+    commonFirstChars.forEach { print($0) }
 }
 
 func linq52(){
     let numbersA = [ 0, 2, 4, 5, 6, 8, 9 ]
     let numbersB = [ 1, 3, 5, 7, 8 ]
     
-    let aOnlyNumbers = difference(numbersA, numbersB)
+    let aOnlyNumbers = difference(numbersA, other: numbersB)
     
-    println("Numbers in first array but not second array:")
-    aOnlyNumbers.each(println)
+    print("Numbers in first array but not second array:")
+    aOnlyNumbers.forEach { print($0) }
 }
 
 func linq53(){
@@ -91,9 +91,9 @@ func linq53(){
     let productFirstChars = products.map { $0.productName.charAt(0) }
     let customerFirstChars = customers.map { $0.companyName.charAt(0) }
     
-    let productOnlyFirstChars = difference(productFirstChars, customerFirstChars)
+    let productOnlyFirstChars = difference(productFirstChars, other: customerFirstChars)
     
-    println("First letters from Product names, but not from Customer names:")
-    productOnlyFirstChars.each(println)
+    print("First letters from Product names, but not from Customer names:")
+    productOnlyFirstChars.forEach { print($0) }
 }
 

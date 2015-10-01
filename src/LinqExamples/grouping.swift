@@ -19,8 +19,8 @@ func linq40(){
         }
     
     for g in numberGroups {
-        println("Numbers with a remainder of \(g.Remainder) when divided by 5:")
-        g.Numbers.items.each(println)
+        print("Numbers with a remainder of \(g.Remainder) when divided by 5:")
+        g.Numbers.items.forEach { print($0) }
     }
 }
 
@@ -33,8 +33,8 @@ func linq41(){
         }
     
     for g in wordGroups {
-        println("Words that start with the letter '\(g.FirstLetter)':")
-        g.Words.items.each(println)
+        print("Words that start with the letter '\(g.FirstLetter)':")
+        g.Words.items.forEach { print($0) }
     }
 }
 
@@ -46,9 +46,9 @@ func linq42(){
             (g.key, g)
         }
 
-    orderGroups.each {
-        println("\($0.Category):")
-        $0.Products.items.each(println)
+    orderGroups.forEach {
+        print("\($0.Category):")
+        $0.Products.items.forEach { print($0) }
     }
 }
 
@@ -58,22 +58,20 @@ func linq43(){
     typealias Year = Int
     typealias Month = Int
     
-    let customerOrderGroups = customers.map { c
-        -> (CompanyName:String, YearGroups:(Year:Int, MonthGroups:Group<Year, Order>[])[])
-        in
+    let customerOrderGroups = customers.map { (c:Customer) -> (CompanyName:String, YearGroups:[(Year:Int, MonthGroups:[Group<Year, Order>])]) in
             (c.companyName,
-             c.orders.groupBy { o in o.orderDate!.getYear() }
-                .map {(yg:Group<Month,Order>) in
+             c.orders.groupBy { o in o.orderDate!.year }
+                .map { (yg:Group<Month,Order>) in
                     (yg.key,
-                     yg.items.groupBy { (o:Order) in o.orderDate!.getMonth() })
+                     yg.items.groupBy { (o:Order) in o.orderDate!.month })
                 })
         }
 
-    customerOrderGroups.each {
-        println("\n# \($0.CompanyName)")
-        $0.YearGroups.each { yg in
-            println("\(yg.Year): ")
-            yg.MonthGroups.each { println("  \($0)") }
+    customerOrderGroups.forEach {
+        print("\n# \($0.CompanyName)")
+        $0.YearGroups.forEach { yg in
+            print("\(yg.Year): ")
+            yg.MonthGroups.forEach { print("  \($0)") }
         }
     }
 }
@@ -81,9 +79,9 @@ func linq43(){
 func linq44(){
     let anagrams = [ "from   ", " salt", " earn ", "  last   ", " near ", " form  " ]
     
-    let orderGroups = anagrams.groupBy({ (s:String) in s.trim() }, anagramComparer)
+    let orderGroups = anagrams.groupBy({ (s:String) in s.trim() }, matchWith: anagramComparer)
     
-    orderGroups.each { println($0.items) }
+    orderGroups.forEach { print($0.items) }
 }
 
 func linq45(){
@@ -93,5 +91,5 @@ func linq45(){
         matchWith: anagramComparer,
         valueAs: { s in s.uppercaseString })
     
-    orderGroups.each { println($0.items) }
+    orderGroups.forEach { print($0.items) }
 }

@@ -13,9 +13,9 @@ let elementoperators = [linq58, linq59, linq61, linq62, linq64]
 func linq58(){
     let products = productsList()
     
-    let product12 = products.find { $0.productId == 12 }[0]
+    let product12 = products.filter { $0.productId == 12 }[0]
     
-    println(product12)
+    print(product12)
 }
 
 func linq59(){
@@ -23,15 +23,15 @@ func linq59(){
     
     let startsWithO = strings.firstWhere { $0.charAt(0) == "o" }
     
-    println("A string starting with 'o': \(startsWithO)")
+    print("A string starting with 'o': \(startsWithO)")
 }
 
 func linq61(){
-    let numbers:Int[] = []
+    let numbers:[Int] = []
     
     let firstNumOrDefault = numbers.firstWhere({ n in true }, orElse: { 0 })
     
-    println(firstNumOrDefault)
+    print(firstNumOrDefault)
 }
 
 func linq62(){
@@ -39,13 +39,13 @@ func linq62(){
     
     let product789 = products.firstWhere { (p:Product) in p.productId == 789 }
     
-    println("Product 789 exists: \(product789 != nil)")
+    print("Product 789 exists: \(product789 != nil)")
 }
 
 func linq64(){
     let numbers = [ 5, 4, 1, 3, 9, 8, 6, 7, 2, 0 ]
     
-    let fourthLowNum = numbers.find { $0 > 5 }[1]
+    let fourthLowNum = numbers.filter { $0 > 5 }[1]
     
-    println("Second number > 5: \(fourthLowNum)")
+    print("Second number > 5: \(fourthLowNum)")
 }

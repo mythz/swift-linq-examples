@@ -8,12 +8,12 @@
 
 import Foundation
 
-func runExamples(fns: (() -> ())[]) {
+func runExamples(fns: [(() -> ())]) {
     for fn in fns {
         fn()
-        println()
+        print("")
     }
-    println()
+    print("")
 }
 
 runExamples(restrictions)

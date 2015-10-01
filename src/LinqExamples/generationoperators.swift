@@ -17,12 +17,12 @@ func linq65(){
         }
     
     for n in numbers {
-        println("The number \(n.Number) is \(n.OddEven).")
+        print("The number \(n.Number) is \(n.OddEven).")
     }
 }
 
 func linq66(){
     let numbers = Array(count:10, repeatedValue:7)
     
-    numbers.each(println)
+    numbers.forEach { print($0) }
 }

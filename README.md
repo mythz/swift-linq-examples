@@ -77,10 +77,10 @@ public void Linq1()
 //swift
 func linq1(){
     let numbers = [5, 4, 1, 3, 9, 8, 6, 7, 2, 0]
-    let lowNums = numbers.find { $0 < 5}
+    let lowNums = numbers.filter { $0 < 5}
     
-    println("Numbers < 5:")
-    lowNums.each(println)
+    print("Numbers < 5:")
+    lowNums.forEach { print($0) }
 }
 ```
 #### Output
@@ -117,11 +117,11 @@ func linq2(){
     let products = productsList()
     
     let soldOutProducts = products
-        .find { $0.unitsInStock == 0 }
+        .filter { $0.unitsInStock == 0 }
     
-    println("Sold out products:")
+    print("Sold out products:")
     for p in soldOutProducts {
-        println("\(p.productName) is sold out!")
+        print("\(p.productName) is sold out!")
     }
 }
 ```
@@ -159,11 +159,11 @@ func linq3(){
     let products = productsList()
     
     let expensiveInStockProducts = products
-        .find { p in p.unitsInStock > 0 && p.unitPrice > 3.00 }
+        .filter { p in p.unitsInStock > 0 && p.unitPrice > 3.00 }
     
-    println("In-stock products that cost more than 3.00:")
+    print("In-stock products that cost more than 3.00:")
     for p in expensiveInStockProducts {
-        println("\(p.productName) is in stock and costs more than 3.00.")
+        print("\(p.productName) is in stock and costs more than 3.00.")
     }
 }
 ```
@@ -200,19 +200,17 @@ public void Linq4()
 ```
 ```swift
 //swift
-func linq4(){
     let customers = customersList()
     let waCustomers = customers
-        .find { $0.region == "WA" }
+        .filter { $0.region == "WA" }
     
-    println("Customers from Washington and their orders:")
+    print("Customers from Washington and their orders:")
     for c in waCustomers {
-        println("Customer \(c.customerId): \(c.companyName)")
+        print("Customer \(c.customerId): \(c.companyName)")
         for o in c.orders {
-            println("  Order \(o.orderId): \(o.orderDate)")
+            print("  Order \(o.orderId): \(o.orderDate)")
         }
     }
-}
 ```
 #### Output
 
@@ -247,11 +245,11 @@ public void Linq5()
 func linq5(){
     let digits = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"]
 
-    let shortDigits = digits.find { $0.length < $1 }
+    let shortDigits = digits.filteri { $0.length < $1 }
     
-    println("Short digits:")
+    print("Short digits:")
     for d in shortDigits {
-        println("The word \(d) is shorter than its value.")
+        print("The word \(d) is shorter than its value.")
     }
 }
 ```
@@ -292,8 +290,8 @@ func linq6(){
     
     let numsPlusOne = numbers.map { $0 + 1 }
     
-    println("Numbers + 1:")
-    numsPlusOne.each(println)
+    print("Numbers + 1:")
+    numsPlusOne.forEach { print($0) }
 }
 ```
 #### Output
@@ -335,8 +333,8 @@ func linq7(){
     
     let productNames = products.map { $0.productName }
     
-    println("Product Names:")
-    productNames.each(println)
+    print("Product Names:")
+    productNames.forEach { print($0) }
 }
 ```
 #### Output
@@ -376,8 +374,8 @@ func linq8(){
     
     let textNums = numbers.map { strings[$0] }
     
-    println("Number strings:")
-    textNums.each(println)
+    print("Number strings:")
+    textNums.forEach { print($0) }
 }
 ```
 #### Output
@@ -421,7 +419,7 @@ func linq9(){
     }
     
     for ul in upperLowerWords {
-        println("Uppercase: \(ul.Upper), Lowercase: \(ul.Lower)")
+        print("Uppercase: \(ul.Upper), Lowercase: \(ul.Lower)")
     }
 }
 ```
@@ -460,7 +458,7 @@ func linq10(){
     }
     
     for d in digitOddEvens {
-        println("The digit \(d.Digit) is " + (d.Even ? "even" : "odd") + ".")
+        print("The digit \(d.Digit) is " + (d.Even ? "even" : "odd") + ".")
     }
 }
 ```
@@ -504,9 +502,9 @@ func linq11(){
         (p.productName, p.category, p.unitPrice)
     }
     
-    println("Product Info:")
+    print("Product Info:")
     for p in productInfos {
-        println("\(p.ProductName) is in the category \(p.Category) and costs \(p.Price) per unit.")
+        print("\(p.ProductName) is in the category \(p.Category) and costs \(p.Price) per unit.")
     }
 }
 ```
@@ -544,9 +542,9 @@ func linq12(){
         (i, i == index++)
     }
     
-    println("Number: In-place?")
+    print("Number: In-place?")
     for n in numsInPlace {
-        println("\(n.Num): \(n.InPlace)")
+        print("\(n.Num): \(n.InPlace)")
     }
 }
 ```
@@ -591,11 +589,11 @@ func linq13(){
     let digits = [ "zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine" ]
     
     let lowNums = numbers
-        .find { $0 < 5 }
+        .filter { $0 < 5 }
         .map { digits[$0] }
     
-    println("Numbers < 5:")
-    lowNums.each(println)
+    print("Numbers < 5:")
+    lowNums.forEach { print($0) }
 }
 ```
 #### Output
@@ -636,13 +634,13 @@ func linq14(){
     
     let pairs = numbersA.expand { a in
         numbersB
-            .find { b in a < b }
+            .filter { b in a < b }
             .map { i -> (a: Int, b:Int) in (a, i) }
         }
     
-    println("Pairs where a < b:")
+    print("Pairs where a < b:")
     for pair in pairs {
-        println("\(pair.a) is less than \(pair.b)")
+        print("\(pair.a) is less than \(pair.b)")
     }
 }
 ```
@@ -689,13 +687,13 @@ func linq15(){
     
     let orders = customers.expand { c in
         c.orders
-            .find { $0.total < 500 }
+            .filter { $0.total < 500 }
             .map { o -> (CustomerId: String, OrderId:Int, Total:Double) in
                 (c.customerId, o.orderId, o.total)
             }
         }
     
-    orders.each(println)
+    orders.forEach { print($0) }
 }
 ```
 #### Output
@@ -730,13 +728,13 @@ func linq16(){
     let date = NSDate(year: 1998, month: 1, day: 1)
     let orders = customers.expand { c in
         c.orders
-            .find { $0.orderDate! > date }
-            .map { o -> (CustomerId: String, OrderId:Int, OrderDate:NSDate?) in
-                (c.customerId, o.orderId, o.orderDate)
+            .filter { $0.orderDate! >= date }
+            .map { o -> (CustomerId: String, OrderId:Int, OrderDate:NSDate) in
+                (c.customerId, o.orderId, o.orderDate!)
             }
         }
     
-    orders.each(println)
+    orders.forEach { print($0) }
 }
 ```
 #### Output
@@ -771,13 +769,13 @@ func linq17(){
     
     let orders = customers.expand { c in
         c.orders
-            .find { $0.total >= 2000 }
+            .filter { $0.total >= 2000 }
             .map { o -> (CustomerId: String, OrderId:Int, Total:Double) in
                 (c.customerId, o.orderId, o.total)
             }
         }
     
-    orders.each(println)
+    orders.forEach { print($0) }
 }
 ```
 #### Output
@@ -816,15 +814,15 @@ func linq18(){
     let cutoffDate = NSDate(year: 1997, month: 1, day: 1)
     
     let orders = customers
-        .find { $0.region == "WA" }.expand { c in
+        .filter { $0.region == "WA" }.expand { c in
             c.orders
-                .find { $0.orderDate! > cutoffDate }
-                .map { o -> (CustomerId: String, OrderId:Int, Total:Double) in
-                    (c.customerId, o.orderId, o.total)
+                .filter { $0.orderDate! > cutoffDate }
+                .map { o -> (CustomerId: String, OrderId:Int) in
+                    (c.customerId, o.orderId)
                 }
             }
     
-    orders.each(println)
+    orders.forEach { print($0) }
 }
 ```
 #### Output
@@ -869,12 +867,12 @@ func linq19(){
     let customers = customersList()
     
     var custIndex = 0
-    let customerOrders = customers.expand { c -> String[] in
+    let customerOrders = customers.expand { c -> [String]? in
         custIndex++
         return c.orders.map { "Customer #\(custIndex) has an order with OrderID \($0.orderId)" }
     }
     
-    customerOrders.each(println)
+    customerOrders.forEach { print($0) }
 }
 ```
 #### Output
@@ -918,8 +916,8 @@ func linq20(){
     
     let first3Numbers = numbers[0...2]
     
-    println("First 3 numbers:")
-    first3Numbers.each(println)
+    print("First 3 numbers:")
+    first3Numbers.forEach { print($0) }
 }
 ```
 #### Output
@@ -956,7 +954,7 @@ func linq21(){
     let customers = customersList()
     
     let first3WAOrders = customers
-        .find { $0.region == "WA" }
+        .filter { $0.region == "WA" }
         .expand { c in c.orders
             .map { o -> (CustomerId: String, OrderId:Int, OrderDate:NSDate?) in
                 (c.customerId, o.orderId, o.orderDate)
@@ -964,8 +962,8 @@ func linq21(){
         }
         .take(3)
     
-    println("First 3 orders in WA:")
-    first3WAOrders.each(println)
+    print("First 3 orders in WA:")
+    first3WAOrders.forEach { print($0) }
 }
 ```
 #### Output
@@ -998,8 +996,8 @@ func linq22(){
     let numbers = [ 5, 4, 1, 3, 9, 8, 6, 7, 2, 0 ]
     let allButFirst4Numbers = numbers.skip(4)
     
-    println("All but first 4 numbers:")
-    allButFirst4Numbers.each(println)
+    print("All but first 4 numbers:")
+    allButFirst4Numbers.forEach { print($0) }
 }
 ```
 #### Output
@@ -1040,7 +1038,7 @@ func linq23(){
     let customers = customersList()
     
     let waOrders = customers
-        .find { $0.region == "WA" }
+        .filter { $0.region == "WA" }
         .expand { c in c.orders
             .map { o -> (CustomerId: String, OrderId:Int, OrderDate:NSDate?) in
                 (c.customerId, o.orderId, o.orderDate)
@@ -1049,8 +1047,8 @@ func linq23(){
     
     let allButFirst2Orders = waOrders.skip(2)
     
-    println("All but first 2 orders in WA:")
-    allButFirst2Orders.each(println)
+    print("All but first 2 orders in WA:")
+    allButFirst2Orders.forEach { print($0) }
 }
 ```
 #### Output
@@ -1097,8 +1095,8 @@ func linq24(){
     
     let firstNumbersLessThan6 = numbers.takeWhile { $0 < 6 }
     
-    println("First numbers less than 6:")
-    firstNumbersLessThan6.each(println)
+    print("First numbers less than 6:")
+    firstNumbersLessThan6.forEach { print($0) }
 }
 ```
 #### Output
@@ -1133,8 +1131,8 @@ func linq25(){
     var index = 0
     let firstSmallNumbers = numbers.takeWhile { $0 >= index++ }
     
-    println("First numbers not less than their position:")
-    firstSmallNumbers.each(println)
+    print("First numbers not less than their position:")
+    firstSmallNumbers.forEach { print($0) }
 }
 ```
 #### Output
@@ -1165,8 +1163,8 @@ func linq26(){
     let numbers = [ 5, 4, 1, 3, 9, 8, 6, 7, 2, 0 ]
     
     let allButFirst3Numbers = numbers.skipWhile { $0 % 3 != 0 }
-    println("All elements starting from first element divisible by 3:")
-    allButFirst3Numbers.each(println)
+    print("All elements starting from first element divisible by 3:")
+    allButFirst3Numbers.forEach { print($0) }
 }
 ```
 #### Output
@@ -1204,8 +1202,8 @@ func linq27(){
     var index = 0
     let laterNumbers = numbers.skipWhile { $0 >= index++ }
     
-    println("All elements starting from first element less than its position:")
-    laterNumbers.each(println)
+    print("All elements starting from first element less than its position:")
+    laterNumbers.forEach { print($0) }
 }
 ```
 #### Output
@@ -1248,10 +1246,10 @@ public void Linq28()
 func linq28(){
     let words = [ "cherry", "apple", "blueberry" ]
     
-    let sortedWords = sort(words)
+    let sortedWords = words.sort()
     
-    println("The sorted list of words:")
-    sortedWords.each(println)
+    print("The sorted list of words:")
+    sortedWords.forEach { print($0) }
 }
 ```
 #### Output
@@ -1285,10 +1283,10 @@ public void Linq29()
 func linq29(){
     let words = [ "cherry", "apple", "blueberry" ]
     
-    let sortedWords = sort(words) { $0.length < $1.length }
+    let sortedWords = words.sort { $0.length < $1.length }
     
-    println("The sorted list of words (by length):")
-    sortedWords.each(println)
+    print("The sorted list of words (by length):")
+    sortedWords.forEach { print($0) }
 }
 ```
 #### Output
@@ -1318,9 +1316,9 @@ public void Linq30()
 func linq30(){
     let products = productsList()
     
-    let sortedProducts = sort(products) { $0.productName < $1.productName }
+    let sortedProducts = products.sort { $0.productName < $1.productName }
     
-    sortedProducts.each(println)
+    sortedProducts.forEach { print($0) }
 }
 ```
 #### Output
@@ -1349,9 +1347,9 @@ public void Linq31()
 func linq31(){
     let words = [ "aPPLE", "AbAcUs", "bRaNcH", "BlUeBeRrY", "ClOvEr", "cHeRry" ]
     
-    let sortedWords = sort(words, caseInsensitiveComparer)
+    let sortedWords = words.sort(caseInsensitiveComparer)
     
-    sortedWords.each(println)
+    sortedWords.forEach { print($0) }
 }
 ```
 #### Output
@@ -1387,10 +1385,10 @@ public void Linq32()
 func linq32(){
     let doubles = [ 1.7, 2.3, 1.9, 4.1, 2.9 ]
     
-    let sortedDoubles = sort(doubles).reverse()
+    let sortedDoubles = doubles.sort().reverse()
     
-    println("The doubles from highest to lowest:")
-    sortedDoubles.each(println)
+    print("The doubles from highest to lowest:")
+    sortedDoubles.forEach { print($0) }
 }
 ```
 #### Output
@@ -1422,9 +1420,9 @@ public void Linq33()
 func linq33(){
     let products = productsList()
     
-    let sortedProducts = sort(products) { $0.unitsInStock < $1.unitsInStock }.reverse()
+    let sortedProducts = products.sort { $0.unitsInStock < $1.unitsInStock }.reverse()
     
-    sortedProducts.each(println)
+    sortedProducts.forEach { print($0) }
 }
 ```
 #### Output
@@ -1453,9 +1451,9 @@ public void Linq34()
 func linq34(){
     let words = [ "aPPLE", "AbAcUs", "bRaNcH", "BlUeBeRrY", "ClOvEr", "cHeRry" ]
     
-    let sortedWords = sort(words, caseInsensitiveComparer).reverse()
+    let sortedWords = words.sort(caseInsensitiveComparer).reverse()
     
-    sortedWords.each(println)
+    sortedWords.forEach { print($0) }
 }
 ```
 #### Output
@@ -1491,10 +1489,10 @@ public void Linq35()
 func linq35(){
     let digits = [ "zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine" ]
     
-    let sortedDigits = sort(sort(digits) { $0 < $1 }) { $0.length < $1.length }
+    let sortedDigits = digits.sort { $0 < $1 }.sort { $0.length < $1.length }
     
-    println("Sorted digits:")
-    sortedDigits.each(println)
+    print("Sorted digits:")
+    sortedDigits.forEach { print($0) }
 }
 ```
 #### Output
@@ -1530,9 +1528,9 @@ public void Linq36()
 func linq36(){
     let words = [ "aPPLE", "AbAcUs", "bRaNcH", "BlUeBeRrY", "ClOvEr", "cHeRry" ]
     
-    let sortedWords = sort(sort(words, caseInsensitiveComparer)) { $0.length < $1.length }
+    let sortedWords = words.sort(caseInsensitiveComparer).sort { $0.length < $1.length }
     
-    sortedWords.each(println)
+    sortedWords.forEach { print($0) }
 }
 ```
 #### Output
@@ -1568,7 +1566,7 @@ func linq37(){
         { compare($0.category, $1.category) },
         { compare($1.unitPrice, $0.unitPrice) }
     )
-    sortedProducts.each(println)
+    sortedProducts.forEach { print($0) }
 }
 ```
 #### Output
@@ -1609,7 +1607,7 @@ func linq38(){
         { compareIgnoreCase($0,$1) }
     )
     
-    sortedWords.each(println)
+    sortedWords.forEach { print($0) }
 }
 ```
 #### Output
@@ -1647,11 +1645,11 @@ func linq39(){
     let digits = [ "zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine" ]
     
     let reversedIDigits = digits
-        .find { $0.charAt(1) == "i" }
+        .filter { $0.charAt(1) == "i" }
         .reverse()
     
-    println("A backwards list of the digits with a second character of 'i':")
-    reversedIDigits.each(println)
+    print("A backwards list of the digits with a second character of 'i':")
+    reversedIDigits.forEach { print($0) }
 }
 ```
 #### Output
@@ -1699,8 +1697,8 @@ func linq40(){
         }
     
     for g in numberGroups {
-        println("Numbers with a remainder of \(g.Remainder) when divided by 5:")
-        g.Numbers.items.each(println)
+        print("Numbers with a remainder of \(g.Remainder) when divided by 5:")
+        g.Numbers.items.forEach { print($0) }
     }
 }
 ```
@@ -1755,8 +1753,8 @@ func linq41(){
         }
     
     for g in wordGroups {
-        println("Words that start with the letter '\(g.FirstLetter)':")
-        g.Words.items.each(println)
+        print("Words that start with the letter '\(g.FirstLetter)':")
+        g.Words.items.forEach { print($0) }
     }
 }
 ```
@@ -1797,9 +1795,9 @@ func linq42(){
             (g.key, g)
         }
 
-    orderGroups.each {
-        println("\($0.Category):")
-        $0.Products.items.each(println)
+    orderGroups.forEach {
+        print("\($0.Category):")
+        $0.Products.items.forEach { print($0) }
     }
 }
 ```
@@ -1861,22 +1859,20 @@ func linq43(){
     typealias Year = Int
     typealias Month = Int
     
-    let customerOrderGroups = customers.map { c
-        -> (CompanyName:String, YearGroups:(Year:Int, MonthGroups:Group<Year, Order>[])[])
-        in
+    let customerOrderGroups = customers.map { (c:Customer) -> (CompanyName:String, YearGroups:[(Year:Int, MonthGroups:[Group<Year, Order>])]) in
             (c.companyName,
-             c.orders.groupBy { o in o.orderDate!.getYear() }
-                .map {(yg:Group<Month,Order>) in
+             c.orders.groupBy { o in o.orderDate!.year }
+                .map { (yg:Group<Month,Order>) in
                     (yg.key,
-                     yg.items.groupBy { (o:Order) in o.orderDate!.getMonth() })
+                     yg.items.groupBy { (o:Order) in o.orderDate!.month })
                 })
         }
 
-    customerOrderGroups.each {
-        println("\n# \($0.CompanyName)")
-        $0.YearGroups.each { yg in
-            println("\(yg.Year): ")
-            yg.MonthGroups.each { println("  \($0)") }
+    customerOrderGroups.forEach {
+        print("\n# \($0.CompanyName)")
+        $0.YearGroups.forEach { yg in
+            print("\(yg.Year): ")
+            yg.MonthGroups.forEach { print("  \($0)") }
         }
     }
 }
@@ -1913,9 +1909,9 @@ public void Linq44()
 func linq44(){
     let anagrams = [ "from   ", " salt", " earn ", "  last   ", " near ", " form  " ]
     
-    let orderGroups = anagrams.groupBy({ (s:String) in s.trim() }, anagramComparer)
+    let orderGroups = anagrams.groupBy({ (s:String) in s.trim() }, matchWith: anagramComparer)
     
-    orderGroups.each { println($0.items) }
+    orderGroups.forEach { print($0.items) }
 }
 ```
 #### Output
@@ -1949,7 +1945,7 @@ func linq45(){
         matchWith: anagramComparer,
         valueAs: { s in s.uppercaseString })
     
-    orderGroups.each { println($0.items) }
+    orderGroups.forEach { print($0.items) }
 }
 ```
 #### Output
@@ -1985,8 +1981,8 @@ func linq46(){
     
     let uniqueFactors = distinct(factorsOf300)
     
-    println("Prime factors of 300:")
-    uniqueFactors.each(println)
+    print("Prime factors of 300:")
+    uniqueFactors.forEach { print($0) }
 }
 ```
 #### Output
@@ -2022,8 +2018,8 @@ func linq47(){
     
     let categoryNames = distinct(products.map { $0.category })
 
-    println("Category names:")
-    categoryNames.each(println)
+    print("Category names:")
+    categoryNames.forEach { print($0) }
 }
 ```
 #### Output
@@ -2063,8 +2059,8 @@ func linq48(){
     
     let uniqueNumbers = union(numbersA, numbersB)
     
-    println("Unique numbers from both arrays:")
-    uniqueNumbers.each(println)
+    print("Unique numbers from both arrays:")
+    uniqueNumbers.forEach { print($0) }
 }
 ```
 #### Output
@@ -2116,8 +2112,8 @@ func linq49(){
     
     let uniqueFirstChars = union(productFirstChars, customerFirstChars)
     
-    println("Unique first letters from Product names and Customer names:")
-    uniqueFirstChars.each(println)
+    print("Unique first letters from Product names and Customer names:")
+    uniqueFirstChars.forEach { print($0) }
 }
 ```
 #### Output
@@ -2173,8 +2169,8 @@ func linq50(){
     
     let commonNumbers = intersection(numbersA, numbersB)
     
-    println("Common numbers shared by both arrays:")
-    commonNumbers.each(println)
+    print("Common numbers shared by both arrays:")
+    commonNumbers.forEach { print($0) }
 }
 ```
 #### Output
@@ -2218,8 +2214,8 @@ func linq51(){
     
     let commonFirstChars = intersection(productFirstChars, customerFirstChars)
     
-    println("Common first letters from Product names and Customer names:")
-    commonFirstChars.each(println)
+    print("Common first letters from Product names and Customer names:")
+    commonFirstChars.forEach { print($0) }
 }
 ```
 #### Output
@@ -2268,10 +2264,10 @@ func linq52(){
     let numbersA = [ 0, 2, 4, 5, 6, 8, 9 ]
     let numbersB = [ 1, 3, 5, 7, 8 ]
     
-    let aOnlyNumbers = difference(numbersA, numbersB)
+    let aOnlyNumbers = difference(numbersA, other: numbersB)
     
-    println("Numbers in first array but not second array:")
-    aOnlyNumbers.each(println)
+    print("Numbers in first array but not second array:")
+    aOnlyNumbers.forEach { print($0) }
 }
 ```
 #### Output
@@ -2316,10 +2312,10 @@ func linq53(){
     let productFirstChars = products.map { $0.productName.charAt(0) }
     let customerFirstChars = customers.map { $0.companyName.charAt(0) }
     
-    let productOnlyFirstChars = difference(productFirstChars, customerFirstChars)
+    let productOnlyFirstChars = difference(productFirstChars, other: customerFirstChars)
     
-    println("First letters from Product names, but not from Customer names:")
-    productOnlyFirstChars.each(println)
+    print("First letters from Product names, but not from Customer names:")
+    productOnlyFirstChars.forEach { print($0) }
 }
 ```
 #### Output
@@ -2358,14 +2354,14 @@ public void Linq54()
 func linq54(){
     let doubles = [ 1.7, 2.3, 1.9, 4.1, 2.9 ]
     
-    let sortedDoubles = sort(doubles).reverse()
+    let sortedDoubles = doubles.sort().reverse()
     
-    let doublesArray = sortedDoubles
+    let doublesArray = sortedDoubles.toArray()
     
-    println("Every other double from highest to lowest:")
+    print("Every other double from highest to lowest:")
     var d = 0
     while d < doublesArray.count {
-        println(doublesArray[d])
+        print(doublesArray[d])
         d += 2
     } 
 }
@@ -2402,12 +2398,12 @@ public void Linq55()
 func linq55(){
     let words = [ "cherry", "apple", "blueberry" ]
     
-    let sortedWords = sort(words)
+    let sortedWords = words.sort()
     
     let wordList = sortedWords
     
-    println("The sorted word list:")
-    wordList.each(println)
+    print("The sorted word list:")
+    wordList.forEach { print($0) }
 }
 ```
 #### Output
@@ -2446,7 +2442,7 @@ func linq56(){
     }
     
     let bobsScore = scoreRecordsDict["Bob"]!
-    println("Bob's score: \(bobsScore)")
+    print("Bob's score: \(bobsScore)")
 }
 ```
 #### Output
@@ -2472,12 +2468,12 @@ public void Linq57()
 ```swift
 //swift
 func linq57(){
-    let numbers = [ nil as Any, 1.0, "two", 3, "four", 5, "six", 7.0 ]
+    let numbers = [ nil as Any?, 1.0, "two", 3, "four", 5, "six", 7.0 ]
     
-    let doubles = numbers.find { $0 is Double }
+    let doubles = numbers.filter { $0 is Double }.map { $0! }
     
-    println("Numbers stored as doubles:")
-    doubles.each(println)
+    print("Numbers stored as doubles:")
+    doubles.forEach { print($0) }
 }
 ```
 #### Output
@@ -2511,9 +2507,9 @@ public void Linq58()
 func linq58(){
     let products = productsList()
     
-    let product12 = products.find { $0.productId == 12 }[0]
+    let product12 = products.filter { $0.productId == 12 }[0]
     
-    println(product12)
+    print(product12)
 }
 ```
 #### Output
@@ -2539,7 +2535,7 @@ func linq59(){
     
     let startsWithO = strings.firstWhere { $0.charAt(0) == "o" }
     
-    println("A string starting with 'o': \(startsWithO)")
+    print("A string starting with 'o': \(startsWithO)")
 }
 ```
 #### Output
@@ -2561,11 +2557,11 @@ public void Linq61()
 ```swift
 //swift
 func linq61(){
-    let numbers:Int[] = []
+    let numbers:[Int] = []
     
     let firstNumOrDefault = numbers.firstWhere({ n in true }, orElse: { 0 })
     
-    println(firstNumOrDefault)
+    print(firstNumOrDefault)
 }
 ```
 #### Output
@@ -2591,7 +2587,7 @@ func linq62(){
     
     let product789 = products.firstWhere { (p:Product) in p.productId == 789 }
     
-    println("Product 789 exists: \(product789 != nil)")
+    print("Product 789 exists: \(product789 != nil)")
 }
 ```
 #### Output
@@ -2619,9 +2615,9 @@ public void Linq64()
 func linq64(){
     let numbers = [ 5, 4, 1, 3, 9, 8, 6, 7, 2, 0 ]
     
-    let fourthLowNum = numbers.find { $0 > 5 }[1]
+    let fourthLowNum = numbers.filter { $0 > 5 }[1]
     
-    println("Second number > 5: \(fourthLowNum)")
+    print("Second number > 5: \(fourthLowNum)")
 }
 ```
 #### Output
@@ -2657,7 +2653,7 @@ func linq65(){
         }
     
     for n in numbers {
-        println("The number \(n.Number) is \(n.OddEven).")
+        print("The number \(n.Number) is \(n.OddEven).")
     }
 }
 ```
@@ -2694,7 +2690,7 @@ public void Linq66()
 func linq66(){
     let numbers = Array(count:10, repeatedValue:7)
     
-    numbers.each(println)
+    numbers.forEach { print($0) }
 }
 ```
 #### Output
@@ -2733,7 +2729,7 @@ func linq67(){
     
     let iAfterE = words.any { $0.contains("ei") }
     
-    println("There is a word that contains in the list that contains 'ei': \(iAfterE)")
+    print("There is a word that contains in the list that contains 'ei': \(iAfterE)")
 }
 ```
 #### Output
@@ -2762,12 +2758,12 @@ func linq69(){
     
     let productGroups = products
         .groupBy { (p:Product) in p.category }
-        .find { $0.items.any { p in p.unitsInStock == 0 } }
+        .filter { $0.items.any { p in p.unitsInStock == 0 } }
         .map { g -> (Category:String, Products:Group<String,Product>) in
             (g.key, g)
         }
 
-    productGroups.each { println($0.Products) }
+    productGroups.forEach { print($0.Products) }
 }
 ```
 #### Output
@@ -2794,7 +2790,7 @@ func linq70(){
     
     let onlyOdd = numbers.all { $0 % 2 == 1 }
     
-    println("The list contains only odd numbers: \(onlyOdd)")
+    print("The list contains only odd numbers: \(onlyOdd)")
 }
 ```
 #### Output
@@ -2823,12 +2819,12 @@ func linq72(){
     let products = productsList()
     
     let productGroups = products.groupBy { $0.category }
-        .find { $0.items.all { p in p.unitsInStock > 0 } }
+        .filter { $0.items.all { p in p.unitsInStock > 0 } }
         .map { g -> (Category:String, Products:Group<String,Product>) in
             (g.key, g)
     }
 
-    productGroups.each { println($0.Products) }
+    productGroups.forEach { print($0.Products) }
 }
 ```
 #### Output
@@ -2859,7 +2855,7 @@ func linq73(){
     
     let uniqueFactors = distinct(factorsOf300).count
     
-    println("There are \(uniqueFactors) unique factors of 300.")
+    print("There are \(uniqueFactors) unique factors of 300.")
 }
 ```
 #### Output
@@ -2883,9 +2879,9 @@ public void Linq74()
 func linq74(){
     let numbers = [ 5, 4, 1, 3, 9, 8, 6, 7, 2, 0 ]
     
-    let oddNumbers = numbers.find { $0 % 2 == 1 }.count
+    let oddNumbers = numbers.filter { $0 % 2 == 1 }.count
     
-    println("There are \(oddNumbers) odd numbers in the list.")
+    print("There are \(oddNumbers) odd numbers in the list.")
 }
 ```
 #### Output
@@ -2916,7 +2912,7 @@ func linq76(){
             (c.customerId, c.orders.count)
     }
     
-    orderCounts.each(println)
+    orderCounts.forEach { print($0) }
 }
 ```
 #### Output
@@ -2955,7 +2951,7 @@ func linq77(){
             (g.key, g.items.count)
     }
     
-    categoryCounts.each(println)
+    categoryCounts.forEach { print($0) }
 }
 ```
 #### Output
@@ -2988,7 +2984,7 @@ func linq78(){
     
     let numSum:Int = numbers.sum()
     
-    println("The sum of the numbers is \(numSum).")
+    print("The sum of the numbers is \(numSum).")
 }
 ```
 #### Output
@@ -3014,7 +3010,7 @@ func linq79(){
     
     let totalChars = words.sum { (s:String) in s.length }
     
-    println("There are a total of \(totalChars) characters in these words.")
+    print("There are a total of \(totalChars) characters in these words.")
 }
 ```
 #### Output
@@ -3046,7 +3042,7 @@ func linq80(){
             (g.key, g.items.sum { (p:Product) in p.unitsInStock })
     }
     
-    categories.each(println)
+    categories.forEach { print($0) }
 }
 ```
 #### Output
@@ -3077,9 +3073,9 @@ public void Linq81()
 func linq81(){
     let numbers = [ 5, 4, 1, 3, 9, 8, 6, 7, 2, 0 ]
     
-    let minNum:Int = numbers.min()
+    let minNum = numbers.minElement()!
     
-    println("The minimum number is \(minNum).")
+    print("The minimum number is \(minNum).")
 }
 ```
 #### Output
@@ -3103,9 +3099,9 @@ public void Linq82()
 func linq82(){
     let words = [ "cherry", "apple", "blueberry" ]
     
-    let shortestWord = words.min { (s:String) in s.length }
+    let shortestWord = words.minElement { (s:String) in s.length }
     
-    println("The shortest word is \(shortestWord) characters long.")
+    print("The shortest word is \(shortestWord) characters long.")
 }
 ```
 #### Output
@@ -3134,10 +3130,10 @@ func linq83(){
     
     let categories = products.groupBy { (p:Product)in p.category }
         .map { g -> (Category:String, CheapestPrice:Double) in
-            (g.key, g.items.map { (p:Product) in p.unitPrice }.min() )
+            (g.key, g.items.map { (p:Product) in p.unitPrice }.minElement()! )
     }
     
-    categories.each(println)
+    categories.forEach { print($0) }
 }
 ```
 #### Output
@@ -3173,14 +3169,14 @@ func linq84(){
     let products = productsList()
     
     let categories = products.groupBy { (p:Product) in p.category }
-        .map { g -> (Category:String, CheapestProducts:Product[]) in
-            let minPrice:Double = g.items.min { (p:Product) in p.unitPrice }
-            return (g.key, g.items.find { $0.unitPrice == minPrice })
+        .map { g -> (Category:String, CheapestProducts:[Product]) in
+            let minPrice:Double = g.items.minElement { (p:Product) in p.unitPrice }
+            return (g.key, g.items.filter { $0.unitPrice == minPrice })
     }
     
-    categories.each {
+    categories.forEach {
         print("\($0.Category): ")
-        $0.CheapestProducts.each(println)
+        $0.CheapestProducts.forEach { print($0) }
     }
 }
 ```
@@ -3212,9 +3208,9 @@ public void Linq85()
 func linq85(){
     let numbers = [ 5, 4, 1, 3, 9, 8, 6, 7, 2, 0 ]
     
-    let maxNum:Int = numbers.max()
+    let maxNum = numbers.maxElement()!
     
-    println("The maximum number is \(maxNum).")
+    print("The maximum number is \(maxNum).")
 }
 ```
 #### Output
@@ -3238,9 +3234,9 @@ public void Linq86()
 func linq86(){
     let words = [ "cherry", "apple", "blueberry" ]
     
-    let longestLength:Int = words.map { (s:String) in s.length }.max()
+    let longestLength:Int = words.map { (s:String) in s.length }.maxElement()!
     
-    println("The longest word is \(longestLength) characters long.")
+    print("The longest word is \(longestLength) characters long.")
 }
 ```
 #### Output
@@ -3269,11 +3265,11 @@ func linq87(){
     
     let categories = products.groupBy { (p:Product) in p.category }
         .map { g -> (Category:String, MostExpensivePrice:Double) in
-            (g.key, g.items.max { (p:Product) in p.unitPrice } )
+            (g.key, g.items.maxElement { (p:Product) in p.unitPrice } )
     }
     
     for c in categories {
-        println("Category: \(c.Category), MaximumPrice: \(c.MostExpensivePrice)")
+        print("Category: \(c.Category), MaximumPrice: \(c.MostExpensivePrice)")
     }
 }
 ```
@@ -3310,14 +3306,14 @@ func linq88(){
     let products = productsList()
     
     let categories = products.groupBy { (p:Product) in p.category }
-        .map { g -> (Category:String, MostExpensiveProducts:Product[]) in
-            let maxPrice:Double = g.items.max { (p:Product) in p.unitPrice }
-            return (g.key, g.items.find { $0.unitPrice == maxPrice })
+        .map { g -> (Category:String, MostExpensiveProducts:[Product]) in
+            let maxPrice:Double = g.items.maxElement { (p:Product) in p.unitPrice }
+            return (g.key, g.items.filter { $0.unitPrice == maxPrice })
     }
     
-    categories.each {
+    categories.forEach {
         print("\($0.Category): ")
-        $0.MostExpensiveProducts.each(println)
+        $0.MostExpensiveProducts.forEach { print($0) }
     }
 }
 ```
@@ -3351,7 +3347,7 @@ func linq89(){
     
     let averageNum = numbers.avg { $0 as Int }
     
-    println("The average number is \(averageNum).")
+    print("The average number is \(averageNum).")
 }
 ```
 #### Output
@@ -3377,7 +3373,7 @@ func linq90(){
     
     let averageLength = words.map { $0.length }.avg { $0 as Int }
     
-    println("The average word length is \(averageLength) characters.")
+    print("The average word length is \(averageLength) characters.")
 }
 ```
 #### Output
@@ -3410,7 +3406,7 @@ func linq91(){
     }
     
     for c in categories {
-        println("Category: \(c.Category), AveragePrice: \(c.AveragePrice)")
+        print("Category: \(c.Category), AveragePrice: \(c.AveragePrice)")
     }
 }
 ```
@@ -3444,7 +3440,7 @@ func linq92(){
     
     let product = doubles.reduce(1) { runningProduct, nextFactor in runningProduct * nextFactor }
     
-    println("Total product of all numbers: \(product)")
+    print("Total product of all numbers: \(product)")
 }
 ```
 #### Output
@@ -3480,7 +3476,7 @@ func linq93(){
         (nextWithdrawal <= balance) ? (balance - nextWithdrawal) : balance
     }
     
-    println("Ending balance: \(endBalance)")
+    print("Ending balance: \(endBalance)")
 }
 ```
 #### Output
@@ -3516,8 +3512,8 @@ func linq94(){
     
     let allNumbers = numbersA + numbersB
     
-    println("All numbers from both arrays:")
-    allNumbers.each(println)
+    print("All numbers from both arrays:")
+    allNumbers.forEach { print($0) }
 }
 ```
 #### Output
@@ -3571,8 +3567,8 @@ func linq95(){
     
     let allNames = customerNames + productNames
     
-    println("Customer and product names:")
-    allNames.each(println)
+    print("Customer and product names:")
+    allNames.forEach { print($0) }
 }
 ```
 #### Output
@@ -3607,7 +3603,7 @@ func linq96(){
     
     let match = wordsA == wordsB
     
-    println("The sequences match: \(match)")
+    print("The sequences match: \(match)")
 }
 ```
 #### Output
@@ -3635,7 +3631,7 @@ func linq97(){
     
     let match = wordsA == wordsB
     
-    println("The sequences match: \(match)")
+    print("The sequences match: \(match)")
 }
 ```
 #### Output
@@ -3678,7 +3674,7 @@ func linq99(){
     
     for f in q {
         let v = f()
-        println("v = \(v), i = \(i)")
+        print("v = \(v), i = \(i)")
     }
 }
 ```
@@ -3725,10 +3721,10 @@ func linq100(){
     let numbers = [ 5, 4, 1, 3, 9, 8, 6, 7, 2, 0 ]
     
     var i = 0
-    var q = numbers.map { n in ++i }
+    let q = numbers.map { n in ++i }
     
     for v in q {
-        println("v = \(v), i = \(i)")
+        print("v = \(v), i = \(i)")
     }
 }
 ```
@@ -3784,17 +3780,17 @@ public void Linq101()
 //swift
 func linq101(){
     var numbers = [ 5, 4, 1, 3, 9, 8, 6, 7, 2, 0 ]
-    var lowNumbers = { numbers.find { $0 < 4 } }
+    let lowNumbers = { numbers.filter { $0 < 4 } }
     
-    println("First run numbers <= 3:")
-    lowNumbers().each(println)
+    print("First run numbers <= 3:")
+    lowNumbers().forEach { print($0) }
     
-    for i in 0..10 {
+    for i in 0..<10 {
         numbers[i] = -numbers[i]
     }
     
-    println("Second run numbers <= 3:")
-    lowNumbers().each(println)
+    print("Second run numbers <= 3:")
+    lowNumbers().forEach { print($0) }
 }
 ```
 #### Output
@@ -3852,14 +3848,14 @@ func linq102(){
     
     let products = productsList()
     
-    let q = join(categories, products) { (c:String,p:Product) in c == p.category }
+    let q = join(categories, withSeq: products) { (c:String,p:Product) in c == p.category }
         .map { j -> (Category:String, ProductName:String) in
             let (c,p) = j
             return (c, p.productName)
         }
 
-    q.each {
-        println("CategoryName:\($0.Category), ProductName:\($0.ProductName)")
+    q.forEach {
+        print("Category:\($0.Category), ProductName:\($0.ProductName)")
     }
 }
 ```
@@ -3911,16 +3907,16 @@ func linq103(){
     
     let products = productsList()
     
-    let q = joinGroup(categories, products) { c,p in c == p.category }
-        .map { (j:Group<String,(String,Product)>) -> (Category:String, Products:Product[]) in
+    let q = joinGroup(categories, withSeq: products) { c,p in c == p.category }
+        .map { j -> (Category:String, Products:[Product]) in
             (j.key, j.items.map {
                 let (_,p) = $0
                 return p })
         }
     
     for v in q {
-        println("\(v.Category):")
-        v.Products.each { println("   \($0.productName)") }
+        print("\(v.Category):")
+        v.Products.forEach { print("   \($0.productName)") }
     }
 }
 ```
@@ -3987,7 +3983,7 @@ func linq104(){
     
     let products = productsList()
     
-    let q = joinGroup(categories, products) { c,p in c == p.category }
+    let q = joinGroup(categories, withSeq: products) { c,p in c == p.category }
         .expand { j in j.items.map {
                     let (_,p) = $0
                     return p
@@ -3997,7 +3993,7 @@ func linq104(){
         }
     
     for v in q {
-        println("\(v.ProductName): \(v.Category)")
+        print("\(v.ProductName): \(v.Category)")
     }
 }
 ```
@@ -4054,15 +4050,15 @@ func linq105(){
     let products = productsList()
     
     let q = categories
-        .expand { c -> (Category:String,ProductName:String)[] in
-            let catProducts = products.find { c == $0.category }
+        .expand { c -> [(Category:String,ProductName:String)]? in
+            let catProducts = products.filter { c == $0.category }
             return catProducts.isEmpty
                 ? [(c, "(No products)")]
                 : catProducts.map { p in( c, p.productName) }
         }
     
     for v in q {
-        println("\(v.ProductName): \(v.Category)")
+        print("\(v.ProductName): \(v.Category)")
     }
 }
 ```

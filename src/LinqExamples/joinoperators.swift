@@ -4,7 +4,7 @@
 //
 //  Created by Demis Bellot on 6/7/14.
 //  Copyright (c) 2014 ServiceStack LLC. All rights reserved.
-// 
+//
 
 import Foundation
 
@@ -15,14 +15,14 @@ func linq102(){
     
     let products = productsList()
     
-    let q = join(categories, products) { (c:String,p:Product) in c == p.category }
+    let q = join(categories, withSeq: products) { (c:String,p:Product) in c == p.category }
         .map { j -> (Category:String, ProductName:String) in
             let (c,p) = j
             return (c, p.productName)
         }
 
-    q.each {
-        println("Category:\($0.Category), ProductName:\($0.ProductName)")
+    q.forEach {
+        print("Category:\($0.Category), ProductName:\($0.ProductName)")
     }
 }
 
@@ -31,16 +31,16 @@ func linq103(){
     
     let products = productsList()
     
-    let q = joinGroup(categories, products) { c,p in c == p.category }
-        .map { (j:Group<String,(String,Product)>) -> (Category:String, Products:Product[]) in
+    let q = joinGroup(categories, withSeq: products) { c,p in c == p.category }
+        .map { j -> (Category:String, Products:[Product]) in
             (j.key, j.items.map {
                 let (_,p) = $0
                 return p })
         }
     
     for v in q {
-        println("\(v.Category):")
-        v.Products.each { println("   \($0.productName)") }
+        print("\(v.Category):")
+        v.Products.forEach { print("   \($0.productName)") }
     }
 }
 
@@ -49,7 +49,7 @@ func linq104(){
     
     let products = productsList()
     
-    let q = joinGroup(categories, products) { c,p in c == p.category }
+    let q = joinGroup(categories, withSeq: products) { c,p in c == p.category }
         .expand { j in j.items.map {
                     let (_,p) = $0
                     return p
@@ -59,7 +59,7 @@ func linq104(){
         }
     
     for v in q {
-        println("\(v.ProductName): \(v.Category)")
+        print("\(v.ProductName): \(v.Category)")
     }
 }
 
@@ -69,15 +69,15 @@ func linq105(){
     let products = productsList()
     
     let q = categories
-        .expand { c -> (Category:String,ProductName:String)[] in
-            let catProducts = products.find { c == $0.category }
+        .expand { c -> [(Category:String,ProductName:String)]? in
+            let catProducts = products.filter { c == $0.category }
             return catProducts.isEmpty
                 ? [(c, "(No products)")]
                 : catProducts.map { p in( c, p.productName) }
         }
     
     for v in q {
-        println("\(v.ProductName): \(v.Category)")
+        print("\(v.ProductName): \(v.Category)")
     }
 }
 

@@ -18,7 +18,7 @@ func linq99(){
     
     for f in q {
         let v = f()
-        println("v = \(v), i = \(i)")
+        print("v = \(v), i = \(i)")
     }
 }
 
@@ -26,24 +26,24 @@ func linq100(){
     let numbers = [ 5, 4, 1, 3, 9, 8, 6, 7, 2, 0 ]
     
     var i = 0
-    var q = numbers.map { n in ++i }
+    let q = numbers.map { n in ++i }
     
     for v in q {
-        println("v = \(v), i = \(i)")
+        print("v = \(v), i = \(i)")
     }
 }
 
 func linq101(){
     var numbers = [ 5, 4, 1, 3, 9, 8, 6, 7, 2, 0 ]
-    var lowNumbers = { numbers.find { $0 < 4 } }
+    let lowNumbers = { numbers.filter { $0 < 4 } }
     
-    println("First run numbers <= 3:")
-    lowNumbers().each(println)
+    print("First run numbers <= 3:")
+    lowNumbers().forEach { print($0) }
     
-    for i in 0..10 {
+    for i in 0..<10 {
         numbers[i] = -numbers[i]
     }
     
-    println("Second run numbers <= 3:")
-    lowNumbers().each(println)
+    print("Second run numbers <= 3:")
+    lowNumbers().forEach { print($0) }
 }

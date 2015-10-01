@@ -16,8 +16,8 @@ func linq94(){
     
     let allNumbers = numbersA + numbersB
     
-    println("All numbers from both arrays:")
-    allNumbers.each(println)
+    print("All numbers from both arrays:")
+    allNumbers.forEach { print($0) }
 }
 
 func linq95(){
@@ -29,8 +29,8 @@ func linq95(){
     
     let allNames = customerNames + productNames
     
-    println("Customer and product names:")
-    allNames.each(println)
+    print("Customer and product names:")
+    allNames.forEach { print($0) }
 }
 
 func linq96(){
@@ -39,7 +39,7 @@ func linq96(){
     
     let match = wordsA == wordsB
     
-    println("The sequences match: \(match)")
+    print("The sequences match: \(match)")
 }
 
 func linq97(){
@@ -48,5 +48,5 @@ func linq97(){
     
     let match = wordsA == wordsB
     
-    println("The sequences match: \(match)")
+    print("The sequences match: \(match)")
 }

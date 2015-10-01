@@ -4,7 +4,7 @@
 //
 //  Created by Demis Bellot on 6/6/14.
 //  Copyright (c) 2014 ServiceStack LLC. All rights reserved.
-// 
+//
 
 import Foundation
 
@@ -15,8 +15,8 @@ func linq6(){
     
     let numsPlusOne = numbers.map { $0 + 1 }
     
-    println("Numbers + 1:")
-    numsPlusOne.each(println)
+    print("Numbers + 1:")
+    numsPlusOne.forEach { print($0) }
 }
 
 func linq7(){
@@ -24,8 +24,8 @@ func linq7(){
     
     let productNames = products.map { $0.productName }
     
-    println("Product Names:")
-    productNames.each(println)
+    print("Product Names:")
+    productNames.forEach { print($0) }
 }
 
 func linq8(){
@@ -34,8 +34,8 @@ func linq8(){
     
     let textNums = numbers.map { strings[$0] }
     
-    println("Number strings:")
-    textNums.each(println)
+    print("Number strings:")
+    textNums.forEach { print($0) }
 }
 
 func linq9(){
@@ -46,7 +46,7 @@ func linq9(){
     }
     
     for ul in upperLowerWords {
-        println("Uppercase: \(ul.Upper), Lowercase: \(ul.Lower)")
+        print("Uppercase: \(ul.Upper), Lowercase: \(ul.Lower)")
     }
 }
 
@@ -59,7 +59,7 @@ func linq10(){
     }
     
     for d in digitOddEvens {
-        println("The digit \(d.Digit) is " + (d.Even ? "even" : "odd") + ".")
+        print("The digit \(d.Digit) is " + (d.Even ? "even" : "odd") + ".")
     }
 }
 
@@ -70,9 +70,9 @@ func linq11(){
         (p.productName, p.category, p.unitPrice)
     }
     
-    println("Product Info:")
+    print("Product Info:")
     for p in productInfos {
-        println("\(p.ProductName) is in the category \(p.Category) and costs \(p.Price) per unit.")
+        print("\(p.ProductName) is in the category \(p.Category) and costs \(p.Price) per unit.")
     }
 }
 
@@ -84,9 +84,9 @@ func linq12(){
         (i, i == index++)
     }
     
-    println("Number: In-place?")
+    print("Number: In-place?")
     for n in numsInPlace {
-        println("\(n.Num): \(n.InPlace)")
+        print("\(n.Num): \(n.InPlace)")
     }
 }
 
@@ -95,11 +95,11 @@ func linq13(){
     let digits = [ "zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine" ]
     
     let lowNums = numbers
-        .find { $0 < 5 }
+        .filter { $0 < 5 }
         .map { digits[$0] }
     
-    println("Numbers < 5:")
-    lowNums.each(println)
+    print("Numbers < 5:")
+    lowNums.forEach { print($0) }
 }
 
 func linq14(){
@@ -108,13 +108,13 @@ func linq14(){
     
     let pairs = numbersA.expand { a in
         numbersB
-            .find { b in a < b }
+            .filter { b in a < b }
             .map { i -> (a: Int, b:Int) in (a, i) }
         }
     
-    println("Pairs where a < b:")
+    print("Pairs where a < b:")
     for pair in pairs {
-        println("\(pair.a) is less than \(pair.b)")
+        print("\(pair.a) is less than \(pair.b)")
     }
 }
 
@@ -123,13 +123,13 @@ func linq15(){
     
     let orders = customers.expand { c in
         c.orders
-            .find { $0.total < 500 }
+            .filter { $0.total < 500 }
             .map { o -> (CustomerId: String, OrderId:Int, Total:Double) in
                 (c.customerId, o.orderId, o.total)
             }
         }
     
-    orders.each(println)
+    orders.forEach { print($0) }
 }
 
 func linq16(){
@@ -138,13 +138,13 @@ func linq16(){
     let date = NSDate(year: 1998, month: 1, day: 1)
     let orders = customers.expand { c in
         c.orders
-            .find { $0.orderDate! >= date }
+            .filter { $0.orderDate! >= date }
             .map { o -> (CustomerId: String, OrderId:Int, OrderDate:NSDate) in
                 (c.customerId, o.orderId, o.orderDate!)
             }
         }
     
-    orders.each(println)
+    orders.forEach { print($0) }
 }
 
 func linq17(){
@@ -152,13 +152,13 @@ func linq17(){
     
     let orders = customers.expand { c in
         c.orders
-            .find { $0.total >= 2000 }
+            .filter { $0.total >= 2000 }
             .map { o -> (CustomerId: String, OrderId:Int, Total:Double) in
                 (c.customerId, o.orderId, o.total)
             }
         }
     
-    orders.each(println)
+    orders.forEach { print($0) }
 }
 
 func linq18(){
@@ -167,27 +167,27 @@ func linq18(){
     let cutoffDate = NSDate(year: 1997, month: 1, day: 1)
     
     let orders = customers
-        .find { $0.region == "WA" }.expand { c in
+        .filter { $0.region == "WA" }.expand { c in
             c.orders
-                .find { $0.orderDate! > cutoffDate }
+                .filter { $0.orderDate! > cutoffDate }
                 .map { o -> (CustomerId: String, OrderId:Int) in
                     (c.customerId, o.orderId)
                 }
             }
     
-    orders.each(println)
+    orders.forEach { print($0) }
 }
 
 func linq19(){
     let customers = customersList()
     
     var custIndex = 0
-    let customerOrders = customers.expand { c -> String[] in
+    let customerOrders = customers.expand { c -> [String]? in
         custIndex++
         return c.orders.map { "Customer #\(custIndex) has an order with OrderID \($0.orderId)" }
     }
     
-    customerOrders.each(println)
+    customerOrders.forEach { print($0) }
 }
 
 

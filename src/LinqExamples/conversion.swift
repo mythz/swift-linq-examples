@@ -13,14 +13,14 @@ let conversions = [linq54, linq55, linq56, linq57]
 func linq54(){
     let doubles = [ 1.7, 2.3, 1.9, 4.1, 2.9 ]
     
-    let sortedDoubles = sort(doubles).reverse()
+    let sortedDoubles = doubles.sort().reverse()
     
-    let doublesArray = sortedDoubles
+    let doublesArray = sortedDoubles.toArray()
     
-    println("Every other double from highest to lowest:")
+    print("Every other double from highest to lowest:")
     var d = 0
     while d < doublesArray.count {
-        println(doublesArray[d])
+        print(doublesArray[d])
         d += 2
     } 
 }
@@ -28,12 +28,12 @@ func linq54(){
 func linq55(){
     let words = [ "cherry", "apple", "blueberry" ]
     
-    let sortedWords = sort(words)
+    let sortedWords = words.sort()
     
     let wordList = sortedWords
     
-    println("The sorted word list:")
-    wordList.each(println)
+    print("The sorted word list:")
+    wordList.forEach { print($0) }
 }
 
 func linq56(){
@@ -48,14 +48,14 @@ func linq56(){
     }
     
     let bobsScore = scoreRecordsDict["Bob"]!
-    println("Bob's score: \(bobsScore)")
+    print("Bob's score: \(bobsScore)")
 }
 
 func linq57(){
-    let numbers = [ nil as Any, 1.0, "two", 3, "four", 5, "six", 7.0 ]
+    let numbers = [ nil as Any?, 1.0, "two", 3, "four", 5, "six", 7.0 ]
     
-    let doubles = numbers.find { $0 is Double }
+    let doubles = numbers.filter { $0 is Double }.map { $0! }
     
-    println("Numbers stored as doubles:")
-    doubles.each(println)
+    print("Numbers stored as doubles:")
+    doubles.forEach { print($0) }
 }
