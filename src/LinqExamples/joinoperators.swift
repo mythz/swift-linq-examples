@@ -50,12 +50,12 @@ func linq104(){
     let products = productsList()
     
     let q = joinGroup(categories, withSeq: products) { c,p in c == p.category }
-        .expand { j in j.items.map {
-                    let (_,p) = $0
-                    return p
-                }.map { (p:Product) -> (Category:String,ProductName:String) in
-                    (j.key, p.productName)
-                }
+        .flatMap { j in j.items.map {
+                let (_,p) = $0
+                return p
+            }.map { (p:Product) -> (Category:String,ProductName:String) in
+                (j.key, p.productName)
+            }
         }
     
     for v in q {
