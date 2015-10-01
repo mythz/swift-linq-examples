@@ -1,7 +1,7 @@
-101 LINQ Samples in Swift
-=========================
+101 LINQ Samples in Swift 2.0
+=============================
 
-Port of the [C# 101 LINQ Samples](http://code.msdn.microsoft.com/101-LINQ-Samples-3fb9811b) rewritten into [Apple's Swift](https://developer.apple.com/swift/).
+Port of the [C# 101 LINQ Samples](http://code.msdn.microsoft.com/101-LINQ-Samples-3fb9811b) rewritten into [Apple's Swift 2.0](https://developer.apple.com/swift/).
 
 Compare Swift to other LINQ examples written in:
 
@@ -11,7 +11,7 @@ Compare Swift to other LINQ examples written in:
 
 ## [Call .NET Web Services from Swift](https://github.com/ServiceStack/ServiceStack/wiki/Swift-Add-ServiceStack-Reference)
 
-If you're looking for an effortles typed API for consuming .NET Web Services in iOS or OSX Swift Apps checkout ServiceStack's [Swift Add ServiceStack Reference](https://github.com/ServiceStack/ServiceStack/wiki/Swift-Add-ServiceStack-Reference).
+If you're looking for an effortles typed API for consuming .NET Web Services in iOS or OSX Swift 2.0 Apps checkout ServiceStack's [Swift Add ServiceStack Reference](https://github.com/ServiceStack/ServiceStack/wiki/Swift-Add-ServiceStack-Reference).
 
 ### Running the examples
 
@@ -46,9 +46,10 @@ For a side-by-side comparison, the original **C#** source code is displayed abov
   - Outputs ending with `...` illustrates only a partial response is displayed. 
   - The C# ObjectDumper util used is downloadable from MSDN - [ObjectDumper.zip](http://code.msdn.microsoft.com/Visual-Studio-2008-C-d295cdba/file/46086/1/ObjectDumper.zip)
 
-Unlike many languages that support a functional-style, Swift doesn't have many LINQ-like utils built-in by default, but as Swift is highly extensible this functionality can be easily extended on core primitives like `Array` as can be seen in [extensions.swift](https://github.com/mythz/swift-linq-examples/blob/master/src/LinqExamples/extensions.swift) which contains all utils used in the samples below.
-
-These LINQ extensions are also available in the [LinqKit](https://github.com/mythz/LinqKit) project.
+Unlike many languages that support a functional-style, Swift doesn't have many of the LINQ-like utils built-in by default, 
+but as Swift is highly extensible this functionality can be easily extended on core primitives like `Array` as can be 
+seen in [extensions.swift](https://github.com/mythz/swift-linq-examples/blob/master/src/LinqExamples/extensions.swift) 
+which contains all utils used in the samples below.
 
 LINQ - Restriction Operators
 ----------------------------
