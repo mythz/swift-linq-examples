@@ -8,6 +8,7 @@ Compare Swift to other LINQ examples written in:
  - [Java](https://github.com/mythz/java-linq-examples)
  - [Clojure](https://github.com/mythz/clojure-linq-examples)
  - [Dart](https://github.com/mythz/dart-linq-examples)
+ - [Elixir](https://github.com/omnibs/elixir-linq-examples)
 
 ## [Call .NET Web Services from Swift](https://github.com/ServiceStack/ServiceStack/wiki/Swift-Add-ServiceStack-Reference)
 
