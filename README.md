@@ -6,6 +6,7 @@ Port of the [C# 101 LINQ Samples](http://code.msdn.microsoft.com/101-LINQ-Sample
 Compare Swift to other LINQ examples written in:
 
  - [Java](https://github.com/mythz/java-linq-examples)
+ - [Kotlin](https://github.com/mythz/kotlin-linq-examples)
  - [Clojure](https://github.com/mythz/clojure-linq-examples)
  - [Dart](https://github.com/mythz/dart-linq-examples)
  - [Elixir](https://github.com/omnibs/elixir-linq-examples)
