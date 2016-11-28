@@ -1,4 +1,4 @@
-101 LINQ Samples in Swift 2.0
+101 LINQ Samples in Swift 3.0
 =============================
 
 Port of the [C# 101 LINQ Samples](http://code.msdn.microsoft.com/101-LINQ-Samples-3fb9811b) rewritten into [Apple's Swift 2.0](https://developer.apple.com/swift/).
@@ -11,9 +11,9 @@ Compare Swift to other LINQ examples written in:
  - [Dart](https://github.com/mythz/dart-linq-examples)
  - [Elixir](https://github.com/omnibs/elixir-linq-examples)
 
-## [Call .NET Web Services from Swift](https://github.com/ServiceStack/ServiceStack/wiki/Swift-Add-ServiceStack-Reference)
+## [Call .NET Web Services from Swift](http://docs.servicestack.net/swift-add-servicestack-reference)
 
-If you're looking for an effortles typed API for consuming .NET Web Services in iOS or OSX Swift 2.0 Apps checkout ServiceStack's [Swift Add ServiceStack Reference](https://github.com/ServiceStack/ServiceStack/wiki/Swift-Add-ServiceStack-Reference).
+If you're looking for an effortles typed API for consuming .NET Web Services in iOS or OSX Swift 3.0 Apps checkout ServiceStack's [Swift Add ServiceStack Reference](http://docs.servicestack.net/swift-add-servicestack-reference).
 
 ### Running the examples
 
