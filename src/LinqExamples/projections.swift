@@ -81,7 +81,7 @@ func linq12(){
     
     var index = 0
     let numsInPlace = numbers.map { i -> (Num: Int, InPlace:Bool) in
-        (i, { index += 1; return i == index }())
+        (i, { let ret = i == index; index += 1; return ret; }())
     }
     
     print("Number: In-place?")

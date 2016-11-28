@@ -26,7 +26,7 @@ func linq100(){
     let numbers = [ 5, 4, 1, 3, 9, 8, 6, 7, 2, 0 ]
     
     var i = 0
-    let q = numbers.map { n in i += 1 }
+    let q = numbers.map { n -> Int in i += 1; return i; }
     
     for v in q {
         print("v = \(v), i = \(i)")

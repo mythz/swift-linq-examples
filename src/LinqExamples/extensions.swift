@@ -24,10 +24,10 @@ extension Array {
         var i = 0
         for x in self {
             let t = x as Element
-            i += 1
             if fn(t, i) {
                 to.append(t)
             }
+            i += 1
         }
         return to
     }
@@ -397,7 +397,7 @@ func anagramComparer(_ a:String, b:String) -> Bool {
 }
 
 func caseInsensitiveComparer (_ a:String,b:String) -> Bool {
-    return a.uppercased().compare(b.uppercased()) == .orderedDescending
+    return a.uppercased().compare(b.uppercased()) == .orderedAscending
 }
 
 func compareIgnoreCase (_ a:String, _ b:String) -> Int {
@@ -477,4 +477,12 @@ extension Date {
         fmt.dateFormat = "yyyy-MM-dd"
         return fmt.string(from: self)
     }
+
+    func toString() -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .medium
+        dateFormatter.timeStyle = .medium
+        return dateFormatter.string(from: self)
+    }
 }
+

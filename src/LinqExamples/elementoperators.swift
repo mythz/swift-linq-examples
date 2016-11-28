@@ -21,9 +21,9 @@ func linq58(){
 func linq59(){
     let strings = [ "zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine" ]
     
-    let startsWithO = strings.firstWhere { $0.charAt(0) == "o" }
-    
-    print("A string starting with 'o': \(startsWithO)")
+    if let startsWithO = strings.firstWhere({ $0.charAt(0) == "o" }) {
+        print("A string starting with 'o': \(startsWithO)")
+    }
 }
 
 func linq61(){

@@ -203,6 +203,7 @@ public void Linq4()
 ```
 ```swift
 //swift
+func linq4(){
     let customers = customersList()
     let waCustomers = customers
         .filter { $0.region == "WA" }
@@ -214,18 +215,19 @@ public void Linq4()
             print("  Order \(o.orderId): \(o.orderDate)")
         }
     }
+}
 ```
 #### Output
 
     Customers from Washington and their orders:
     Customer LAZYK: Lazy K Kountry Store
-      Order 10482: -5877520-03-03 -596:-31:-23 +0000
-      Order 10545: -5877520-03-03 -596:-31:-23 +0000
+      Order 10482: Optional(1997-03-21 05:00:00 +0000)
+      Order 10545: Optional(1997-05-22 04:00:00 +0000)
     Customer TRAIH: Trail's Head Gourmet Provisioners
-      Order 10574: -5877520-03-03 -596:-31:-23 +0000
-      Order 10577: -5877520-03-03 -596:-31:-23 +0000
-      Order 10822: -5877520-03-03 -596:-31:-23 +0000
-      ...
+      Order 10574: Optional(1997-06-19 04:00:00 +0000)
+      Order 10577: Optional(1997-06-23 04:00:00 +0000)
+      Order 10822: Optional(1998-01-08 05:00:00 +0000)
+    ...
 
 ### linq5: Where - Indexed
 ```csharp
@@ -418,7 +420,7 @@ func linq9(){
     let words = ["aPPLE", "BlUeBeRrY", "cHeRry"]
     
     let upperLowerWords = words.map { s -> (Upper: String, Lower:String) in
-        (s.uppercaseString, s.lowercaseString)
+        (s.uppercased(), s.lowercased())
     }
     
     for ul in upperLowerWords {
@@ -542,7 +544,7 @@ func linq12(){
     
     var index = 0
     let numsInPlace = numbers.map { i -> (Num: Int, InPlace:Bool) in
-        (i, i == index++)
+        (i, { let ret = i == index; index += 1; return ret; }())
     }
     
     print("Number: In-place?")
@@ -701,10 +703,10 @@ func linq15(){
 ```
 #### Output
 
-    (ALFKI, 10702, 330.0)
-    (ALFKI, 10952, 471.2)
-    (ANATR, 10308, 88.8)
-    (ANATR, 10625, 479.75)
+    ("ALFKI", 10702, 330.0)
+    ("ALFKI", 10952, 471.19999999999999)
+    ("ANATR", 10308, 88.799999999999997)
+    ("ANATR", 10625, 479.75)
     ...
 
 ### linq16: SelectMany - Compound from 3
@@ -728,11 +730,11 @@ public void Linq16()
 func linq16(){
     let customers = customersList()
     
-    let date = NSDate(year: 1998, month: 1, day: 1)
+    let date = Date(year: 1998, month: 1, day: 1)
     let orders = customers.expand { c in
         c.orders
             .filter { $0.orderDate! >= date }
-            .map { o -> (CustomerId: String, OrderId:Int, OrderDate:NSDate) in
+            .map { o -> (CustomerId: String, OrderId:Int, OrderDate:Date) in
                 (c.customerId, o.orderId, o.orderDate!)
             }
         }
@@ -742,11 +744,11 @@ func linq16(){
 ```
 #### Output
 
-    (ALFKI, 10835, 1998-01-15 05:00:00 +0000)
-    (ALFKI, 10952, 1998-03-16 05:00:00 +0000)
-    (ALFKI, 11011, 1998-04-09 04:00:00 +0000)
-    (ANATR, 10926, 1998-03-04 05:00:00 +0000)
-    (ANTON, 10856, 1998-01-28 05:00:00 +0000)
+    ("ALFKI", 10835, 1998-01-15 05:00:00 +0000)
+    ("ALFKI", 10952, 1998-03-16 05:00:00 +0000)
+    ("ALFKI", 11011, 1998-04-09 04:00:00 +0000)
+    ("ANATR", 10926, 1998-03-04 05:00:00 +0000)
+    ("ANTON", 10856, 1998-01-28 05:00:00 +0000)
     ...
 
 ### linq17: SelectMany - from Assignment
@@ -783,11 +785,11 @@ func linq17(){
 ```
 #### Output
 
-    (ANTON, 10573, 2082.0)
-    (AROUT, 10558, 2142.9)
-    (AROUT, 10953, 4441.25)
-    (BERGS, 10384, 2222.4)
-    (BERGS, 10524, 3192.65)
+    ("ANTON", 10573, 2082.0)
+    ("AROUT", 10558, 2142.9000000000001)
+    ("AROUT", 10953, 4441.25)
+    ("BERGS", 10384, 2222.4000000000001)
+    ("BERGS", 10524, 3192.6500000000001)
     ...
 
 ### linq18: SelectMany - Multiple from
@@ -814,7 +816,7 @@ public void Linq18()
 func linq18(){
     let customers = customersList()
     
-    let cutoffDate = NSDate(year: 1997, month: 1, day: 1)
+    let cutoffDate = Date(year: 1997, month: 1, day: 1)
     
     let orders = customers
         .filter { $0.region == "WA" }.expand { c in
@@ -830,23 +832,23 @@ func linq18(){
 ```
 #### Output
 
-    (LAZYK, 10482)
-    (LAZYK, 10545)
-    (TRAIH, 10574)
-    (TRAIH, 10577)
-    (TRAIH, 10822)
-    (WHITC, 10469)
-    (WHITC, 10483)
-    (WHITC, 10504)
-    (WHITC, 10596)
-    (WHITC, 10693)
-    (WHITC, 10696)
-    (WHITC, 10723)
-    (WHITC, 10740)
-    (WHITC, 10861)
-    (WHITC, 10904)
-    (WHITC, 11032)
-    (WHITC, 11066)
+    ("LAZYK", 10482)
+    ("LAZYK", 10545)
+    ("TRAIH", 10574)
+    ("TRAIH", 10577)
+    ("TRAIH", 10822)
+    ("WHITC", 10469)
+    ("WHITC", 10483)
+    ("WHITC", 10504)
+    ("WHITC", 10596)
+    ("WHITC", 10693)
+    ("WHITC", 10696)
+    ("WHITC", 10723)
+    ("WHITC", 10740)
+    ("WHITC", 10861)
+    ("WHITC", 10904)
+    ("WHITC", 11032)
+    ("WHITC", 11066)
 
 ### linq19: SelectMany - Indexed
 ```csharp
@@ -871,7 +873,7 @@ func linq19(){
     
     var custIndex = 0
     let customerOrders = customers.expand { c -> [String]? in
-        custIndex++
+        custIndex += 1
         return c.orders.map { "Customer #\(custIndex) has an order with OrderID \($0.orderId)" }
     }
     
@@ -959,7 +961,7 @@ func linq21(){
     let first3WAOrders = customers
         .filter { $0.region == "WA" }
         .expand { c in c.orders
-            .map { o -> (CustomerId: String, OrderId:Int, OrderDate:NSDate?) in
+            .map { o -> (CustomerId: String, OrderId:Int, OrderDate:Date?) in
                 (c.customerId, o.orderId, o.orderDate)
             }
         }
@@ -972,9 +974,9 @@ func linq21(){
 #### Output
 
     First 3 orders in WA:
-    (LAZYK, 10482, 1997-03-21 05:00:00 +0000)
-    (LAZYK, 10545, 1997-05-22 04:00:00 +0000)
-    (TRAIH, 10574, 1997-06-19 04:00:00 +0000)
+    ("LAZYK", 10545, Optional(1997-05-22 04:00:00 +0000))
+    ("TRAIH", 10574, Optional(1997-06-19 04:00:00 +0000))
+    ("TRAIH", 10577, Optional(1997-06-23 04:00:00 +0000))
 
 
 ### linq22: Skip - Simple
@@ -1043,7 +1045,7 @@ func linq23(){
     let waOrders = customers
         .filter { $0.region == "WA" }
         .expand { c in c.orders
-            .map { o -> (CustomerId: String, OrderId:Int, OrderDate:NSDate?) in
+            .map { o -> (CustomerId: String, OrderId:Int, OrderDate:Date?) in
                 (c.customerId, o.orderId, o.orderDate)
             }
         }
@@ -1057,23 +1059,23 @@ func linq23(){
 #### Output
 
     All but first 2 orders in WA:
-    (TRAIH, 10574, 1997-06-19 04:00:00 +0000)
-    (TRAIH, 10577, 1997-06-23 04:00:00 +0000)
-    (TRAIH, 10822, 1998-01-08 05:00:00 +0000)
-    (WHITC, 10269, 1996-07-31 04:00:00 +0000)
-    (WHITC, 10344, 1996-11-01 05:00:00 +0000)
-    (WHITC, 10469, 1997-03-10 05:00:00 +0000)
-    (WHITC, 10483, 1997-03-24 05:00:00 +0000)
-    (WHITC, 10504, 1997-04-11 04:00:00 +0000)
-    (WHITC, 10596, 1997-07-11 04:00:00 +0000)
-    (WHITC, 10693, 1997-10-06 04:00:00 +0000)
-    (WHITC, 10696, 1997-10-08 04:00:00 +0000)
-    (WHITC, 10723, 1997-10-30 05:00:00 +0000)
-    (WHITC, 10740, 1997-11-13 05:00:00 +0000)
-    (WHITC, 10861, 1998-01-30 05:00:00 +0000)
-    (WHITC, 10904, 1998-02-24 05:00:00 +0000)
-    (WHITC, 11032, 1998-04-17 04:00:00 +0000)
-    (WHITC, 11066, 1998-05-01 04:00:00 +0000)
+    ("TRAIH", 10574, Optional(1997-06-19 04:00:00 +0000))
+    ("TRAIH", 10577, Optional(1997-06-23 04:00:00 +0000))
+    ("TRAIH", 10822, Optional(1998-01-08 05:00:00 +0000))
+    ("WHITC", 10269, Optional(1996-07-31 04:00:00 +0000))
+    ("WHITC", 10344, Optional(1996-11-01 05:00:00 +0000))
+    ("WHITC", 10469, Optional(1997-03-10 05:00:00 +0000))
+    ("WHITC", 10483, Optional(1997-03-24 05:00:00 +0000))
+    ("WHITC", 10504, Optional(1997-04-11 04:00:00 +0000))
+    ("WHITC", 10596, Optional(1997-07-11 04:00:00 +0000))
+    ("WHITC", 10693, Optional(1997-10-06 04:00:00 +0000))
+    ("WHITC", 10696, Optional(1997-10-08 04:00:00 +0000))
+    ("WHITC", 10723, Optional(1997-10-30 05:00:00 +0000))
+    ("WHITC", 10740, Optional(1997-11-13 05:00:00 +0000))
+    ("WHITC", 10861, Optional(1998-01-30 05:00:00 +0000))
+    ("WHITC", 10904, Optional(1998-02-24 05:00:00 +0000))
+    ("WHITC", 11032, Optional(1998-04-17 04:00:00 +0000))
+    ("WHITC", 11066, Optional(1998-05-01 04:00:00 +0000))
 
 ### linq24: TakeWhile - Simple
 ```csharp
@@ -1132,7 +1134,7 @@ func linq25(){
     let numbers = [ 5, 4, 1, 3, 9, 8, 6, 7, 2, 0 ]
     
     var index = 0
-    let firstSmallNumbers = numbers.takeWhile { $0 >= index++ }
+    let firstSmallNumbers = numbers.takeWhile { index += 1; return $0 >= index }
     
     print("First numbers not less than their position:")
     firstSmallNumbers.forEach { print($0) }
@@ -1203,7 +1205,7 @@ func linq27(){
     let numbers = [ 5, 4, 1, 3, 9, 8, 6, 7, 2, 0 ]
     
     var index = 0
-    let laterNumbers = numbers.skipWhile { $0 >= index++ }
+    let laterNumbers = numbers.skipWhile { index += 1; return $0 >= index }
     
     print("All elements starting from first element less than its position:")
     laterNumbers.forEach { print($0) }
@@ -1249,7 +1251,7 @@ public void Linq28()
 func linq28(){
     let words = [ "cherry", "apple", "blueberry" ]
     
-    let sortedWords = words.sort()
+    let sortedWords = words.sorted()
     
     print("The sorted list of words:")
     sortedWords.forEach { print($0) }
@@ -1286,7 +1288,7 @@ public void Linq29()
 func linq29(){
     let words = [ "cherry", "apple", "blueberry" ]
     
-    let sortedWords = words.sort { $0.length < $1.length }
+    let sortedWords = words.sorted { $0.length < $1.length }
     
     print("The sorted list of words (by length):")
     sortedWords.forEach { print($0) }
@@ -1319,7 +1321,7 @@ public void Linq30()
 func linq30(){
     let products = productsList()
     
-    let sortedProducts = products.sort { $0.productName < $1.productName }
+    let sortedProducts = products.sorted { $0.productName < $1.productName }
     
     sortedProducts.forEach { print($0) }
 }
@@ -1350,7 +1352,7 @@ public void Linq31()
 func linq31(){
     let words = [ "aPPLE", "AbAcUs", "bRaNcH", "BlUeBeRrY", "ClOvEr", "cHeRry" ]
     
-    let sortedWords = words.sort(caseInsensitiveComparer)
+    let sortedWords = words.sorted(by: caseInsensitiveComparer)
     
     sortedWords.forEach { print($0) }
 }
@@ -1388,7 +1390,7 @@ public void Linq32()
 func linq32(){
     let doubles = [ 1.7, 2.3, 1.9, 4.1, 2.9 ]
     
-    let sortedDoubles = doubles.sort().reverse()
+    let sortedDoubles = doubles.sorted().reversed()
     
     print("The doubles from highest to lowest:")
     sortedDoubles.forEach { print($0) }
@@ -1423,7 +1425,7 @@ public void Linq33()
 func linq33(){
     let products = productsList()
     
-    let sortedProducts = products.sort { $0.unitsInStock < $1.unitsInStock }.reverse()
+    let sortedProducts = products.sorted { $0.unitsInStock < $1.unitsInStock }.reversed()
     
     sortedProducts.forEach { print($0) }
 }
@@ -1454,7 +1456,7 @@ public void Linq34()
 func linq34(){
     let words = [ "aPPLE", "AbAcUs", "bRaNcH", "BlUeBeRrY", "ClOvEr", "cHeRry" ]
     
-    let sortedWords = words.sort(caseInsensitiveComparer).reverse()
+    let sortedWords = words.sorted(by: caseInsensitiveComparer).reversed()
     
     sortedWords.forEach { print($0) }
 }
@@ -1492,7 +1494,7 @@ public void Linq35()
 func linq35(){
     let digits = [ "zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine" ]
     
-    let sortedDigits = digits.sort { $0 < $1 }.sort { $0.length < $1.length }
+    let sortedDigits = digits.sorted { $0 < $1 }.sorted { $0.length < $1.length }
     
     print("Sorted digits:")
     sortedDigits.forEach { print($0) }
@@ -1531,7 +1533,7 @@ public void Linq36()
 func linq36(){
     let words = [ "aPPLE", "AbAcUs", "bRaNcH", "BlUeBeRrY", "ClOvEr", "cHeRry" ]
     
-    let sortedWords = words.sort(caseInsensitiveComparer).sort { $0.length < $1.length }
+    let sortedWords = words.sorted(by: caseInsensitiveComparer).sorted { $0.length < $1.length }
     
     sortedWords.forEach { print($0) }
 }
@@ -1577,10 +1579,10 @@ func linq37(){
     [Product id:38, name:Côte de Blaye, cat:Beverages, price:263.5, inStock:17]
     [Product id:43, name:Ipoh Coffee, cat:Beverages, price:46.0, inStock:17]
     [Product id:2, name:Chang, cat:Beverages, price:19.0, inStock:17]
-    [Product id:35, name:Steeleye Stout, cat:Beverages, price:18.0, inStock:20]
+    [Product id:1, name:Chai, cat:Beverages, price:18.0, inStock:39]
     [Product id:76, name:Lakkalikööri, cat:Beverages, price:18.0, inStock:57]
     [Product id:39, name:Chartreuse verte, cat:Beverages, price:18.0, inStock:69]
-    [Product id:1, name:Chai, cat:Beverages, price:18.0, inStock:39]
+    [Product id:35, name:Steeleye Stout, cat:Beverages, price:18.0, inStock:20]
     [Product id:70, name:Outback Lager, cat:Beverages, price:15.0, inStock:15]
     [Product id:67, name:Laughing Lumberjack Lager, cat:Beverages, price:14.0, inStock:52]
     [Product id:34, name:Sasquatch Ale, cat:Beverages, price:14.0, inStock:111]
@@ -1607,7 +1609,7 @@ func linq38(){
     
     let sortedWords = words.sortBy(
         { compare($0.length,$1.length) },
-        { compareIgnoreCase($0,$1) }
+        { compareIgnoreCase($1,$0) }
     )
     
     sortedWords.forEach { print($0) }
@@ -1649,7 +1651,7 @@ func linq39(){
     
     let reversedIDigits = digits
         .filter { $0.charAt(1) == "i" }
-        .reverse()
+        .reversed()
     
     print("A backwards list of the digits with a second character of 'i':")
     reversedIDigits.forEach { print($0) }
@@ -1707,21 +1709,21 @@ func linq40(){
 ```
 #### Output
 
-    Numbers with a remainder of 0 when divided by 5:
-    5
-    0
-    Numbers with a remainder of 1 when divided by 5:
-    1
-    6
-    Numbers with a remainder of 2 when divided by 5:
-    7
-    2
     Numbers with a remainder of 3 when divided by 5:
     3
     8
+    Numbers with a remainder of 2 when divided by 5:
+    7
+    2
+    Numbers with a remainder of 0 when divided by 5:
+    5
+    0
     Numbers with a remainder of 4 when divided by 5:
     4
     9
+    Numbers with a remainder of 1 when divided by 5:
+    1
+    6
 
 ### linq41: GroupBy - Simple 2
 ```csharp
@@ -1763,15 +1765,15 @@ func linq41(){
 ```
 #### Output
 
+    Words that start with the letter 'b':
+    blueberry
+    banana
     Words that start with the letter 'c':
     chimpanzee
     cheese
     Words that start with the letter 'a':
     abacus
     apple
-    Words that start with the letter 'b':
-    blueberry
-    banana
 
 ### linq42: GroupBy - Simple 3
 ```csharp
@@ -1806,23 +1808,22 @@ func linq42(){
 ```
 #### Output
 
-    Confections:
-    [Product id:16, name:Pavlova, cat:Confections, price:17.45, inStock:29]
-    [Product id:19, name:Teatime Chocolate Biscuits, cat:Confections, price:9.2, inStock:25]
-    [Product id:20, name:Sir Rodney's Marmalade, cat:Confections, price:81.0, inStock:40]
-    [Product id:21, name:Sir Rodney's Scones, cat:Confections, price:10.0, inStock:3]
-    [Product id:25, name:NuNuCa Nuß-Nougat-Creme, cat:Confections, price:14.0, inStock:76]
-    [Product id:26, name:Gumbär Gummibärchen, cat:Confections, price:31.23, inStock:15]
-    [Product id:27, name:Schoggi Schokolade, cat:Confections, price:43.9, inStock:49]
-    [Product id:47, name:Zaanse koeken, cat:Confections, price:9.5, inStock:36]
-    [Product id:48, name:Chocolade, cat:Confections, price:12.75, inStock:15]
-    [Product id:49, name:Maxilaku, cat:Confections, price:20.0, inStock:10]
-    [Product id:50, name:Valkoinen suklaa, cat:Confections, price:16.25, inStock:65]
-    [Product id:62, name:Tarte au sucre, cat:Confections, price:49.3, inStock:17]
-    [Product id:68, name:Scottish Longbreads, cat:Confections, price:12.5, inStock:6]
-    Dairy Products:
-    [Product id:11, name:Queso Cabrales, cat:Dairy Products, price:21.0, inStock:22]
-    [Product id:12, name:Queso Manchego La Pastora, cat:Dairy Products, price:38.0, inStock:86]
+    Condiments:
+    [Product id:3, name:Aniseed Syrup, cat:Condiments, price:10.0, inStock:13]
+    [Product id:4, name:Chef Anton's Cajun Seasoning, cat:Condiments, price:22.0, inStock:53]
+    [Product id:5, name:Chef Anton's Gumbo Mix, cat:Condiments, price:21.35, inStock:0]
+    [Product id:6, name:Grandma's Boysenberry Spread, cat:Condiments, price:25.0, inStock:120]
+    [Product id:8, name:Northwoods Cranberry Sauce, cat:Condiments, price:40.0, inStock:6]
+    [Product id:15, name:Genen Shouyu, cat:Condiments, price:15.5, inStock:39]
+    [Product id:44, name:Gula Malacca, cat:Condiments, price:19.45, inStock:27]
+    [Product id:61, name:Sirop d'érable, cat:Condiments, price:28.5, inStock:113]
+    [Product id:63, name:Vegie-spread, cat:Condiments, price:43.9, inStock:24]
+    [Product id:65, name:Louisiana Fiery Hot Pepper Sauce, cat:Condiments, price:21.05, inStock:76]
+    [Product id:66, name:Louisiana Hot Spiced Okra, cat:Condiments, price:17.0, inStock:4]
+    [Product id:77, name:Original Frankfurter grüne Soße, cat:Condiments, price:13.0, inStock:32]
+    Produce:
+    [Product id:7, name:Uncle Bob's Organic Dried Pears, cat:Produce, price:30.0, inStock:15]
+    [Product id:14, name:Tofu, cat:Produce, price:23.25, inStock:35]
 
 ### linq43: GroupBy - Nested
 ```csharp
@@ -1883,17 +1884,17 @@ func linq43(){
 #### Output
 
     # Alfreds Futterkiste
+    1998: 
+      3: [[Order id:10952, total:471.2]]
+
+      1: [[Order id:10835, total:845.8]]
+
+      4: [[Order id:11011, total:933.5]]
+
     1997: 
       8: [[Order id:10643, total:814.5]]
 
       10: [[Order id:10692, total:878.0], [Order id:10702, total:330.0]]
-
-    1998: 
-      4: [[Order id:11011, total:933.5]]
-
-      1: [[Order id:10835, total:845.8]]
-
-      3: [[Order id:10952, total:471.2]]
 
 ### linq44: GroupBy - Comparer
 ```csharp
@@ -1919,9 +1920,9 @@ func linq44(){
 ```
 #### Output
 
-    [from   ,  form  ]
-    [ salt,   last   ]
-    [ earn ,  near ]
+    ["from   ", " form  "]
+    [" salt", "  last   "]
+    [" earn ", " near "]
 
 ### linq45: GroupBy - Comparer, Mapped    
 ```csharp
@@ -1946,16 +1947,16 @@ func linq45(){
     
     let orderGroups = anagrams.groupBy({ (s:String) in s.trim() },
         matchWith: anagramComparer,
-        valueAs: { s in s.uppercaseString })
+        valueAs: { s in s.uppercased() })
     
     orderGroups.forEach { print($0.items) }
 }
 ```
 #### Output
 
-    [FROM   ,  FORM  ]
-    [ SALT,   LAST   ]
-    [ EARN ,  NEAR ]
+    ["FROM   ", " FORM  "]
+    [" SALT", "  LAST   "]
+    [" EARN ", " NEAR "]
 
 
 LINQ - Set Operators
@@ -2357,7 +2358,7 @@ public void Linq54()
 func linq54(){
     let doubles = [ 1.7, 2.3, 1.9, 4.1, 2.9 ]
     
-    let sortedDoubles = doubles.sort().reverse()
+    let sortedDoubles = doubles.sorted().reversed()
     
     let doublesArray = sortedDoubles.toArray()
     
@@ -2401,7 +2402,7 @@ public void Linq55()
 func linq55(){
     let words = [ "cherry", "apple", "blueberry" ]
     
-    let sortedWords = words.sort()
+    let sortedWords = words.sorted()
     
     let wordList = sortedWords
     
@@ -2450,7 +2451,7 @@ func linq56(){
 ```
 #### Output
 
-    Bob's score: (Bob, 40)
+    Bob's score: ("Bob", 40)
 
 ### linq57: OfType    
 ```csharp
@@ -2536,9 +2537,9 @@ public void Linq59()
 func linq59(){
     let strings = [ "zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine" ]
     
-    let startsWithO = strings.firstWhere { $0.charAt(0) == "o" }
-    
-    print("A string starting with 'o': \(startsWithO)")
+    if let startsWithO = strings.firstWhere({ $0.charAt(0) == "o" }) {
+        print("A string starting with 'o': \(startsWithO)")
+    }
 }
 ```
 #### Output
@@ -2691,7 +2692,7 @@ public void Linq66()
 ```swift
 //swift
 func linq66(){
-    let numbers = Array(count:10, repeatedValue:7)
+    let numbers = Array(repeating: 7, count: 10)
     
     numbers.forEach { print($0) }
 }
@@ -2771,7 +2772,7 @@ func linq69(){
 ```
 #### Output
 
-    Dairy Products: [[Product id:11, name:Queso Cabrales, cat:Dairy Products, price:21.0, inStock:22], [Product id:12, name:Queso Manchego La Pastora, cat:Dairy Products, price:38.0, inStock:86], [Product id:31, name:Gorgonzola Telino, cat:Dairy Products, price:12.5, inStock:0], [Product id:32, name:Mascarpone Fabioli, cat:Dairy Products, price:32.0, inStock:9], [Product id:33, name:Geitost, cat:Dairy Products, price:2.5, inStock:112], [Product id:59, name:Raclette Courdavault, cat:Dairy Products, price:55.0, inStock:79], [Product id:60, name:Camembert Pierrot, cat:Dairy Products, price:34.0, inStock:19], [Product id:69, name:Gudbrandsdalsost, cat:Dairy Products, price:36.0, inStock:26], [Product id:71, name:Flotemysost, cat:Dairy Products, price:21.5, inStock:26], [Product id:72, name:Mozzarella di Giovanni, cat:Dairy Products, price:34.8, inStock:14]]
+    Condiments: [[Product id:3, name:Aniseed Syrup, cat:Condiments, price:10.0, inStock:13], [Product id:4, name:Chef Anton's Cajun Seasoning, cat:Condiments, price:22.0, inStock:53], [Product id:5, name:Chef Anton's Gumbo Mix, cat:Condiments, price:21.35, inStock:0], [Product id:6, name:Grandma's Boysenberry Spread, cat:Condiments, price:25.0, inStock:120], [Product id:8, name:Northwoods Cranberry Sauce, cat:Condiments, price:40.0, inStock:6], [Product id:15, name:Genen Shouyu, cat:Condiments, price:15.5, inStock:39], [Product id:44, name:Gula Malacca, cat:Condiments, price:19.45, inStock:27], [Product id:61, name:Sirop d'érable, cat:Condiments, price:28.5, inStock:113], [Product id:63, name:Vegie-spread, cat:Condiments, price:43.9, inStock:24], [Product id:65, name:Louisiana Fiery Hot Pepper Sauce, cat:Condiments, price:21.05, inStock:76], [Product id:66, name:Louisiana Hot Spiced Okra, cat:Condiments, price:17.0, inStock:4], [Product id:77, name:Original Frankfurter grüne Soße, cat:Condiments, price:13.0, inStock:32]]
     ...
 
 ### linq70: All - Simple
@@ -2832,7 +2833,7 @@ func linq72(){
 ```
 #### Output
 
-    Confections: [[Product id:16, name:Pavlova, cat:Confections, price:17.45, inStock:29], [Product id:19, name:Teatime Chocolate Biscuits, cat:Confections, price:9.2, inStock:25], [Product id:20, name:Sir Rodney's Marmalade, cat:Confections, price:81.0, inStock:40], [Product id:21, name:Sir Rodney's Scones, cat:Confections, price:10.0, inStock:3], [Product id:25, name:NuNuCa Nuß-Nougat-Creme, cat:Confections, price:14.0, inStock:76], [Product id:26, name:Gumbär Gummibärchen, cat:Confections, price:31.23, inStock:15], [Product id:27, name:Schoggi Schokolade, cat:Confections, price:43.9, inStock:49], [Product id:47, name:Zaanse koeken, cat:Confections, price:9.5, inStock:36], [Product id:48, name:Chocolade, cat:Confections, price:12.75, inStock:15], [Product id:49, name:Maxilaku, cat:Confections, price:20.0, inStock:10], [Product id:50, name:Valkoinen suklaa, cat:Confections, price:16.25, inStock:65], [Product id:62, name:Tarte au sucre, cat:Confections, price:49.3, inStock:17], [Product id:68, name:Scottish Longbreads, cat:Confections, price:12.5, inStock:6]]
+    Produce: [[Product id:7, name:Uncle Bob's Organic Dried Pears, cat:Produce, price:30.0, inStock:15], [Product id:14, name:Tofu, cat:Produce, price:23.25, inStock:35], [Product id:28, name:Rössle Sauerkraut, cat:Produce, price:45.6, inStock:26], [Product id:51, name:Manjimup Dried Apples, cat:Produce, price:53.0, inStock:20], [Product id:74, name:Longlife Tofu, cat:Produce, price:10.0, inStock:4]]
     ...
 
 
@@ -2920,13 +2921,13 @@ func linq76(){
 ```
 #### Output
 
-    (ALFKI, 6)
-    (ANATR, 4)
-    (ANTON, 7)
-    (AROUT, 13)
-    (BERGS, 18)
-    (BLAUS, 7)
-    (BLONP, 11)
+    ("ALFKI", 6)
+    ("ANATR", 4)
+    ("ANTON", 7)
+    ("AROUT", 13)
+    ("BERGS", 18)
+    ("BLAUS", 7)
+    ("BLONP", 11)
     ...
 
 ### linq77: Count - Grouped
@@ -2959,14 +2960,14 @@ func linq77(){
 ```
 #### Output
 
-    (Confections, 13)
-    (Dairy Products, 10)
-    (Seafood, 12)
-    (Produce, 5)
-    (Grains/Cereals, 7)
-    (Beverages, 12)
-    (Condiments, 12)
-    (Meat/Poultry, 6)
+    ("Condiments", 12)
+    ("Produce", 5)
+    ("Seafood", 12)
+    ("Meat/Poultry", 6)
+    ("Dairy Products", 10)
+    ("Grains/Cereals", 7)
+    ("Confections", 13)
+    ("Beverages", 12)
 
 ### linq78: Sum - Simple
 ```csharp
@@ -3050,14 +3051,14 @@ func linq80(){
 ```
 #### Output
 
-    (Confections, 386)
-    (Dairy Products, 393)
-    (Seafood, 701)
-    (Produce, 100)
-    (Grains/Cereals, 308)
-    (Beverages, 559)
-    (Condiments, 507)
-    (Meat/Poultry, 165)
+    ("Condiments", 507)
+    ("Produce", 100)
+    ("Seafood", 701)
+    ("Meat/Poultry", 165)
+    ("Dairy Products", 393)
+    ("Grains/Cereals", 308)
+    ("Confections", 386)
+    ("Beverages", 559)
 
 ### linq81: Min - Simple
 ```csharp
@@ -3076,7 +3077,7 @@ public void Linq81()
 func linq81(){
     let numbers = [ 5, 4, 1, 3, 9, 8, 6, 7, 2, 0 ]
     
-    let minNum = numbers.minElement()!
+    let minNum = numbers.min()!
     
     print("The minimum number is \(minNum).")
 }
@@ -3133,7 +3134,7 @@ func linq83(){
     
     let categories = products.groupBy { (p:Product)in p.category }
         .map { g -> (Category:String, CheapestPrice:Double) in
-            (g.key, g.items.map { (p:Product) in p.unitPrice }.minElement()! )
+            (g.key, g.items.map { (p:Product) in p.unitPrice }.min()! )
     }
     
     categories.forEach { print($0) }
@@ -3141,14 +3142,14 @@ func linq83(){
 ```
 #### Output
 
-    (Confections, 9.2)
-    (Dairy Products, 2.5)
-    (Seafood, 6.0)
-    (Produce, 10.0)
-    (Grains/Cereals, 7.0)
-    (Beverages, 4.5)
-    (Condiments, 10.0)
-    (Meat/Poultry, 7.45)
+    ("Condiments", 10.0)
+    ("Produce", 10.0)
+    ("Seafood", 6.0)
+    ("Meat/Poultry", 7.4500000000000002)
+    ("Dairy Products", 2.5)
+    ("Grains/Cereals", 7.0)
+    ("Confections", 9.1999999999999993)
+    ("Beverages", 4.5)
 
 ### linq84: Min - Elements
 ```csharp
@@ -3185,14 +3186,22 @@ func linq84(){
 ```
 #### Output
 
-    Confections: [Product id:19, name:Teatime Chocolate Biscuits, cat:Confections, price:9.2, inStock:25]
-    Dairy Products: [Product id:33, name:Geitost, cat:Dairy Products, price:2.5, inStock:112]
-    Seafood: [Product id:13, name:Konbu, cat:Seafood, price:6.0, inStock:24]
-    Produce: [Product id:74, name:Longlife Tofu, cat:Produce, price:10.0, inStock:4]
-    Grains/Cereals: [Product id:52, name:Filo Mix, cat:Grains/Cereals, price:7.0, inStock:38]
-    Beverages: [Product id:24, name:Guaraná Fantástica, cat:Beverages, price:4.5, inStock:20]
-    Condiments: [Product id:3, name:Aniseed Syrup, cat:Condiments, price:10.0, inStock:13]
-    Meat/Poultry: [Product id:54, name:Tourtière, cat:Meat/Poultry, price:7.45, inStock:21]
+    Condiments: 
+    [Product id:3, name:Aniseed Syrup, cat:Condiments, price:10.0, inStock:13]
+    Produce: 
+    [Product id:74, name:Longlife Tofu, cat:Produce, price:10.0, inStock:4]
+    Seafood: 
+    [Product id:13, name:Konbu, cat:Seafood, price:6.0, inStock:24]
+    Meat/Poultry: 
+    [Product id:54, name:Tourtière, cat:Meat/Poultry, price:7.45, inStock:21]
+    Dairy Products: 
+    [Product id:33, name:Geitost, cat:Dairy Products, price:2.5, inStock:112]
+    Grains/Cereals: 
+    [Product id:52, name:Filo Mix, cat:Grains/Cereals, price:7.0, inStock:38]
+    Confections: 
+    [Product id:19, name:Teatime Chocolate Biscuits, cat:Confections, price:9.2, inStock:25]
+    Beverages: 
+    [Product id:24, name:Guaraná Fantástica, cat:Beverages, price:4.5, inStock:20]
 
 ### linq85: Max - Simple
 ```csharp
@@ -3211,7 +3220,7 @@ public void Linq85()
 func linq85(){
     let numbers = [ 5, 4, 1, 3, 9, 8, 6, 7, 2, 0 ]
     
-    let maxNum = numbers.maxElement()!
+    let maxNum = numbers.max()!
     
     print("The maximum number is \(maxNum).")
 }
@@ -3237,7 +3246,7 @@ public void Linq86()
 func linq86(){
     let words = [ "cherry", "apple", "blueberry" ]
     
-    let longestLength:Int = words.map { (s:String) in s.length }.maxElement()!
+    let longestLength:Int = words.map { (s:String) in s.length }.max()!
     
     print("The longest word is \(longestLength) characters long.")
 }
@@ -3278,14 +3287,14 @@ func linq87(){
 ```
 #### Output
 
-    Category: Confections, MaximumPrice: 81.0
-    Category: Dairy Products, MaximumPrice: 55.0
-    Category: Seafood, MaximumPrice: 62.5
-    Category: Produce, MaximumPrice: 53.0
-    Category: Grains/Cereals, MaximumPrice: 38.0
-    Category: Beverages, MaximumPrice: 263.5
     Category: Condiments, MaximumPrice: 43.9
+    Category: Produce, MaximumPrice: 53.0
+    Category: Seafood, MaximumPrice: 62.5
     Category: Meat/Poultry, MaximumPrice: 123.79
+    Category: Dairy Products, MaximumPrice: 55.0
+    Category: Grains/Cereals, MaximumPrice: 38.0
+    Category: Confections, MaximumPrice: 81.0
+    Category: Beverages, MaximumPrice: 263.5
 
 ### linq88: Max - Elements
 ```csharp
@@ -3322,14 +3331,22 @@ func linq88(){
 ```
 #### Output
 
-    Confections: [Product id:20, name:Sir Rodney's Marmalade, cat:Confections, price:81.0, inStock:40]
-    Dairy Products: [Product id:59, name:Raclette Courdavault, cat:Dairy Products, price:55.0, inStock:79]
-    Seafood: [Product id:18, name:Carnarvon Tigers, cat:Seafood, price:62.5, inStock:42]
-    Produce: [Product id:51, name:Manjimup Dried Apples, cat:Produce, price:53.0, inStock:20]
-    Grains/Cereals: [Product id:56, name:Gnocchi di nonna Alice, cat:Grains/Cereals, price:38.0, inStock:21]
-    Beverages: [Product id:38, name:Côte de Blaye, cat:Beverages, price:263.5, inStock:17]
-    Condiments: [Product id:63, name:Vegie-spread, cat:Condiments, price:43.9, inStock:24]
-    Meat/Poultry: [Product id:29, name:Thüringer Rostbratwurst, cat:Meat/Poultry, price:123.79, inStock:0]
+    Condiments: 
+    [Product id:63, name:Vegie-spread, cat:Condiments, price:43.9, inStock:24]
+    Produce: 
+    [Product id:51, name:Manjimup Dried Apples, cat:Produce, price:53.0, inStock:20]
+    Seafood: 
+    [Product id:18, name:Carnarvon Tigers, cat:Seafood, price:62.5, inStock:42]
+    Meat/Poultry: 
+    [Product id:29, name:Thüringer Rostbratwurst, cat:Meat/Poultry, price:123.79, inStock:0]
+    Dairy Products: 
+    [Product id:59, name:Raclette Courdavault, cat:Dairy Products, price:55.0, inStock:79]
+    Grains/Cereals: 
+    [Product id:56, name:Gnocchi di nonna Alice, cat:Grains/Cereals, price:38.0, inStock:21]
+    Confections: 
+    [Product id:20, name:Sir Rodney''s Marmalade, cat:Confections, price:81.0, inStock:40]
+    Beverages: 
+    [Product id:38, name:Côte de Blaye, cat:Beverages, price:263.5, inStock:17]
 
 ### linq89: Average - Simple
 ```csharp
@@ -3673,7 +3690,7 @@ func linq99(){
     let numbers = [ 5, 4, 1, 3, 9, 8, 6, 7, 2, 0 ]
     
     var i = 0
-    let q = numbers.map { n in { ++i } }
+    let q = numbers.map { n in { () -> Int in i += 1; return i } }
     
     for f in q {
         let v = f()
@@ -3724,7 +3741,7 @@ func linq100(){
     let numbers = [ 5, 4, 1, 3, 9, 8, 6, 7, 2, 0 ]
     
     var i = 0
-    let q = numbers.map { n in ++i }
+    let q = numbers.map { n -> Int in i += 1; return i; }
     
     for v in q {
         print("v = \(v), i = \(i)")
@@ -3925,19 +3942,6 @@ func linq103(){
 ```
 #### Output
 
-    Beverages:
-       Chai
-       Chang
-       Guaraná Fantástica
-       Sasquatch Ale
-       Steeleye Stout
-       Côte de Blaye
-       Chartreuse verte
-       Ipoh Coffee
-       Laughing Lumberjack Lager
-       Outback Lager
-       Rhönbräu Klosterbier
-       Lakkalikööri
     Condiments:
        Aniseed Syrup
        Chef Anton's Cajun Seasoning
@@ -3951,6 +3955,17 @@ func linq103(){
        Louisiana Fiery Hot Pepper Sauce
        Louisiana Hot Spiced Okra
        Original Frankfurter grüne Soße
+    Dairy Products:
+       Queso Cabrales
+       Queso Manchego La Pastora
+       Gorgonzola Telino
+       Mascarpone Fabioli
+       Geitost
+       Raclette Courdavault
+       Camembert Pierrot
+       Gudbrandsdalsost
+       Flotemysost
+       Mozzarella di Giovanni
     ...
 
 ### linq104: Cross Join with Group Join
@@ -4002,21 +4017,21 @@ func linq104(){
 ```
 #### Output
 
-    Chai: Beverages
-    Chang: Beverages
-    Guaraná Fantástica: Beverages
-    Sasquatch Ale: Beverages
-    Steeleye Stout: Beverages
-    Côte de Blaye: Beverages
-    Chartreuse verte: Beverages
-    Ipoh Coffee: Beverages
-    Laughing Lumberjack Lager: Beverages
-    Outback Lager: Beverages
-    Rhönbräu Klosterbier: Beverages
-    Lakkalikööri: Beverages
     Aniseed Syrup: Condiments
     Chef Anton's Cajun Seasoning: Condiments
     Chef Anton's Gumbo Mix: Condiments
+    Grandma's Boysenberry Spread: Condiments
+    Northwoods Cranberry Sauce: Condiments
+    Genen Shouyu: Condiments
+    Gula Malacca: Condiments
+    Sirop d'érable: Condiments
+    Vegie-spread: Condiments
+    Louisiana Fiery Hot Pepper Sauce: Condiments
+    Louisiana Hot Spiced Okra: Condiments
+    Original Frankfurter grüne Soße: Condiments
+    Queso Cabrales: Dairy Products
+    Queso Manchego La Pastora: Dairy Products
+    Gorgonzola Telino: Dairy Products
     ...
 
 ### linq105: Left Outer Join

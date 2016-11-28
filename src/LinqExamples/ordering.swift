@@ -101,7 +101,7 @@ func linq38(){
     
     let sortedWords = words.sortBy(
         { compare($0.length,$1.length) },
-        { compareIgnoreCase($0,$1) }
+        { compareIgnoreCase($1,$0) }
     )
     
     sortedWords.forEach { print($0) }
