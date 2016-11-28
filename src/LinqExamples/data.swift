@@ -38,17 +38,17 @@ class Product : CustomStringConvertible {
 }
 
 //Avoid repitition of naming properties
-func newProduct(id: Int, name: String, category: String, unitPrice: Double, unitsInStock: Int) -> Product {
+func newProduct(_ id: Int, name: String, category: String, unitPrice: Double, unitsInStock: Int) -> Product {
     return Product(id: id, name: name, category: category, unitPrice: unitPrice, unitsInStock: unitsInStock)
 }
 
 class Order : CustomStringConvertible
 {
     let orderId: Int
-    let orderDate: NSDate?
+    let orderDate: Date?
     let total: Double
     
-    init(orderId: Int, orderDate: NSDate?, total: Double){
+    init(orderId: Int, orderDate: Date?, total: Double){
         self.orderId = orderId
         self.orderDate = orderDate
         self.total = total
@@ -184,41 +184,41 @@ func customersList() -> [Customer] {
         return customers!
     }
     
-    let files = NSFileManager.defaultManager()
-    let jsonData = files.contentsAtPath(NSBundle.mainBundle().pathForResource("customers", ofType: "json")!)
+    let files = FileManager.default
+    let jsonData = files.contents(atPath: Bundle.main.path(forResource: "customers", ofType: "json")!)
     var rawCustomers:NSDictionary
     do {
-        rawCustomers = try NSJSONSerialization.JSONObjectWithData(jsonData!, options:[]) as! NSDictionary
+        rawCustomers = try JSONSerialization.jsonObject(with: jsonData!, options:[]) as! NSDictionary
     } catch {
         return []
     }
     let customersArray = rawCustomers["customers"] as! NSArray
-    let fmt = NSNumberFormatter()
+    let fmt = NumberFormatter()
 
     var to = Array<Customer>()
-    for o : AnyObject in customersArray {
+    for o : Any in customersArray {
         let c = o as! NSDictionary
 
-        func str(key: String) -> String? {
+        func str(_ key: String) -> String? {
             if let s = c[key] as? NSString {
                 return String(s)
             }
             return nil
         }
 
-        func createOrders(orders: NSArray?) -> [Order] {
+        func createOrders(_ orders: NSArray?) -> [Order] {
             var to = [Order]()
             if orders != nil {
-                for o: AnyObject in orders! {
+                for o: Any in orders! {
                     let m = o as! NSDictionary
-                    var orderDate: NSDate?
-                    if let dateStr : AnyObject = m["orderdate"] {
-                        orderDate = NSDate(dateString:dateStr as! String, format: "yyyy-MM-dd'T'HH:mm:ss")
+                    var orderDate: Date?
+                    if let dateStr : Any = m["orderdate"] {
+                        orderDate = Date(dateString:dateStr as! String, format: "yyyy-MM-dd'T'HH:mm:ss")
                     }
                     to.append(Order(
-                        orderId:fmt.numberFromString(m["id"] as! String)!.integerValue,
+                        orderId:fmt.number(from: m["id"] as! String)!.intValue,
                         orderDate:orderDate,
-                        total:fmt.numberFromString(m["total"] as! String)!.doubleValue))
+                        total:fmt.number(from: m["total"] as! String)!.doubleValue))
                 }
             }
             return to

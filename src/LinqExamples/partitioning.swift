@@ -25,7 +25,7 @@ func linq21(){
     let first3WAOrders = customers
         .filter { $0.region == "WA" }
         .expand { c in c.orders
-            .map { o -> (CustomerId: String, OrderId:Int, OrderDate:NSDate?) in
+            .map { o -> (CustomerId: String, OrderId:Int, OrderDate:Date?) in
                 (c.customerId, o.orderId, o.orderDate)
             }
         }
@@ -49,7 +49,7 @@ func linq23(){
     let waOrders = customers
         .filter { $0.region == "WA" }
         .expand { c in c.orders
-            .map { o -> (CustomerId: String, OrderId:Int, OrderDate:NSDate?) in
+            .map { o -> (CustomerId: String, OrderId:Int, OrderDate:Date?) in
                 (c.customerId, o.orderId, o.orderDate)
             }
         }
@@ -73,7 +73,7 @@ func linq25(){
     let numbers = [ 5, 4, 1, 3, 9, 8, 6, 7, 2, 0 ]
     
     var index = 0
-    let firstSmallNumbers = numbers.takeWhile { $0 >= index++ }
+    let firstSmallNumbers = numbers.takeWhile { index += 1; return $0 >= index }
     
     print("First numbers not less than their position:")
     firstSmallNumbers.forEach { print($0) }
@@ -91,7 +91,7 @@ func linq27(){
     let numbers = [ 5, 4, 1, 3, 9, 8, 6, 7, 2, 0 ]
     
     var index = 0
-    let laterNumbers = numbers.skipWhile { $0 >= index++ }
+    let laterNumbers = numbers.skipWhile { index += 1; return $0 >= index }
     
     print("All elements starting from first element less than its position:")
     laterNumbers.forEach { print($0) }

@@ -13,7 +13,7 @@ let conversions = [linq54, linq55, linq56, linq57]
 func linq54(){
     let doubles = [ 1.7, 2.3, 1.9, 4.1, 2.9 ]
     
-    let sortedDoubles = doubles.sort().reverse()
+    let sortedDoubles = doubles.sorted().reversed()
     
     let doublesArray = sortedDoubles.toArray()
     
@@ -28,7 +28,7 @@ func linq54(){
 func linq55(){
     let words = [ "cherry", "apple", "blueberry" ]
     
-    let sortedWords = words.sort()
+    let sortedWords = words.sorted()
     
     let wordList = sortedWords
     

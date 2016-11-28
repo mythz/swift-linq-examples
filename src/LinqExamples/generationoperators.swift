@@ -22,7 +22,7 @@ func linq65(){
 }
 
 func linq66(){
-    let numbers = Array(count:10, repeatedValue:7)
+    let numbers = Array(repeating: 7, count: 10)
     
     numbers.forEach { print($0) }
 }

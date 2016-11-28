@@ -42,7 +42,7 @@ func linq9(){
     let words = ["aPPLE", "BlUeBeRrY", "cHeRry"]
     
     let upperLowerWords = words.map { s -> (Upper: String, Lower:String) in
-        (s.uppercaseString, s.lowercaseString)
+        (s.uppercased(), s.lowercased())
     }
     
     for ul in upperLowerWords {
@@ -81,7 +81,7 @@ func linq12(){
     
     var index = 0
     let numsInPlace = numbers.map { i -> (Num: Int, InPlace:Bool) in
-        (i, i == index++)
+        (i, { index += 1; return i == index }())
     }
     
     print("Number: In-place?")
@@ -135,11 +135,11 @@ func linq15(){
 func linq16(){
     let customers = customersList()
     
-    let date = NSDate(year: 1998, month: 1, day: 1)
+    let date = Date(year: 1998, month: 1, day: 1)
     let orders = customers.expand { c in
         c.orders
             .filter { $0.orderDate! >= date }
-            .map { o -> (CustomerId: String, OrderId:Int, OrderDate:NSDate) in
+            .map { o -> (CustomerId: String, OrderId:Int, OrderDate:Date) in
                 (c.customerId, o.orderId, o.orderDate!)
             }
         }
@@ -164,7 +164,7 @@ func linq17(){
 func linq18(){
     let customers = customersList()
     
-    let cutoffDate = NSDate(year: 1997, month: 1, day: 1)
+    let cutoffDate = Date(year: 1997, month: 1, day: 1)
     
     let orders = customers
         .filter { $0.region == "WA" }.expand { c in
@@ -183,7 +183,7 @@ func linq19(){
     
     var custIndex = 0
     let customerOrders = customers.expand { c -> [String]? in
-        custIndex++
+        custIndex += 1
         return c.orders.map { "Customer #\(custIndex) has an order with OrderID \($0.orderId)" }
     }
     

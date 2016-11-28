@@ -8,7 +8,7 @@
 
 import Foundation
 
-func runExamples(fns: [(() -> ())]) {
+func runExamples(_ fns: [(() -> ())]) {
     for fn in fns {
         fn()
         print("")

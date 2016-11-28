@@ -81,7 +81,7 @@ func linq80(){
 func linq81(){
     let numbers = [ 5, 4, 1, 3, 9, 8, 6, 7, 2, 0 ]
     
-    let minNum = numbers.minElement()!
+    let minNum = numbers.min()!
     
     print("The minimum number is \(minNum).")
 }
@@ -99,7 +99,7 @@ func linq83(){
     
     let categories = products.groupBy { (p:Product)in p.category }
         .map { g -> (Category:String, CheapestPrice:Double) in
-            (g.key, g.items.map { (p:Product) in p.unitPrice }.minElement()! )
+            (g.key, g.items.map { (p:Product) in p.unitPrice }.min()! )
     }
     
     categories.forEach { print($0) }
@@ -123,7 +123,7 @@ func linq84(){
 func linq85(){
     let numbers = [ 5, 4, 1, 3, 9, 8, 6, 7, 2, 0 ]
     
-    let maxNum = numbers.maxElement()!
+    let maxNum = numbers.max()!
     
     print("The maximum number is \(maxNum).")
 }
@@ -131,7 +131,7 @@ func linq85(){
 func linq86(){
     let words = [ "cherry", "apple", "blueberry" ]
     
-    let longestLength:Int = words.map { (s:String) in s.length }.maxElement()!
+    let longestLength:Int = words.map { (s:String) in s.length }.max()!
     
     print("The longest word is \(longestLength) characters long.")
 }

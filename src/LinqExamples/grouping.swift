@@ -89,7 +89,7 @@ func linq45(){
     
     let orderGroups = anagrams.groupBy({ (s:String) in s.trim() },
         matchWith: anagramComparer,
-        valueAs: { s in s.uppercaseString })
+        valueAs: { s in s.uppercased() })
     
     orderGroups.forEach { print($0.items) }
 }

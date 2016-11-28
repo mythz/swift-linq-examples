@@ -147,6 +147,7 @@
 				TargetAttributes = {
 					517DBB73194180BC007E7B70 = {
 						CreatedOnToolsVersion = 6.0;
+						LastSwiftMigration = 0810;
 					};
 				};
 			};
@@ -275,6 +276,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -282,6 +284,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
