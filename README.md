@@ -1,7 +1,7 @@
 101 LINQ Samples in Swift 3
 ===========================
 
-Port of the [C# 101 LINQ Samples](http://code.msdn.microsoft.com/101-LINQ-Samples-3fb9811b) rewritten into [Apple's Swift 2.0](https://developer.apple.com/swift/).
+Port of the [C# 101 LINQ Samples](http://code.msdn.microsoft.com/101-LINQ-Samples-3fb9811b) rewritten into [Apple's Swift 3](https://developer.apple.com/swift/).
 
 Compare Swift to other LINQ examples written in:
 
