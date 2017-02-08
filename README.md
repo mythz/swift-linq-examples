@@ -1,5 +1,5 @@
-101 LINQ Samples in Swift 3.0
-=============================
+101 LINQ Samples in Swift 3
+===========================
 
 Port of the [C# 101 LINQ Samples](http://code.msdn.microsoft.com/101-LINQ-Samples-3fb9811b) rewritten into [Apple's Swift 2.0](https://developer.apple.com/swift/).
 
