@@ -5,12 +5,13 @@ Port of the [C# 101 LINQ Samples](http://code.msdn.microsoft.com/101-LINQ-Sample
 
 Compare Swift to other LINQ examples written in:
 
+ - [Python](https://github.com/rogerwcpt/python-linq-samples)
  - [Java](https://github.com/mythz/java-linq-examples)
  - [Kotlin](https://github.com/mythz/kotlin-linq-examples)
  - [Clojure](https://github.com/mythz/clojure-linq-examples)
  - [Dart](https://github.com/mythz/dart-linq-examples)
  - [Elixir](https://github.com/omnibs/elixir-linq-examples)
- - [Python](https://github.com/rogerwcpt/python-linq-samples)
+ - [Groovy](https://gitlab.com/svermeulen/groovy-linq-samples)
  - [#Script](https://sharpscript.net/linq/restriction-operators)
 
 ## [Call .NET Web Services from Swift](http://docs.servicestack.net/swift-add-servicestack-reference)
